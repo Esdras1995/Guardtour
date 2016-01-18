@@ -1,230 +1,279 @@
 <?php
+  
+  require_once("PostService.php");
+  require_once("session.php");
+  require_once("class.user.php");
 
-require_once("session.php");
-// session_start();
-require_once('class.user.php');
-$user = new USER();
+  $auth_user = new USER();
+  
+  
+  $user_id = $_SESSION['user_session'];
+  
+  $stmt = $auth_user->runQuery("SELECT * FROM admin WHERE id=:user_id");
+  $stmt->execute(array(":user_id"=>$user_id));
+  
+  $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 
-// if($user->is_loggedin()!="")
-// {
-// 	$user->redirect('home.php');
-// }
+  $service = new PostService();
+  $listguard = $service->listGuard();
+  $listpost = $service->listPost();
 
-if(isset($_POST['btn-signup']))
-{
-	$uname = strip_tags($_POST['username']);
-	$umail = strip_tags($_POST['email']);
-	$upass = strip_tags($_POST['password']);
-	$firstname = strip_tags($_POST['firstname']);
-	$lastname = strip_tags($_POST['lastname']);
+  if(isset($_POST["validate"])){
+  	
+  	$interval = $_POST["hour"];
+  	$heure = $_POST["date"];
+  	$guard = $_POST["guard"];
+  	$post = $_POST["post"];
+  	$debut = $_POST["debut"];
+  	$fin = $_POST["fin"];
 
-	
-	if($uname=="")	{
-		$error[] = "provide username !";	
-	}
-	else if($umail=="")	{
-		$error[] = "provide email id !";	
-	}
-	else if(!filter_var($umail, FILTER_VALIDATE_EMAIL))	{
-	    $error[] = 'Please enter a valid email address !';
-	}
-	else if($upass=="")	{
-		$error[] = "provide password !";
-	}
-	else if(strlen($upass) < 6){
-		$error[] = "Password must be atleast 6 characters";	
-	}
-	else
-	{
-		try
+
+  		try
 		{
-			$stmt = $user->runQuery("SELECT username, email FROM admin WHERE username=:uname OR email=:umail");
-			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
+			$guard_id = $service->getGuardId($guard);
+			$poste_id = $service->getPostId($post);
+
+			$stmt = $service->runQuery("SELECT poste_id, guard_id FROM guardtours WHERE poste_id=:poste_id OR guard_id=:guard_id");
+			$stmt->execute(array(':poste_id'=>$poste_id, ":guard_id"=>$guard_id));
+			
 			$row=$stmt->fetch(PDO::FETCH_ASSOC);
-				
-			if($row['username']==$uname) {
-				$error[] = "sorry username already taken !";
-			}
-			else if($row['email']==$umail) {
-				$error[] = "sorry email id already taken !";
+
+			if($row['poste_id']==$poste_id) {
+				$error[] = "sorry this post already taken !";
+			
+			}else if($row['guard_id']==$guard_id){
+				$error[] = "sorry this guard already taken !";
 			}
 			else
 			{
-				if($user->register($uname,$umail,$upass,$firstname,$lastname)){	
-					$user->redirect('signup.php?joined');
-				}
+				$service->registerTools($heure,$interval,$debut,$fin,$guard_id,$poste_id);
 			}
 		}
 		catch(PDOException $e)
 		{
 			echo $e->getMessage();
 		}
-	}	
-}
+  }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
   
- <head>
+<head>
     <meta charset="utf-8">
-    <title>Signup - Bootstrap Admin Template</title>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    <title>Tools</title>
     
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-
-<link href="css/font-awesome.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">    
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
     
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/pages/signin.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet">
+    
+    
+    <link href="css/pages/plans.css" rel="stylesheet"> 
 
-</head>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
 
 <body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                    class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="home.php">PAPS -Admin</a>
+      <div class="nav-collapse">
+        <ul class="nav pull-right">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="icon-cog"></i> Account <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="signup.php">New</a></li>
+              <li><a href="javascript:;">Settings</a></li>
+              <li><a href="javascript:;">Help</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="icon-user"></i> <?php print($userRow['username']); ?> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:;">Profile</a></li>
+              <li><a href="logout.php?logout=true">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-search pull-right">
+          <input type="text" class="search-query" placeholder="Search">
+        </form>
+      </div>
+      <!--/.nav-collapse --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+    
+
+
+
+    
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li class="active"><a href="index.php"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+        <li><a href="reports.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+        <li><a href="register.php"><i class="icon-plus"></i><span>Add post</span> </a></li>
+        <li><a href="tools.php"><i class="icon-cog"></i><span>tools</span></a> </li>
+      </ul>
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+    
+    
+<div class="main">
 	
-	<div class="navbar navbar-fixed-top">
+	<div class="main-inner">
+
+	    <div class="container">
 	
-	<div class="navbar-inner">
+	      <div class="row">
+	      	<div class="span6 offset3">
+	      		
+	      		<!--<div class="widget">
+						
+					<!--<div class="widget-header">
+						<i class="icon-th-large"></i>
+						<h3>Choose Your Plan</h3>
+					</div> <!-- /widget-header -->
+					
+					<!-- <div class="widget-content"> -->
+						
+						<div>					    
+					    <div class="plan-container span5">
+					        <div class="plan">
+						        <div class="plan-header">
+					                
+						        	<div class="plan-title">
+						        		Post supervisor tools        		
+					        		</div> <!-- /plan-title -->
+					                
+						            <div class="plan-price">
+					                	<i class=" icon-wrench"></i><span class="term">Customize</span>
+									</div> <!-- /plan-price -->
+									
+						        </div> <!-- /plan-header -->	       
+						        <form method="post">
+							        <div class="plan-features">
+										<ul>
+											<li><strong>Customize</strong> verification time for each post</li>
+											
+											<li>Round hour: <input required=required type="time" name="hour" for="round" min="1" max="24" class="type-number"></li>
+											
+											<li>Date: <input required=required type="datetime" name="date" for="date" min="1" max="24" class="type-number"></li>
+											<li>Debut: <input name="debut" type="time" ></li>
+											<li>Fin: <input name="fin" type="time" ></li>
+											<li><a href="list.php?guard" target="_blank">Guard uid:</a>
+												<select name="guard" required=required>
+													<option></option>
+													<?php
+
+														for($i=0; $i < sizeof($listguard); $i++) {
+															
+															$list = $listguard[$i]; 
+															
+															foreach ($list as $key => $value)
+																if($key == "uid") echo "<option>".$value."</option>";
+														}
+														
+													?>
+
+												</select>
+											</li>
+											<li><a href="list.php?post" target="_blank">Post:</a>
+												<select name="post" required=required>
+													<option></option>
+													<?php
+														for($i=0; $i < sizeof($listpost); $i++) {
+															
+															$list = $listpost[$i]; 
+															
+															foreach ($list as $key => $value)
+																if($key == "adress") echo "<option>".$value."</option>";
+														}
+														
+													?>
+												</select>
+											</li>
+										</ul>
+									</div> <!-- /plan-features -->
+									
+									<div class="plan-actions">				
+										<button type="submit" class="btn btn-success" name="validate">Validate</button>				
+									</div> <!-- /plan-actions -->
+								</form>
+							</div> <!-- /plan -->
+							
+					    </div> <!-- /plan-container -->
+				
+				
+					</div> <!-- /pricing-plans -->
+						
+					<!-- </div> /widget-content -->
+						
+				<!-- </div> /widget					 -->
+				
+		    </div> <!-- /span12 -->     	
+	      	
+	      	
+	      </div> <!-- /row -->
+	
+	    </div> <!-- /container -->
+	    
+	</div> <!-- /main-inner -->
+    
+</div> <!-- /main -->
+       
+    
+<div class="footer">
+	
+	<div class="footer-inner">
 		
 		<div class="container">
 			
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</a>
-			
-			<a class="brand" href="home.php">
-				PAPS - Admin				
-			</a>		
-			
-			<div class="nav-collapse">
-				<ul class="nav pull-right">
-					<li class="">						
-						<a href="index.php" class="">
-							Already have an account? Login now
-						</a>
-						
-					</li>
-					<li class="">						
-						<a href="home.php" class="">
-							<i class="icon-chevron-left"></i>
-							Back to Homepage
-						</a>
-						
-					</li>
-				</ul>
+			<div class="row">
 				
-			</div><!--/.nav-collapse -->	
-	
+    			<div class="span12">
+    				&copy; 2013.
+    			</div> <!-- /span12 -->
+    			
+    		</div> <!-- /row -->
+    		
 		</div> <!-- /container -->
 		
-	</div> <!-- /navbar-inner -->
+	</div> <!-- /footer-inner -->
 	
-</div> <!-- /navbar -->
+</div> <!-- /footer -->
+    
 
-
-
-<div class="account-container register">
-	
-	<div class="content clearfix">
-		
-		<form action="#" method="post">
-		
-			<!-- <h1>Signup for new Account</h1> -->
-
-			<?php
-			if(isset($error))
-			{
-			 	foreach($error as $error)
-			 	{
-					 ?>
-                     <div class="alert alert-danger">
-                        <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
-                     </div>
-                     <?php
-				}
-			}
-			else if(isset($_GET['joined']))
-			{
-				 ?>
-                 <div class="alert alert-info">
-                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Successfully registered <a href='index.php'>login</a> here
-                 </div>
-                 <?php
-			}
-			?>			
-			
-			<div class="login-fields">
-				
-				<p>Create Super User:</p>
-				
-				<div class="field">
-					<label for="firstname">First Name:</label>	
-					<input type="text" id="firstname" name="firstname" value="" placeholder="First Name" class="login" />
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="lastname">Last Name:</label>	
-					<input type="text" id="lastname" name="lastname" value="" placeholder="Last Name" class="login" />
-				</div> <!-- /field -->
-
-				<div class="field">
-					<label for="lastname">Username:</label>	
-					<input type="text" id="username" name="username" value="" placeholder="Username" class="login" />
-				</div> <!-- /field -->
-				
-				
-				<div class="field">
-					<label for="email">Email Address:</label>
-					<input type="text" id="email" name="email" value="" placeholder="Email" class="login"/>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" class="login"/>
-				</div> <!-- /field -->
-				
-				<!--<div class="field">
-					<label for="confirm_password">Confirm Password:</label>
-					<input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="login"/>
-				</div> <!-- /field -->
-				
-			</div> <!-- /login-fields -->
-			
-			<div class="login-actions">
-				
-				<!-- <span class="login-checkbox">
-					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
-					<label class="choice" for="Field">Agree with the Terms & Conditions.</label>
-				</span> -->
-									
-				<button type = "submit" class="button btn btn-primary btn-large" name="btn-signup">Register</button>
-				
-			</div> <!-- .actions -->
-			
-		</form>
-		
-	</div> <!-- /content -->
-	
-</div> <!-- /account-container -->
-
-
-<!-- Text Under Box -->
-<div class="login-extra">
-	Already have an account? <a href="index.php">Login to your account</a>
-</div> <!-- /login-extra -->
-
-
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery-1.7.2.min.js"></script>
+
 <script src="js/bootstrap.js"></script>
+<script src="js/base.js"></script>
 
-<script src="js/signin.js"></script>
+  </body>
 
-</body>
-
- </html>
+</html>

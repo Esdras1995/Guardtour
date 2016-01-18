@@ -1,17 +1,19 @@
 <?php
 
   require_once("session.php");
-  
   require_once("class.user.php");
+  require_once("PostService.php");
+
   $auth_user = new USER();
-  
-  
+  $service = new PostService();
+  $listtours = $service->listTours();
   $user_id = $_SESSION['user_session'];
   
   $stmt = $auth_user->runQuery("SELECT * FROM admin WHERE id=:user_id");
   $stmt->execute(array(":user_id"=>$user_id));
   
   $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+
 
 ?>
 <!DOCTYPE html>
@@ -106,74 +108,49 @@
     <div class="container">
       <div class="row">
         <div class="span12">
+
           <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-th-list"></i>
               <h3>Supervisor report</h3>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-              <!-- <table class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th> ID </th>
-                    <th> Last name  </th>
-                    <th> First name</th>
-                    <th> Post </th>
-                    <!-- <th class="td-actions"> </th> -->
-                  <!--</tr>
-                </thead>
+              <table class="table table-striped table-bordered">
+
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Date</th>
+                  <th>Qr code</th>
+                  <th>Description</th>
+                  <th>Uid</th>
+                  <!-- <th>Post</th> -->
+                </tr>
+              </thead>
                 <tbody>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> Fresh Web Development Resources </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> Fresh Web Development Resources </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                
+
+                <?php
+                    for ($i=0; $i < sizeof($listtours); $i++) {
+                     {
+                      echo "<tr>";
+                      
+                       foreach ($listtours[$i] as $key => $value){ 
+                        # code...
+                        if($key == "guard_id"){
+                          // echo "<td>".$value."</td>";
+                          echo "<td>".$service->getGuardUid($value)."</td>";
+                        }else{
+                          echo "<td>".$value."</td>";
+                        }
+                      }
+
+                      echo "</tr>";
+
+                    }
+                }
+                ?>
                 </tbody>
-              </table> -->
+              </table> 
             </div>
             <!-- /widget-content --> 
           </div>

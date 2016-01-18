@@ -32,7 +32,7 @@
 				<span class="icon-bar"></span>
 			</a>
 			
-			<a class="brand" href="index.html">
+			<a class="brand" href="home.php">
 				PAPS - Admin				
 			</a>		
 			
@@ -40,7 +40,7 @@
 				<ul class="nav pull-right">
 					
 					<li class="">						
-						<a href="index.html" class="">
+						<a href="home.php" class="">
 							<i class="icon-chevron-left"></i>
 							Back to Dashboard
 						</a>
@@ -70,12 +70,12 @@
 				<h2>Who! bad trip man. No more pixesl for you.</h2>
 				
 				<div class="error-details">
-					Sorry, an error has occured! Why not try going back to the <a href="index.html">home page</a> or perhaps try following!
+					Sorry, an error has occured! Why not try going back to the <a href="home.php">home page</a> or perhaps try following!
 					
 				</div> <!-- /error-details -->
 				
 				<div class="error-actions">
-					<a href="index.html" class="btn btn-large btn-primary">
+					<a href="home.php" class="btn btn-large btn-primary">
 						<i class="icon-chevron-left"></i>
 						&nbsp;
 						Back to Dashboard						

@@ -1,17 +1,21 @@
 <?php
-  
+
   require_once("PostService.php");
   
   $test = new PostService();
+  
+  // echo $test->getMention("2016-01-14 13:51:04", "2");
 
-  if(isset($_GET['uid'])){
-  	$qrcode = $_GET['qrcode'];
-  	$description = $_GET['description'];
-  	$uid = $_GET['uid'];
+  if(isset($_POST['uid']) && isset($_POST['qrcode']) && isset($_POST['description']) && isset($_POST['date_tour'])){
+  	
+    $uid = $_POST['uid'];
+    $qrcode = $_POST['qrcode'];
+  	$description = $_POST['description'];
+    $datetime = $_POST['date_tour']; 
 
-  	if($test->insertTours("12/03/2016", $qrcode, $description, "1")){
-		echo "Yes";
-		return true;    
+  	if($test->insertTours($datetime, $qrcode, $description, $uid)){
+  		echo "Yes";
+  		return true;    
   	}
   	else{
 

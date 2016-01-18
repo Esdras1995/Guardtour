@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2016 at 11:32 
+-- Generation Time: Jan 18, 2016 at 11:17 
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -35,16 +35,15 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `name` varchar(45) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `create_time`, `name`, `lastname`) VALUES
-(1, 'admin', 'esdras@mail.com', '$2y$10$gqiBOIsjgp4F4jrPjDjdjulKE', '2016-01-13 17:14:31', 'Esdras', 'SUY'),
-(2, 'admin1', 'test@mail.com', '$2y$10$0GWAp5sLGuBuGdECd68sae7Av', '2016-01-13 17:20:12', 'Esdras', 'Suy'),
-(3, 'testAdmin', 'esdras.test@esih.edu', '123456', '2016-01-13 17:36:11', 'Esdras', 'SUY');
+(1, 'testAdmin', 'esdras.test@esih.edu', '123456', '2016-01-13 17:36:11', 'Esdras', 'SUY'),
+(4, 'admin', 'david.jean@mail.com', 'administrateur', '2016-01-18 18:48:14', 'David', 'Jean');
 
 -- --------------------------------------------------------
 
@@ -62,14 +61,14 @@ CREATE TABLE IF NOT EXISTS `guard` (
   `phone` varchar(45) DEFAULT NULL,
   `NIF` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `guard`
 --
 
 INSERT INTO `guard` (`id`, `nom`, `prenom`, `uid`, `photo`, `email`, `phone`, `NIF`) VALUES
-(1, '111', '111', '11', NULL, 'esdras@mail.com', '1111', 'wwwww');
+(3, 'Alessandro', 'Osias', 'e0504fd1d65f789b', NULL, 'alhdo@mail.com', '3456-7899', '112-999-543-0');
 
 -- --------------------------------------------------------
 
@@ -80,13 +79,15 @@ INSERT INTO `guard` (`id`, `nom`, `prenom`, `uid`, `photo`, `email`, `phone`, `N
 CREATE TABLE IF NOT EXISTS `guardtours` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `heure` datetime DEFAULT NULL,
-  `interval` int(11) DEFAULT NULL,
+  `intervale` time DEFAULT NULL,
+  `openAt` time DEFAULT NULL,
+  `closeAt` time DEFAULT NULL,
   `guard_id` int(11) NOT NULL,
   `poste_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_guardtours_guard_idx` (`guard_id`),
   KEY `fk_guardtours_poste1_idx` (`poste_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 -- --------------------------------------------------------
 
@@ -100,15 +101,14 @@ CREATE TABLE IF NOT EXISTS `poste` (
   `adress` varchar(255) DEFAULT NULL,
   `contact` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `poste`
 --
 
 INSERT INTO `poste` (`id`, `nom`, `adress`, `contact`) VALUES
-(1, 'Post', '69, rue laveau', '47839902'),
-(2, 'fadfa', 'adfa', 'fafd');
+(3, 'Post503', '69, rue nogues bourdon', '3778-9905');
 
 -- --------------------------------------------------------
 
@@ -119,10 +119,8 @@ INSERT INTO `poste` (`id`, `nom`, `adress`, `contact`) VALUES
 CREATE TABLE IF NOT EXISTS `report` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mention` varchar(255) DEFAULT NULL,
-  `guard_id` int(11) NOT NULL,
   `tours_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_report_guard1_idx` (`guard_id`),
   KEY `fk_report_tours1_idx` (`tours_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -140,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `tours` (
   `guard_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tours_guard1_idx` (`guard_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
 --
 -- Constraints for dumped tables
@@ -157,7 +155,6 @@ ALTER TABLE `guardtours`
 -- Constraints for table `report`
 --
 ALTER TABLE `report`
-  ADD CONSTRAINT `fk_report_guard1` FOREIGN KEY (`guard_id`) REFERENCES `guard` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_report_tours1` FOREIGN KEY (`tours_id`) REFERENCES `tours` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

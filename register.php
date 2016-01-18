@@ -99,7 +99,7 @@ if(isset($_POST['register']))
   
  <head>
     <meta charset="utf-8">
-    <title>Signup - Bootstrap Admin Template</title>
+    <title>Register - PAPS</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"> 
@@ -258,7 +258,7 @@ if(isset($_POST['register']))
 
 <!-- Text Under Box -->
 <div class="login-extra">
-	Post already exist? <a href="index.php">Show all posts</a>
+	Post already exist? <a href="list.php?post" target="_blank">Show all posts</a>
 </div> <!-- /login-extra -->
 
 
