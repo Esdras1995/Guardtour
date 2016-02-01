@@ -16,6 +16,7 @@ $(function(){
 
         var pageableTerritories = new PageableTerritories(),
             initialTerritories = pageableTerritories;
+
         function createBackgrid(collection){
             var columns = [{
                 name: "id", // The key of the model attribute
@@ -193,6 +194,8 @@ $(function(){
                             $('<li '+sClass+'><a href="#">'+j+'</a></li>')
                                 .insertBefore( $('li:last', an[i])[0] )
                                 .bind('click', function (e) {
+                                    $(".check-item").prop('checked', false);
+                                    $("#select-all").prop('checked', false);
                                     e.preventDefault();
                                     oSettings._iDisplayStart = (parseInt($('a', this).text(),10)-1) * oPaging.iLength;
                                     fnDraw( oSettings );
@@ -235,20 +238,111 @@ $(function(){
               "sFilter": "pull-right",
               "sFilterInput": "form-control input-rounded ml-sm"
             },
-            "aoColumns": unsortableColumns
-        });
+            
+            "aoColumns": unsortableColumns,
+
+            "fnDrawCallback": function () {
+              // window.pageLength = this.fnPagingInfo().iLength;
+              selectedData(0, this.fnPagingInfo().iTotal);
+              $(".check-item").prop('checked', false);
+              $("#select-all").prop('checked', false);
+            }
+        });       
+        
 
         $(".dataTables_length select").selectpicker({
             width: 'auto'
         });
     }
 
+        function selectedData(selected, entries){
+            $(".selected-item").html(selected+" of "+entries+" entries");
+        }
+        var selected = 0;
+        $("#select-all").on("click", function(){
+
+            var table = $('#datatable-table').DataTable();
+            var info = table.page.info();
+
+            // var page = 
+            // var length = info.length;
+            // var recordsTotal = info.recordsTotal;
+
+            // alert(length);
+            var entries = info.recordsTotal;
+
+            if($(this).is(':checked')){
+                $(".check-item").prop('checked', true);
+                selected = info.end - info.start;
+            }
+
+            else{
+                $(".check-item").prop('checked', false);
+                selected = 0;
+            }
+
+            selectedData(selected, entries);
+
+            // $('#datatable-table tr td:nth-child(2)').addClass('edit');
+
+            // for (var i = 0; i <=length; i++) {
+
+            //     $("#datatable-table tr:eq("+i+")").find("td.item").each(function(){
+            //         // if($(this).text())
+            //             console.log($(this).text()+" - ");
+            //     });
+            //     console.log("\n");
+            // }
+
+            // var text = $("#datatable-table tr:eq("+t+") td:eq(0)").text();
+        });
+    $('.check-item').on('click', function(){
+       
+        var table = $('#datatable-table').DataTable();
+        var info = table.page.info();
+        var entries = info.recordsTotal;
+        
+        if(!$(this).is(':checked')){
+
+            if($('#select-all').is(':checked'))
+                $("#select-all").prop('checked', false);
+            --selected;
+        }else{
+
+            if(++selected == info.end - info.start){
+                $("#select-all").prop('checked', true);
+            }
+        }
+        selectedData(selected, entries);
+    });
+
     function pageLoad(){
         $('.widget').widgster();
         initBackgrid();
         initDataTables();
     }
-
+    // selectedData(0, $('#datatable-table').DataTable().info().recordsTotal);
     pageLoad();
     SingApp.onPageLoad(pageLoad);
+
+//     $(function() {
+//  $(".editButton").click(function(){
+//        var id = $(this).data('id'); 
+//        $.ajax({
+//           type: "POST",
+//           url: "process.php",
+//           dataType:"json",
+//           data: { id: id, op: "edit" },
+//         }).done(function( data ) {
+// //the next two lines work fine, i.e., it grabs the value from database and fills the textboxes
+//           $("#nome_categoria").val( data['nome_categoria'] );
+//           $("#descricao_categoria").val( data['descricao_categoria'] );
+// //then I tried to set the checkbox checked (because its unchecked by default) and it does not work
+//            $("#estado_cat").prop("checked", true);
+//         $('#fModal').modal('show');
+// });
+//     evt.preventDefault();
+//     return false;
+//     });     
+// });
 });

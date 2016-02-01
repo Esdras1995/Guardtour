@@ -12,7 +12,15 @@
             <li>YOU ARE HERE</li>
             <li class="active">Tables Basic</li>
         </ol> -->
-        <h1 class="page-title">List - <span class="fw-semi-bold"><?php echo $currentPage ?></span></h1>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-title">List - <span class="fw-semi-bold"><?php echo $currentPage; ?></span></h1>
+                <a href="forms.php?page=<?php echo $currentPage; ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+            </div>
+        </div>
+        
+        
+
         <section class="widget">
             <header>
                 <!-- <h4>Table <span class="fw-semi-bold">Styles</span></h4> -->
@@ -27,8 +35,9 @@
                     <table id="datatable-table" class="table table-striped table-hover">
                         <thead>
                         <tr>
-
+                            <th class="no-sort" style="padding: 10px;"><input name="select_all" value="1" id="select-all" type="checkbox" /></th>
                             <?php
+                                if(!empty($list))
                                 foreach ($list[0] as $key => $value) {
                                     # code...
                                     // if($key != "id")
@@ -41,16 +50,19 @@
                         </thead>
                         <tbody>
                         <?php
+                            if(!empty($list))
                             for ($i=0; $i < sizeof($list); $i++) {
                              {
+                              $compt = -1;
                               echo "<tr>";
-                              
+                              echo '<td><input type="checkbox" class="check-item"></td>'; 
                                foreach ($list[$i] as $key => $value){ 
                                 # code...
-                                // if($key != "id"){
-                                  // echo "<td>".$value."</td>";
-                                  echo "<td>".$value."</td>";
-                                // }
+                                if(++$compt == 0)
+                                    echo '<td class="item"><a href="#" class="edit">'.$value."</a></td>";
+
+                                else
+                                    echo '<td class="item">'.$value."</td>";
                               }
 
                               echo "</tr>";
@@ -63,8 +75,14 @@
                 </div>
             </div>
         </section>
+        <button class="btn btn-warning delete">Delete selected <?php echo $currentPage; ?></button>
+        <span class="selected-item"></span>
     </main>
 </div>
+
+<script type="text/javascript">
+    
+</script>
 <!-- The Loader. Is shown when pjax happens -->
 <div class="loader-wrap hiding hide">
     <i class="fa fa-circle-o-notch fa-spin-fast"></i>
@@ -87,7 +105,6 @@
 <!-- common app js -->
 <script src="js/settings.js"></script>
 <script src="js/app.js"></script>
-
 <!-- page specific libs -->
 <script src="vendor/underscore/underscore-min.js"></script>
 <script src="vendor/backbone/backbone.js"></script>
@@ -96,8 +113,8 @@
 <script src="vendor/backgrid-paginator/backgrid-paginator.js"></script>
 <script src="vendor/datatables/media/js/jquery.dataTables.js"></script>
 <script src="vendor/bootstrap-select/bootstrap-select.min.js"></script>
-
 <!-- page specific js -->
 <script src="js/tables-dynamic.js"></script>
+
 </body>
 </html>

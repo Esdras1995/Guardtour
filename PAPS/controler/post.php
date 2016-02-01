@@ -1,6 +1,6 @@
 <?php 
   
-  require_once('../model/post_model.php');
+  require_once('post_model.php');
 
   $post = new Post();
   $guard = new Guard();
@@ -19,6 +19,7 @@
       
       $list = $post->_list("poste", "*");
       $currentPage = "post";
+      $toPage = "post_register.php";
       
     }elseif ($page === "guard") {
       # code...
