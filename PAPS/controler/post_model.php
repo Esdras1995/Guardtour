@@ -16,16 +16,25 @@ class Post extends Model
 		parent::__construct();
 	}
 
-	public function setForm($formModel){
+	public function remove($table, $data){
+		try {
+			
+			// $cols = array();
 
-		$this->formModel = $formModel;
-	}
+		 //    foreach($data as $key=>$val) {
+		 //        $cols[] = "$key = '$val'";
+		 //    }
 
-	public function getForm(){
+		    $stmt = $this->conn->prepare("DELETE FROM $table WHERE id IN (" . implode(', ', $data).")");
+		    $stmt->execute();
+
+		} catch(PDOException $e){
+
+				echo $e->getMessage();
+			}
 		
-		return $this->formModel;
+		return $stmt;
 	}
-
 }
 
 

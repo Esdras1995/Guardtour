@@ -45,7 +45,7 @@ class Model implements iDatabase
 
 
 
-	public function remove($table, $data, $where){}
+	public function remove($table, $data){}
 
 	
 

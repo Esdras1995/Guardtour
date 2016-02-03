@@ -1,5 +1,5 @@
 <?php 
-  
+  require_once("../model/session.php");
   require_once('post_model.php');
 
   $post = new Post();
@@ -8,7 +8,6 @@
   $tours = new Tours();
 
   $list = "";
-  $currentPage = "";
 
   if(isset($_GET["page"])){
 
@@ -18,25 +17,25 @@
       # code...
       
       $list = $post->_list("poste", "*");
-      $currentPage = "post";
+      $_SESSION['page'] = "post";
       $toPage = "post_register.php";
       
     }elseif ($page === "guard") {
       # code...
-      $currentPage = "guard";
+      $_SESSION['page'] = "guard";
       $list = $guard->_list("guard", "*");
 
     }elseif ($page === "guardTours") {
       # code...
       
       $list = $guardTours->_list("guardtours", "*");
-      $currentPage = "Guard tours";
+      $_SESSION['page'] = "Guard tours";
 
     }elseif ($page === "tours") {
       # code...
       
       $list = $tours->_list("tours", "*");
-      $currentPage = "Tours";
+      $_SESSION['page'] = "Tours";
 
     }else{
         header("Location: error.php");

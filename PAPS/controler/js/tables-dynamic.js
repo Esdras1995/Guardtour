@@ -361,53 +361,65 @@ $(function(){
         // var allId = {"id":[]};
         if(selected != 0){
             
-            var objTmpl = {};
-            var key = [];
+            // var objTmpl = {};
+            // var key = [];
 
-            $('tr .key').each(function(i){
-                objTmpl[$(this).text()] = '';
-                key[i] = $(this).text();
-            });
+            // $('tr .key').each(function(i){
+            //     objTmpl[$(this).text()] = '';
+            //     key[i] = $(this).text();
+            // });
 
-            // console.log(key, objTmpl);
+            // // console.log(key, objTmpl);
             
-            var dataToDelete = [];
-            $('.to-remove').each(function(){
-                var arrayTemp = JSON.parse(JSON.stringify(objTmpl));
+            // var dataToDelete = [];
+            // var arrayTemp = JSON.parse(JSON.stringify(objTmpl));
 
-                $(this).find('.item').each(function(i){
-                    arrayTemp[key[i]] = $(this).text();
-                    if(key.length == i+1)
-                        dataToDelete.push(arrayTemp);
-                });
+            var allId = [];
+
+            $('.to-remove td:nth-child(2)').each(function(){
+                 allId.push($(this).text());
             });
 
-           $.post('delete.php', {id: JSON.stringify(dataToDelete)});
+           $.post('delete.php', {id: JSON.stringify(allId)});
            $('.modal-body').html('<i class="glyphicon glyphicon-ok" style="font-size: 2em; color: green;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Successfully deleted!');
            $('.no').prop('disabled', true);
            $('.delete').prop('disabled', true);
-           console.log(JSON.stringify(dataToDelete));
+           // console.log(JSON.stringify(allId));
+           location.reload();
         }
     });
 
-//     $(function() {
-//  $(".editButton").click(function(){
-//        var id = $(this).data('id'); 
-//        $.ajax({
-//           type: "POST",
-//           url: "process.php",
-//           dataType:"json",
-//           data: { id: id, op: "edit" },
-//         }).done(function( data ) {
-// //the next two lines work fine, i.e., it grabs the value from database and fills the textboxes
-//           $("#nome_categoria").val( data['nome_categoria'] );
-//           $("#descricao_categoria").val( data['descricao_categoria'] );
-// //then I tried to set the checkbox checked (because its unchecked by default) and it does not work
-//            $("#estado_cat").prop("checked", true);
-//         $('#fModal').modal('show');
-// });
-//     evt.preventDefault();
-//     return false;
-//     });     
-// });
+
+// $('.delete').on('click', function(){
+//         // var allId = {"id":[]};
+//         if(selected != 0){
+            
+//             var objTmpl = {};
+//             var key = [];
+
+//             $('tr .key').each(function(i){
+//                 objTmpl[$(this).text()] = '';
+//                 key[i] = $(this).text();
+//             });
+
+//             // console.log(key, objTmpl);
+            
+//             var dataToDelete = [];
+//             $('.to-remove').each(function(){
+//                 var arrayTemp = JSON.parse(JSON.stringify(objTmpl));
+
+//                 $(this).find('.item').each(function(i){
+//                     arrayTemp[key[i]] = $(this).text();
+//                     if(key.length == i+1)
+//                         dataToDelete.push(arrayTemp);
+//                 });
+//             });
+
+//            $.post('delete.php', {id: JSON.stringify(dataToDelete)});
+//            $('.modal-body').html('<i class="glyphicon glyphicon-ok" style="font-size: 2em; color: green;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Successfully deleted!');
+//            $('.no').prop('disabled', true);
+//            $('.delete').prop('disabled', true);
+//            console.log(JSON.stringify(dataToDelete));
+//         }
+//     });
 });

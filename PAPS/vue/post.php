@@ -15,23 +15,14 @@
         </ol> -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-title">List - <span class="fw-semi-bold"><?php echo $currentPage; ?></span></h1>
-                <a href="forms.php?page=<?php echo $currentPage; ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+                <h1 class="page-title">List - <span class="fw-semi-bold"><?php echo $_SESSION['page']; ?></span></h1>
+                <a href="forms.php?page=<?php echo $_SESSION['page']; ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
         </div>
         
         
 
         <section class="widget">
-            <?php
-                if(isset($_POST['id'])){
-                    echo  "tout va bien";
-                    // $data = $_POST['id'];
-
-                    // $arrayPost = array('nom'=>$data[0]['adress'], 'adress'=>"adress", 'contact'=>"contact");
-                    // $post->add("poste", $arrayPost);
-                } 
-            ?>
             <header>
                 <!-- <h4>Table <span class="fw-semi-bold">Styles</span></h4> -->
                 <div class="widget-controls">
@@ -85,7 +76,7 @@
                 </div>
             </div>
         </section>
-        <button type="button" class="btn btn-warning del-selected" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $currentPage; ?></button>
+        <button type="button" class="btn btn-warning del-selected" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $_SESSION['page']; ?></button>
         <span class="selected-item"></span>
         
         <!-- Modal -->
@@ -96,7 +87,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
               <div class="modal-body">
-                Are you sure you wan't to delete selected <?php print($currentPage); ?> ?
+                Are you sure you wan't to delete selected <?php print($_SESSION['page']); ?> ?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>

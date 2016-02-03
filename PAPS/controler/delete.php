@@ -1,29 +1,48 @@
-<?php 
+<?php
+require_once("../model/session.php"); 
 require_once('post_model.php');
+
+$post = new Post();
+$guard = new Guard();
+$guardTours = new GuardTours();
+$tours = new Tours();
 
 $h = fopen("debug.txt", "a");
 
+$page = $_SESSION['page'];
 
-$data = '[{"id":"8","nom":"post2","adress":"2, address","contact":"2 contact"},{"id":"9","nom":"post3","adress":"3, address","contact":"3 contact"}]';
+if(isset($_POST['id'])){
 
-$obj = json_decode($data, true);
-// var_dump($obj);
+	$data = json_decode($_POST['id'], true);
+	// var_dump(json_decode($data, true));
+	fprintf($h, $data[0]." ".$page);
 
-// print_r($obj);
+	switch ($page) {
+		case 'post':
+			# code...
+			$post->remove("poste", $data);
+			break;
+		
+		case 'guard':
+			# code...
+			$guard->remove("guard", $data);
+			break;
 
-// echo "\n--------------------> ".$obj[0]['id'];
-// print $obj->{'foo-bar'}; // 12345
-// $post = new Post();
+		case 'guardTours':
+			# code...
+			$guard->remove("guardTours", $data);
+			break;
+		
+		case 'tours':
+			# code...
+			$post->remove("tours", $data);
+			break;
 
-// if(isset($_POST['id'])){
-// 	$data = $_POST['id'];
-// 	// var_dump(json_decode($data, true));
-	fprintf($h, $obj[0]['id']);
-// 	// print_r($data);
-
-//     // $arrayPost = array('nom'=>$data[0], 'adress'=>"adress", 'contact'=>"contact");
-//     // $post->add("poste", $arrayPost);
-// }
+		default:
+			# code...
+			break;
+	}
+}
 fclose($h);
 
 include("../vue/delete.php");
