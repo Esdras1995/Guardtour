@@ -246,6 +246,7 @@ $(function(){
               selectedData(0, this.fnPagingInfo().iTotal);
               $(".check-item").prop('checked', false);
               $("#select-all").prop('checked', false);
+              $('tr').removeClass('to-remove');
             }
         });       
         
@@ -263,6 +264,7 @@ $(function(){
 
             var table = $('#datatable-table').DataTable();
             var info = table.page.info();
+            // alert("jghgghgfgfg");
 
             // var page = 
             // var length = info.length;
@@ -273,11 +275,14 @@ $(function(){
 
             if($(this).is(':checked')){
                 $(".check-item").prop('checked', true);
+                $('tr').addClass('to-remove');
+                // $('tr'),addClass
                 selected = info.end - info.start;
             }
-
             else{
+
                 $(".check-item").prop('checked', false);
+                $('tr').removeClass('to-remove');
                 selected = 0;
             }
 
@@ -307,14 +312,28 @@ $(function(){
             if($('#select-all').is(':checked'))
                 $("#select-all").prop('checked', false);
             --selected;
+            $(this).closest("tr").removeClass('to-remove');
         }else{
 
             if(++selected == info.end - info.start){
                 $("#select-all").prop('checked', true);
             }
+            $(this).closest("tr").addClass('to-remove');
         }
+
         selectedData(selected, entries);
     });
+
+    // $('.delete').on('click', function(){
+    //     for (var i = 0; i <=length; i++) {
+
+    //         $("#datatable-table tr:eq("+i+")").find("td.item").each(function(){
+    //             // if($(this).text())
+    //                 console.log($(this).text()+" - ");
+    //         });
+    //         console.log("\n");
+    //     }        
+    // });
 
     function pageLoad(){
         $('.widget').widgster();
@@ -324,6 +343,52 @@ $(function(){
     // selectedData(0, $('#datatable-table').DataTable().info().recordsTotal);
     pageLoad();
     SingApp.onPageLoad(pageLoad);
+
+    $('.del-selected').on('click', function(){
+        if(selected == 0){
+            $('.modal-body').html('<i class="glyphicon glyphicon-warning-sign" style="font-size: 2em; color: #DD5826;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Nothing to delete!');
+            $('.no').prop('disabled', true);
+            $('.delete').prop('disabled', true);
+        }
+        else{
+            $('.modal-body').html('<i class="glyphicon glyphicon-remove" style="font-size: 2em; color: red;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Are you sure you wan\'t to delete selected data?');
+            $('.no').prop('disabled', false);
+            $('.delete').prop('disabled', false);
+        }
+    });
+
+    $('.delete').on('click', function(){
+        // var allId = {"id":[]};
+        if(selected != 0){
+            
+            var objTmpl = {};
+            var key = [];
+
+            $('tr .key').each(function(i){
+                objTmpl[$(this).text()] = '';
+                key[i] = $(this).text();
+            });
+
+            // console.log(key, objTmpl);
+            
+            var dataToDelete = [];
+            $('.to-remove').each(function(){
+                var arrayTemp = JSON.parse(JSON.stringify(objTmpl));
+
+                $(this).find('.item').each(function(i){
+                    arrayTemp[key[i]] = $(this).text();
+                    if(key.length == i+1)
+                        dataToDelete.push(arrayTemp);
+                });
+            });
+
+           $.post('delete.php', {id: JSON.stringify(dataToDelete)});
+           $('.modal-body').html('<i class="glyphicon glyphicon-ok" style="font-size: 2em; color: green;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Successfully deleted!');
+           $('.no').prop('disabled', true);
+           $('.delete').prop('disabled', true);
+           console.log(JSON.stringify(dataToDelete));
+        }
+    });
 
 //     $(function() {
 //  $(".editButton").click(function(){

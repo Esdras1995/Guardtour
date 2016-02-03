@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <?php include("head.php"); ?>
+
 <body>
 
 <?php include("menu_and_header.php"); ?>
@@ -22,6 +23,15 @@
         
 
         <section class="widget">
+            <?php
+                if(isset($_POST['id'])){
+                    echo  "tout va bien";
+                    // $data = $_POST['id'];
+
+                    // $arrayPost = array('nom'=>$data[0]['adress'], 'adress'=>"adress", 'contact'=>"contact");
+                    // $post->add("poste", $arrayPost);
+                } 
+            ?>
             <header>
                 <!-- <h4>Table <span class="fw-semi-bold">Styles</span></h4> -->
                 <div class="widget-controls">
@@ -41,7 +51,7 @@
                                 foreach ($list[0] as $key => $value) {
                                     # code...
                                     // if($key != "id")
-                                        echo "<th>".$key."</th>";
+                                        echo '<th class="key">'.$key."</th>";
                                 }
                               ?>
                             <!-- <th class="hidden-xs">Date</th> -->
@@ -54,7 +64,7 @@
                             for ($i=0; $i < sizeof($list); $i++) {
                              {
                               $compt = -1;
-                              echo "<tr>";
+                              echo '<tr>';
                               echo '<td><input type="checkbox" class="check-item"></td>'; 
                                foreach ($list[$i] as $key => $value){ 
                                 # code...
@@ -75,8 +85,27 @@
                 </div>
             </div>
         </section>
-        <button class="btn btn-warning delete">Delete selected <?php echo $currentPage; ?></button>
+        <button type="button" class="btn btn-warning del-selected" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $currentPage; ?></button>
         <span class="selected-item"></span>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                Are you sure you wan't to delete selected <?php print($currentPage); ?> ?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default no" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger delete">Yes</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </main>
 </div>
 
@@ -96,11 +125,13 @@
 <script src="vendor/bootstrap-sass/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
 <script src="vendor/bootstrap-sass/vendor/assets/javascripts/bootstrap/button.js"></script>
 <script src="vendor/bootstrap-sass/vendor/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="vendor/bootstrap-sass/vendor/assets/javascripts/bootstrap/modal.js"></script>
 <script src="vendor/bootstrap-sass/vendor/assets/javascripts/bootstrap/alert.js"></script>
 <script src="vendor/jQuery-slimScroll/jquery.slimscroll.min.js"></script>
 <script src="vendor/widgster/widgster.js"></script>
 <script src="vendor/pace.js/pace.min.js"></script>
 <script src="vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script type="text/javascript" src="Bootstrap-Confirmation/bootstrap-confirmation.js"></script>
 
 <!-- common app js -->
 <script src="js/settings.js"></script>
@@ -113,8 +144,10 @@
 <script src="vendor/backgrid-paginator/backgrid-paginator.js"></script>
 <script src="vendor/datatables/media/js/jquery.dataTables.js"></script>
 <script src="vendor/bootstrap-select/bootstrap-select.min.js"></script>
+
 <!-- page specific js -->
 <script src="js/tables-dynamic.js"></script>
+
 
 </body>
 </html>

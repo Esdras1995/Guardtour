@@ -8,461 +8,150 @@
 <div class="content-wrap">
     <!-- main page content. the place to put widgets in. usually consists of .row > .col-md-* > .widget.  -->
     <main id="content" class="content" role="main">
-        <ol class="breadcrumb">
-            <li>YOU ARE HERE</li>
-            <li class="active">Tables Basic</li>
-        </ol>
-        <h1 class="page-title">Dynamic - <span class="fw-semi-bold">Tables</span></h1>
-        <section class="widget">
-            <header>
-                <h4>Table <span class="fw-semi-bold">Styles</span></h4>
-                <div class="widget-controls">
-                    <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
-                    <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                    <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-                </div>
-            </header>
-            <div class="widget-body">
-                <p>
-                    Column sorting, live search, pagination. Built with
-                    <a href="http://www.datatables.net/" target="_blank">jQuery DataTables</a>
-                </p>
-                <div class="mt">
-                    <table id="datatable-table" class="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th class="no-sort hidden-xs">Info</th>
-                            <th class="hidden-xs">Description</th>
-                            <th class="hidden-xs">Date</th>
-                            <th class="no-sort">Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><span class="fw-semi-bold">Algerd</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; JPEG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 200x150
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Palo Alto</a></td>
-                            <td class="hidden-xs">June 27, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-success" style="width: 29%;"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <section class="widget widget-invoice">
+                    <header>
+                        <div class="row">
+                            <div class="col-sm-6 col-print-6">
+                                <img src="demo/img/logo/invoice-logo.png" alt="Logo" class="invoice-logo"/>
+                            </div>
+                            <div class="col-sm-6 col-print-6">
+                                <h3 class="text-align-right">
+                                    #<span class="fw-semi-bold">9.45613</span> / <small>17 May 2014</small>
+                                </h3>
+                                <div class="text-muted fs-larger text-align-right">
+                                    Some Invoice number description or whatever
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><span class="fw-semi-bold">Vitaut</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; PNG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 6433x4522
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Vilnia</a></td>
-                            <td class="hidden-xs">January 1, 1442</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 19%;"></div>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="widget-body">
+                        <div class="row mb-lg">
+                            <section class="col-sm-6 col-print-6">
+                                <h4 class="text-muted no-margin">Company Information</h4>
+                                <h3 class="company-name">
+                                    Wrapbootstrap LLC
+                                </h3>
+                                <address>
+                                    <strong>2 Infinite Loop</strong><br>
+                                    Minsk, Belarus 220004<br>
+                                    088.253.5345<br>
+                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#">email@example.com</a><br>
+                                    <abbr title="Work Phone">phone:</abbr> (012) 345-678-901<br>
+                                    <abbr title="Work Fax">fax:</abbr> (012) 678-132-901
+                                </address>
+                            </section>
+                            <section class="col-sm-6 col-print-6 text-align-right">
+                                <h4 class="text-muted no-margin">Client Information</h4>
+                                <h3 class="client-name">
+                                    Veronica Niasvizhskaja
+                                </h3>
+                                <address>
+                                    <strong>Consultant</strong> at
+                                    <a href="#">Allspana</a><br>
+                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#">maryna@allspana.by</a><br>
+                                    <abbr title="Work Phone">phone:</abbr> (012) 345-678-901<br>
+                                    <abbr title="Work Fax">fax:</abbr> (012) 678-132-901
+                                    <p class="no-margin"><strong>Note:</strong></p>
+                                    <p class="text-muted fs-mini">Some nights I stay up cashing in my bad luck.
+                                        Some nights I call it a draw</p>
+                                </address>
+                            </section>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Item</th>
+                                <th class="hidden-xs">Description</th>
+                                <th>Quantity</th>
+                                <th class="hidden-xs">Price per Unit</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Brand-new 27' monitor</td>
+                                <td class="hidden-xs">2,560x1,440-pixel (WQHD) resolution supported!</td>
+                                <td>2</td>
+                                <td class="hidden-xs">700</td>
+                                <td>1,400.00</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Domain: okendoken.com</td>
+                                <td class="hidden-xs">6-month registration</td>
+                                <td>1</td>
+                                <td class="hidden-xs">10.99</td>
+                                <td>21.88</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Atlas Shrugged</td>
+                                <td class="hidden-xs">Novel by Ayn Rand, first published in 1957 in the US</td>
+                                <td>5</td>
+                                <td class="hidden-xs">35</td>
+                                <td>175.00</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>New Song by Dr. Pre</td>
+                                <td class="hidden-xs">Lyrics: praesent blandit augue non sapien ornare imperdiet</td>
+                                <td>1</td>
+                                <td class="hidden-xs">2</td>
+                                <td>2.00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-8 col-print-6">
+                                <p>
+                                    <strong>Note:</strong>
+                                    Thank you for your business. Keep in mind, sometimes bad things happen. But it's just sometimes.
+                                </p>
+                            </div>
+                            <div class="col-sm-4 col-print-6">
+                                <div class="row text-align-right">
+                                    <div class="col-xs-6"></div> <!-- instead of offset -->
+                                    <div class="col-xs-3">
+                                        <p>Subtotal</p>
+                                        <p>Tax(10%)</p>
+                                        <p class="no-margin"><strong>Total</strong></p>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <p>1,598.88</p>
+                                        <p>159.89</p>
+                                        <p class="no-margin"><strong>1,758.77</strong></p>
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><span class="fw-semi-bold">Honar</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; AVI
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 1440x980
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Berlin</a></td>
-                            <td class="hidden-xs">August 6, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-gray-light" style="width: 49%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><span class="fw-semi-bold">Jack</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; PNG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 12x43
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">San Francisco</a></td>
-                            <td class="hidden-xs">August 19, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar" style="width: 69%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><span class="fw-semi-bold">Leon</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; MP4
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 800x480
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Brasilia</a></td>
-                            <td class="hidden-xs">October 1, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-gray-light" style="width: 9%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td><span class="fw-semi-bold">Max</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; TXT
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; -
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Helsinki</a></td>
-                            <td class="hidden-xs">October 29, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-warning" style="width: 38%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td><span class="fw-semi-bold">Pol</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; MOV
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 640x480
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Radashkovichi</a></td>
-                            <td class="hidden-xs">November 11, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 83%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td><span class="fw-semi-bold">Chrishna</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; DOC
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; -
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Mumbai</a></td>
-                            <td class="hidden-xs">December 2, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-info" style="width: 40%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td><span class="fw-semi-bold">Leslie</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; AVI
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 4820x2140
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Singapore</a></td>
-                            <td class="hidden-xs">December 6, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-warning" style="width: 18%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td><span class="fw-semi-bold">David</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; XML
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; -
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Portland</a></td>
-                            <td class="hidden-xs">December 13, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-gray-light" style="width: 54%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td><span class="fw-semi-bold">Andrej</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; VOB
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 6433x4522
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Minsk</a></td>
-                            <td class="hidden-xs">December 14, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar" style="width: 25%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td><span class="fw-semi-bold">Julia</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; JPEG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 40x40
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Hrodna</a></td>
-                            <td class="hidden-xs">July 9, 2012</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-warning" style="width: 50%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td><span class="fw-semi-bold">Ihnat</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; JAVA
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; -
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Los Angeles</a></td>
-                            <td class="hidden-xs">August 2, 2012</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-success" style="width: 8%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td><span class="fw-semi-bold">Abraham</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; DOCX
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; -
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Panama</a></td>
-                            <td class="hidden-xs">September 3, 2012</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-gray-light" style="width: 80%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td><span class="fw-semi-bold">Tomas</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; JPEG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 1800x1420
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Amsterdam</a></td>
-                            <td class="hidden-xs">November 13, 2012</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-gray-light" style="width: 10%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>16</td>
-                            <td><span class="fw-semi-bold">Scott</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; PNG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 240x460
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Sluck</a></td>
-                            <td class="hidden-xs">December 5, 2012</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar" style="width: 93%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td><span class="fw-semi-bold">Pham</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; MAIL
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; -
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Tokyo</a></td>
-                            <td class="hidden-xs">December 8, 2012</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 44%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>18</td>
-                            <td><span class="fw-semi-bold">Peter</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; PNG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 8320x6400
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Cape Town</a></td>
-                            <td class="hidden-xs">December 29, 2012</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-gray-light" style="width: 5%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>19</td>
-                            <td><span class="fw-semi-bold">Uladz'</span></td>
-                            <td class="hidden-xs">
-                                <small>
-                                    <span class="fw-semi-bold">Type:</span>
-                                    &nbsp; JPEG
-                                </small>
-                                <br>
-                                <small>
-                                    <span class="fw-semi-bold">Dimensions:</span>
-                                    &nbsp; 2200x1600
-                                </small>
-                            </td>
-                            <td class="hidden-xs"><a href="#">Mahileu</a></td>
-                            <td class="hidden-xs">December 7, 2013</td>
-                            <td class="width-150">
-                                <div class="progress progress-sm mt-xs">
-                                    <div class="progress-bar progress-bar-gray-light" style="width: 0%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            </div>
+                        </div>
+                        <p class="text-align-right mt-lg mb-xs">
+                            Marketing Consultant
+                        </p>
+                        <p class="text-align-right">
+                            <span class="fw-semi-bold">Bob Smith</span>
+                        </p>
+                        <div class="btn-toolbar mt-lg text-align-right hidden-print">
+                            <button id="print" class="btn btn-inverse">
+                                <i class="fa fa-print"></i>
+                                &nbsp;&nbsp;
+                                Print
+                            </button>
+                            <!-- <button class="btn btn-danger">
+                                Proceed with Payment
+                                &nbsp;
+                                <span class="circle bg-white">
+                                    <i class="fa fa-arrow-right text-danger"></i>
+                                </span>
+                            </button> -->
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
+        </div>
     </main>
 </div>
 <!-- The Loader. Is shown when pjax happens -->
@@ -489,15 +178,7 @@
 <script src="js/app.js"></script>
 
 <!-- page specific libs -->
-<script src="vendor/underscore/underscore-min.js"></script>
-<script src="vendor/backbone/backbone.js"></script>
-<script src="vendor/backbone.paginator/lib/backbone.paginator.min.js"></script>
-<script src="vendor/backgrid/lib/backgrid.js"></script>
-<script src="vendor/backgrid-paginator/backgrid-paginator.js"></script>
-<script src="vendor/datatables/media/js/jquery.dataTables.js"></script>
-<script src="vendor/bootstrap-select/bootstrap-select.min.js"></script>
-
 <!-- page specific js -->
-<script src="js/tables-dynamic.js"></script>
+<script src="js/invoice.js"></script>
 </body>
 </html>
