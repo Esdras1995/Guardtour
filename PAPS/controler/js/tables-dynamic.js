@@ -357,24 +357,24 @@ $(function(){
         }
     });
 
-    $('.delete').on('click', function(){
-        // var allId = {"id":[]};
+    function getAllSelected(){
+
+        var allId = [];
+
         if(selected != 0){
-            
-            // var objTmpl = {};
-            // var key = [];
+            $('.to-remove td:nth-child(2)').each(function(){
+                 allId.push($(this).text());
+            });
+        }
 
-            // $('tr .key').each(function(i){
-            //     objTmpl[$(this).text()] = '';
-            //     key[i] = $(this).text();
-            // });
+        return allId;
+    }
 
-            // // console.log(key, objTmpl);
-            
-            // var dataToDelete = [];
-            // var arrayTemp = JSON.parse(JSON.stringify(objTmpl));
-
-            var allId = [];
+    $('.delete').on('click', function(){
+        
+        if(selected != 0){
+        
+            var allId = getAllSelected();
 
             $('.to-remove td:nth-child(2)').each(function(){
                  allId.push($(this).text());
@@ -388,7 +388,22 @@ $(function(){
            location.reload();
         }
     });
+    
+    $('.save').on('click', function(){
+        if(selected != 0){
+            var allId = getAllSelected();
+            $.post("invoice.php", {id: JSON.stringify(allId)});
+        }
+    });
 
+    $('.hide-show').on('click', function(){
+        var table = $('#datatable-table').DataTable();
+        // Get the column API object
+        var column = table.column( $(this).attr('data-column') );
+ 
+        // Toggle the visibility
+        column.visible( ! column.visible() );
+    });
 
 // $('.delete').on('click', function(){
 //         // var allId = {"id":[]};

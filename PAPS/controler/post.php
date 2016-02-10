@@ -17,12 +17,12 @@
       # code...
       
       $list = $post->_list("poste", "*");
-      $_SESSION['page'] = "post";
-      $toPage = "post_register.php";
+      $_SESSION['page'] = "Post";
+      // $toPage = "post_register.php";
       
     }elseif ($page === "guard") {
       # code...
-      $_SESSION['page'] = "guard";
+      $_SESSION['page'] = "Guard";
       $list = $guard->_list("guard", "*");
 
     }elseif ($page === "guardTours") {
@@ -36,6 +36,12 @@
       
       $list = $tours->_list("tours", "*");
       $_SESSION['page'] = "Tours";
+
+    }elseif ($page === "users") {
+      # code...
+      
+      $list = $tours->_list("admin", "*");
+      $_SESSION['page'] = "Users";
 
     }else{
         header("Location: error.php");

@@ -62,47 +62,40 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Item</th>
-                                <th class="hidden-xs">Description</th>
-                                <th>Quantity</th>
-                                <th class="hidden-xs">Price per Unit</th>
-                                <th>Total</th>
+                                <?php
+                                if(!empty($listReport))
+                                foreach ($listReport[0] as $key => $value) {
+                                    # code...
+                                    // if($key != "tours_id")
+                                        echo '<th class="key">'.$key."</th>";
+                                    // else
+                                    //     echo '<th class="key"><a href="post.php?page=tours" target="_blank">'.$key."</a></th>";
+                                }
+                              ?>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Brand-new 27' monitor</td>
-                                <td class="hidden-xs">2,560x1,440-pixel (WQHD) resolution supported!</td>
-                                <td>2</td>
-                                <td class="hidden-xs">700</td>
-                                <td>1,400.00</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Domain: okendoken.com</td>
-                                <td class="hidden-xs">6-month registration</td>
-                                <td>1</td>
-                                <td class="hidden-xs">10.99</td>
-                                <td>21.88</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Atlas Shrugged</td>
-                                <td class="hidden-xs">Novel by Ayn Rand, first published in 1957 in the US</td>
-                                <td>5</td>
-                                <td class="hidden-xs">35</td>
-                                <td>175.00</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>New Song by Dr. Pre</td>
-                                <td class="hidden-xs">Lyrics: praesent blandit augue non sapien ornare imperdiet</td>
-                                <td>1</td>
-                                <td class="hidden-xs">2</td>
-                                <td>2.00</td>
-                            </tr>
+                                <?php
+                                    if(!empty($listReport))
+                                    for ($i=0; $i < sizeof($listReport); $i++) {
+                                     {
+                                      $compt = -1;
+                                      echo '<tr>';
+                                      echo '<td><input type="checkbox" class="check-item"></td>'; 
+                                       foreach ($listReport[$i] as $key => $value){ 
+                                        # code...
+                                        if(++$compt == 0)
+                                            echo '<td class="item"><a href="#" class="edit">'.$value."</a></td>";
+
+                                        else
+                                            echo '<td class="item">'.$value."</td>";
+                                      }
+
+                                      echo "</tr>";
+
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
                         <div class="row">

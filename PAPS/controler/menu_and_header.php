@@ -55,7 +55,7 @@
                     <i class="toggle fa fa-angle-down"></i>
                 </a>
                 <ul id="sidebar-ui" class="collapse">
-                    <li><a href="ui_components.html">Users</a></li>
+                    <li><a href="post.php?page=users">Users</a></li>
                 </ul>
             </li>
         </ul>

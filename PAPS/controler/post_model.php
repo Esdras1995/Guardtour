@@ -71,7 +71,15 @@ class GuardTours extends Model
 	}
 }
 
-
+class Report extends Model
+{
+	
+	function __construct()
+	{
+		# code...
+		parent::__construct();
+	}
+}
 
 
 
