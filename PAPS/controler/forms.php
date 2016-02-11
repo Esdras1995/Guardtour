@@ -4,7 +4,7 @@
 
   	// $post = new Post();
   	$guard = new Guard();
-  	// $guardTours = new GuardTours();
+  	$guardTours = new GuardTours();
   	$tours = new Tours();
     $user = new User();
     $model = new Model();
@@ -23,8 +23,9 @@
       $heure = securite_bdd(strip_tags($_POST['heure']));
       $uid = securite_bdd(strip_tags($_POST['uid']));
 
-      $guard_id = $guard->getId(array('uid' => $uid));
-      $guard_tours_id = $getId(array('guard_id' => $guard_id));   
+      $guard_id = $guard->getId("uid = ?", array($uid));
+
+      $guard_tours_id = $guardTours->getId("guard_id = ?", array($guard_id));
       
       $mention = $tours->getMention($heure, $guard_tours_id);
     }

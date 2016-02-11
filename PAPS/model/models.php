@@ -122,6 +122,23 @@ class Guard extends Model
 		# code...
 		parent::__construct();
 	}
+
+	public function getId($where, $value){
+		
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT id FROM guard WHERE $where");
+			$stmt->execute($value);
+
+			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+
+			return $userRow['id'];
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}	
 }
 
 
@@ -134,6 +151,8 @@ class Tours extends Model
 		parent::__construct();
 	}
 
+	// public function getMention($heure, $guard_tours_id){}
+
 }
 
 
@@ -145,17 +164,25 @@ class GuardTours extends Model
 		# code...
 		parent::__construct();
 	}
-}
 
-class Report extends Model
-{
-	
-	function __construct()
-	{
-		# code...
-		parent::__construct();
+	public function getId($where, $value){
+		
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT id FROM guard WHERE $where");
+			$stmt->execute($value);
+
+			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+
+			return $userRow['id'];
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
 	}
 }
+
 
 
 
