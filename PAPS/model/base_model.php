@@ -86,18 +86,18 @@ class Model implements iDatabase
 
 	public function _list($table, $data){
 		try
-			{	
-				
-				$stmt = $this->conn->prepare("SELECT " . $data . " FROM $table");
-				$stmt->execute();
-				$listpost = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				
-				return $listpost;
+		{	
+			
+			$stmt = $this->conn->prepare("SELECT " . $data . " FROM $table");
+			$stmt->execute();
+			$listpost = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			return $listpost;
 
-			}catch(PDOException $e){
+		}catch(PDOException $e){
 
-				echo $e->getMessage();
-			}
+			echo $e->getMessage();
+		}
 
 	}
 }

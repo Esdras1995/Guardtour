@@ -151,7 +151,14 @@ class Tours extends Model
 		parent::__construct();
 	}
 
-	// public function getMention($heure, $guard_tours_id){}
+	public function getMention($heure, $guard_tours_id){
+		
+		$guard_tours = new GuardTours();
+
+		$guard_tours->dynamicSelect("id = ?", array($guard_tours_id), "intervale, intervale_limit, commence_a, termine_a");
+
+		return $guard_tours;
+	}
 
 }
 
@@ -175,6 +182,22 @@ class GuardTours extends Model
 			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 
 			return $userRow['id'];
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+
+	public function dynamicSelect($where, $value, $element){
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT $element FROM guardtours WHERE $where");
+			$stmt->execute($value);
+
+			$selected=$stmt->fetch(PDO::FETCH_ASSOC);
+
+			return $selected;
 		}
 		catch(PDOException $e)
 		{
