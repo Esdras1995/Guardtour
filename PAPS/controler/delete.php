@@ -1,13 +1,10 @@
 <?php
 require_once("../model/session.php"); 
-require_once('post_model.php');
+require_once('../model/models.php');
 
-$post = new Post();
-$guard = new Guard();
-$guardTours = new GuardTours();
-$tours = new Tours();
+$model = new Model();
 
-$h = fopen("debug.txt", "a");
+// $h = fopen("debug.txt", "a");
 
 $page = $_SESSION['page'];
 
@@ -15,27 +12,32 @@ if(isset($_POST['id'])){
 
 	$data = json_decode($_POST['id'], true);
 	// var_dump(json_decode($data, true));
-	fprintf($h, $data[0]." ".$page);
+	// fprintf($h, $data[0]." ".$page);
 
 	switch ($page) {
-		case 'post':
+		case 'Post':
 			# code...
-			$post->remove("poste", $data);
+			$model->remove("poste", $data);
 			break;
 		
-		case 'guard':
+		case 'Guard':
 			# code...
-			$guard->remove("guard", $data);
+			$model->remove("guard", $data);
 			break;
 
-		case 'guardTours':
+		case 'Guard tours':
 			# code...
-			$guard->remove("guardTours", $data);
+			$model->remove("guardTours", $data);
 			break;
 		
-		case 'tours':
+		case 'Tours':
 			# code...
-			$post->remove("tours", $data);
+			$model->remove("tours", $data);
+			break;
+
+		case 'Users':
+			# code...
+			$model->remove("admin", $data);
 			break;
 
 		default:
@@ -43,7 +45,7 @@ if(isset($_POST['id'])){
 			break;
 	}
 }
-fclose($h);
+// fclose($h);
 
-include("../vue/delete.php");
+// include("../vue/delete.php");
  ?>

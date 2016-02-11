@@ -1,6 +1,6 @@
 <?php 
   
-  require_once("../model/authentification.php");
+  require_once("../model/models.php");
 
   $auth_user = new User();
   

@@ -1,6 +1,6 @@
 <?php 
   require_once("../model/session.php");
-  require_once('post_model.php');
+  require_once('../model/models.php');
   
 
   $report = new Report();

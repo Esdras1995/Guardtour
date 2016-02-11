@@ -2,7 +2,7 @@
     <!-- need this .js class to initiate slimscroll -->
     <div class="js-sidebar-content">
         <header class="logo hidden-xs">
-            <a href="index.html">PAP-Security</a>
+            <a href="dashboard.php">PAPS</a>
         </header>
         <!-- main notification links are placed inside of .sidebar-nav -->
         <ul class="sidebar-nav">
@@ -129,7 +129,7 @@
                 <i class="fa fa-circle text-gray mr-n-sm"></i>
                 <i class="fa fa-circle text-warning"></i>
                 &nbsp;
-                PAP Security
+                PAPS
                 &nbsp;
                 <i class="fa fa-circle text-warning mr-n-sm"></i>
                 <i class="fa fa-circle text-gray"></i>

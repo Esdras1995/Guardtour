@@ -1,95 +1,175 @@
 <?php
 
-require_once("Database.php");
-require_once 'dbconfig.php';
+require_once("../model/base_model.php");
 
 /**
 * 
 */
-class Model implements iDatabase
-{
-	protected $conn;
-	protected $form;
+
+class User extends Model
+{	
 
 	function __construct()
 	{
 		# code...
-
-		$database = new Database();
-		$db = $database->dbConnection();
-		$this->conn = $db;
+		parent::__construct();
 	}
-
-
-
-	public function update($table, $data, $where){
-
-		try {
-			
-			$cols = array();
-
-		    foreach($data as $key=>$val) {
-		        $cols[] = "$key = '$val'";
-		    }
-
-		    $stmt = $this->conn->prepare("UPDATE $table SET " . implode(', ', $cols) . " WHERE $where");
-		    $stmt->execute();
-
-		} catch(PDOException $e){
-
-				echo $e->getMessage();
-			}
-		
-		return $stmt;
-	}
-
-
-
-	public function remove($table, $data){}
-
 	
-
-	public function add($table, $data){
-
-		try {
-			
-			$cols = array();
-
-		    foreach($data as $key=>$val) {
-		        $cols[] = "$key = '$val'";
-		    }
-
-		    $stmt = $this->conn->prepare("INSERT INTO $table SET " . implode(', ', $cols));
-		    $stmt->execute();
-
-		} catch(PDOException $e){
-
-				echo $e->getMessage();
-			}
-		
+	public function runQuery($sql)
+	{
+		$stmt = $this->conn->prepare($sql);
 		return $stmt;
 	}
 	
-
-
-	public function _list($table, $data){
+	public function exist($uname, $umail){
 		try
-			{	
-				
-				$stmt = $this->conn->prepare("SELECT " . $data . " FROM $table");
-				$stmt->execute();
-				$listpost = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				
-				return $listpost;
+		{
+			$stmt = $this->conn->prepare("SELECT id FROM admin WHERE username=:uname OR email=:umail ");
+			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
+			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 
-			}catch(PDOException $e){
+			echo $stmt->rowCount();
+			
+			if($stmt->rowCount() >= 1)
+				return true;
 
-				echo $e->getMessage();
+			return false;
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+		
+	public function doLogin($uname,$umail,$upass)
+	{
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT id, username, email, password FROM admin WHERE username=:uname OR email=:umail ");
+			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
+			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+
+			echo $stmt->rowCount();
+			
+			if($stmt->rowCount() == 1)
+			{
+				//if(password_verify($upass, $userRow['password']))
+				if(md5($upass) == $userRow['password'])
+				{
+					echo "tout va bien!!!";
+					$_SESSION['user_session'] = $userRow['id'];
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+	
+	public function is_loggedin()
+	{
+		if(isset($_SESSION['user_session']))
+		{
+			return true;
+		}
+	}
+	
+	public function redirect($url)
+	{
+		header("Location: $url");
+	}
+	
+	public function doLogout()
+	{
+		session_destroy();
+		unset($_SESSION['user_session']);
+		return true;
+	}
 
+	public function getUserRow($user_id)
+	{
+
+	  $stmt = $this->runQuery("SELECT * FROM admin WHERE id=:user_id");
+	  $stmt->execute(array(":user_id"=>$user_id));
+	  $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+	  
+	  return $userRow;
+	}
+}
+class Post extends Model
+{
+	private $formModel;
+
+	function __construct()
+	{
+		# code...
+		parent::__construct();
+	}
+}
+
+
+class Guard extends Model
+{
+	
+	function __construct()
+	{
+		# code...
+		parent::__construct();
+	}
+}
+
+
+class Tours extends Model
+{
+	
+	function __construct()
+	{
+		# code...
+		parent::__construct();
 	}
 
 }
+
+
+class GuardTours extends Model
+{
+	
+	function __construct()
+	{
+		# code...
+		parent::__construct();
+	}
+}
+
+class Report extends Model
+{
+	
+	function __construct()
+	{
+		# code...
+		parent::__construct();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

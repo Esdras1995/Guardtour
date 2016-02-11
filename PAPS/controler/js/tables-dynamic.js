@@ -380,6 +380,8 @@ $(function(){
                  allId.push($(this).text());
             });
 
+            // console.log(JSON.stringify(allId));
+            
            $.post('delete.php', {id: JSON.stringify(allId)});
            $('.modal-body').html('<i class="glyphicon glyphicon-ok" style="font-size: 2em; color: green;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Successfully deleted!');
            $('.no').prop('disabled', true);

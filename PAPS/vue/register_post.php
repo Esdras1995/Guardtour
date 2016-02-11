@@ -29,7 +29,7 @@
                         <form role="form" method="post" class="form-register">
                             <fieldset>
                                 <legend>
-                                    Register <?php echo $currentPage ?>
+                                    Register <?php echo $_SESSION['page']; ?>
                                 </legend>
                                 <!-- <p>
                                     Different colors & sizes for any elements including input groups. Elements may be
@@ -37,10 +37,10 @@
                                 </p> -->
                                 <br/>
                                 <div class="form-group">
-                                    <input class="form-control input-lg" name="name" placeholder="Name" type="text">
+                                    <input class="form-control input-lg" required="riquired" name="name" placeholder="Name" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control input-lg" name="address" placeholder="Address" type="text">
+                                    <input class="form-control input-lg" required="riquired" name="address" placeholder="Address" type="text">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control input-lg" name="contact" placeholder="Contact" type="text">

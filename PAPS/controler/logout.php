@@ -1,6 +1,6 @@
 <?php
 	require_once('../model/session.php');
-	require_once('../model/authentification.php');
+	require_once('../model/models.php');
 	$user_logout = new User();
 	
 	if($user_logout->is_loggedin()!="")

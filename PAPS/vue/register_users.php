@@ -19,6 +19,7 @@
                         <!-- <h4>
                             
                         </h4> -->
+                        
                         <div class="widget-controls">
                             <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
                             <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
@@ -31,12 +32,12 @@
                                 <legend>
                                     Register <?php echo $_SESSION['page']; ?>
                                 </legend>
-
+                                <?php if($error) echo '<span class="alert alert-danger">'.$error.'</span><br>'; ?>
                                 <div class="form-group">
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input  name="firstname" class="form-control input-lg" size="16" type="text" placeholder="firstname">
+                                            <input  name="firstname" class="form-control input-lg" size="16" type="text" placeholder="firstname" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -45,7 +46,16 @@
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input name="lastname" class="form-control input-lg" size="16" type="text" placeholder="lastname">
+                                            <input name="lastname" class="form-control input-lg" size="16" type="text" placeholder="lastname" required="required">
+                                        </div>
+                                    <!-- </div> -->
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- <div class="col-sm-7"> -->
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input name="username" class="form-control input-lg" size="16" type="text" placeholder="username" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -54,7 +64,7 @@
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="email" class="form-control input-lg" size="16" type="email" placeholder="email">
+                                            <input name="email" class="form-control input-lg" size="16" type="email" placeholder="email" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -62,30 +72,20 @@
                                 <div class="form-group">
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="uid" required="required" class="form-control input-lg" size="16" type="text" placeholder="uid">
+                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                            <input name="password" class="form-control input-lg" size="16" type="password" placeholder="password" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
 
-                                <div class="form-group">
+                                <!-- <div class="form-group"> -->
                                     <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
+                                        <!-- <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                            <input name="phone" class="form-control input-lg" size="16" type="text" placeholder="phone">
-                                        </div>
+                                            <input name="password-confirmation" class="form-control input-lg" size="16" type="password" placeholder="Confirm password" required="required">
+                                        </div> -->
                                     <!-- </div> -->
-                                </div>
-
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="nif" class="form-control input-lg" size="16" type="text" placeholder="nif/cin">
-                                        </div>
-                                    <!-- </div> -->
-                                </div>
-
+                                <!-- </div> -->
                                 <button type="submit" class="btn btn-success pull-right" name="register" >Register</button>
                             </fieldset>
                         </form>
