@@ -50,7 +50,7 @@
 			if(!empty($this->model->listKey($table, "*")))
 				$listkey = $this->model->listKey($table, "*");
 			else
-				return '<span class="alert alert-danger"> Something is bad </span>';
+				return '<span class="alert alert-danger"> Something is bad 1111</span>';
 
 			if(!empty($this->listToAdd($listkey, $value)))
 				$listToAdd = $this->listToAdd($listkey, $value);
@@ -61,7 +61,6 @@
 
 			return $message;
 		}
-
 
 		/* Update specified data. */
 

@@ -38,7 +38,7 @@
                         <form role="form" method="post" class="form-register">
                             <fieldset>
                                 <legend>
-                                    Register Post
+                                    <strong><?php echo $update==1?"Update":"Register"; ?> Post</strong>
                                 </legend>
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-lg-12">

@@ -33,7 +33,7 @@
                         <form role="form" method="post">
                             <fieldset>
                                 <legend>
-                                    Register Guard
+                                    <strong><?php echo $update==1?"Update":"Register"; ?> Guard</strong>
                                 </legend>
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-lg-12">

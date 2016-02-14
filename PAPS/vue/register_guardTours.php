@@ -33,7 +33,7 @@
                         <form role="form" method="post">
                             <fieldset>
                                 <legend>
-                                    Register Guard tours
+                                    <strong><?php echo $update==1?"Update":"Register"; ?> Guard tours</strong>
                                 </legend>
                                 <div class="row" style="margin-bottom: 10px;">
                                 	<div class="col-lg-12">
@@ -49,7 +49,7 @@
 	                                </div>
 	                               
 	                                <div class="col-lg-7">
-	                                	<select class="form-control" name="post" required="required">
+	                                	<select class="form-control" name="poste_id" required="required">
 	                                		<option></option>
 	                                		<?php 
 	                                			for ($i=0; $i < sizeof($postAdress); $i++) { 
@@ -71,6 +71,10 @@
 	                                	</div>
 	                                </div>
 								</div>
+
+								<legend>
+                                    First guard
+                                </legend>
 
 								<div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
@@ -101,6 +105,34 @@
 	                                </div>
 								</div>
 
+								<div class="row" style="margin-bottom: 10px;">
+	                                <div class="col-lg-2">
+	                                	<label>Begin at: </label>
+	                                </div>
+	                               
+	                                <div class="col-lg-10">
+	                                	<div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                            <input  name="commence_a1" class="form-control" size="16" type="time" placeholder="begin at">
+                                        </div>
+	                                </div>
+								</div>
+								
+								<div class="row" style="margin-bottom: 10px;">
+	                                <div class="col-lg-2">
+	                                	<label clas>Ends at: </label>
+	                                </div>
+	                               
+	                                <div class="col-lg-10">
+	                                	<div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                            <input  name="termine_a1" class="form-control" size="16" type="time"  required="required" placeholder="Ends at">
+                                        </div>
+	                                </div>
+								</div>
+								<legend>
+                                    Second guard
+                                </legend>
 								<div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
 	                                	<label clas><a href="post.php?page=guard" target="_blank">Guard 2:</a> </label>
@@ -138,7 +170,7 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="begin" class="form-control" size="16" value="18:00:00" type="time" placeholder="intervale">
+                                            <input  name="commence_a2" class="form-control" size="16" type="time" placeholder="begin at">
                                         </div>
 	                                </div>
 								</div>
@@ -151,11 +183,13 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="end" class="form-control" size="16" type="time"  required="required" placeholder="intervale">
+                                            <input  name="termine_a2" class="form-control" size="16" type="time"  required="required" placeholder="Ends at">
                                         </div>
 	                                </div>
 								</div>
-
+								<legend>
+                                    Intervale tower and limit time
+                                </legend>
 								<div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
 	                                	<label clas>Interval tower: </label>
@@ -172,13 +206,13 @@
 
                                 <div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
-	                                	<label clas>Limit: </label>
+	                                	<label clas>Limit (minute): </label>
 	                                </div>
 	                               
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="limit" class="form-control" size="16" type="time" required="required" placeholder="intervale">
+                                            <input  name="intervale_limit" class="form-control" size="16" min="1" max="59" type="number" required="required" placeholder="interval limit">
                                         </div>
 	                                </div>
 								</div>

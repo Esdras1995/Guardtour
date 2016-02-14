@@ -45,10 +45,10 @@ class Model implements iDatabase
 
 
 
-	public function remove($table, $data){
+	public function remove($table, $data, $where){
 		try {
 
-		    $stmt = $this->conn->prepare("DELETE FROM $table WHERE id IN (" . implode(', ', $data).")");
+		    $stmt = $this->conn->prepare("DELETE FROM $table WHERE $where IN (" . implode(', ', $data).")");
 		    $stmt->execute();
 
 		} catch(PDOException $e){
@@ -118,25 +118,8 @@ class Model implements iDatabase
 	}
 
 	public function listKey($table, $data){
-		$listkey = array();
-		try
-		{	
-			
-			$stmt = $this->conn->prepare("SELECT " . $data . " FROM $table");
-			$stmt->execute();
-			$listpost = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-			foreach ($listpost[0] as $key => $value) {
-				# code...
-				$listkey[] = $key;
-			}
-
-		}catch(PDOException $e){
-
-			echo $e->getMessage();
-		}
-
-		return $listkey;
+		return (!empty($this->_list($table, $data))) ? array_keys($this->_list($table, $data)[0]) : array();
 
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 require_once("../model/session.php"); 
-require_once('../model/models.php');
+require_once("../model/base_model.php");
 
 $model = new Model();
 
@@ -17,27 +17,30 @@ if(isset($_POST['id'])){
 	switch ($page) {
 		case 'Post':
 			# code...
-			$model->remove("poste", $data);
+			$model->remove("guardtours", $data, "poste_id");
+			$model->remove("poste", $data, "id");
 			break;
 		
 		case 'Guard':
 			# code...
-			$model->remove("guard", $data);
+			$model->remove("guardtours", $data, "guard_id");
+			$model->remove("guard", $data, "id");
 			break;
 
 		case 'Guard tours':
 			# code...
-			$model->remove("guardTours", $data);
+			$model->remove("tours", $data, "guardtours_id");
+			$model->remove("guardTours", $data, "id");
 			break;
 		
 		case 'Tours':
 			# code...
-			$model->remove("tours", $data);
+			$model->remove("tours", $data, "id");
 			break;
 
 		case 'Users':
 			# code...
-			$model->remove("admin", $data);
+			$model->remove("admin", $data, "id");
 			break;
 
 		default:

@@ -61,7 +61,12 @@
                                 # code...
                                 if(++$compt == 0)
                                     echo '<td class="item"><a href="javascript:;" class="edit">'.$value."</a></td>";
-
+                                elseif ($key == "mention") {
+                                    # code...
+                                    echo '<td class="item"><div class="progress progress-xs mt-xs mb-0">
+                                            <div class="progress-bar progress-bar-gray-light" style="width: 100%; background: '.$value.'"></div>
+                                        </div>'.$value."</td>";;
+                                }
                                 else
                                     echo '<td class="item">'.$value."</td>";
                               }

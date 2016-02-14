@@ -221,7 +221,7 @@ class Tours extends Model
 		$a = $intervale_limit/3;
 		$b = 2*$intervale_limit/3;
 
-		echo $a." ".$b." ".$intervale_limit." <br>";
+		// echo $a." ".$b." ".$intervale_limit." <br>";
 
 		if($a < $result && $result <= $b)
 			return "#f0b518";
