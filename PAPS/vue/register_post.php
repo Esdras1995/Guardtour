@@ -1,3 +1,7 @@
+<?php 
+    if(!$controllerCalled)
+        header("Location: ../controler/index.php");
+ ?>
 <!DOCTYPE html>
 <html>
     <?php include("head.php"); ?>
@@ -11,7 +15,12 @@
             <li>YOU ARE HERE</li>
             <li class="active">Form Validation</li>
         </ol> -->
-        <h1 class="page-title">Form - <span class="fw-semi-bold">register</span></h1>
+
+        <?php 
+            $tours = new Tours();
+            echo $tours->getMention("09:10:01", 13);
+        ?>
+        <h1 class="page-title">Form - <span class="fw-semi-bold"><?php echo $update==1?"Update":"Register"; ?> </span></h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-1">
                 <section class="widget">
@@ -29,23 +38,27 @@
                         <form role="form" method="post" class="form-register">
                             <fieldset>
                                 <legend>
-                                    Register <?php echo $_SESSION['page']; ?>
+                                    Register Post
                                 </legend>
-                                <!-- <p>
-                                    Different colors & sizes for any elements including input groups. Elements may be
-                                    easily styled with classes like <code>.bg-primary</code> or <code>.bg-transparent</code>
-                                </p> -->
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            <?php if($message) echo $message; ?>
+                                        </p>
+                                    </div>
+                                </div>
+
                                 <br/>
                                 <div class="form-group">
-                                    <input class="form-control input-lg" required="riquired" name="name" placeholder="Name" type="text">
+                                    <input class="form-control input-lg" required="riquired" name="nom" value="<?php echo $dataUpdate!=''?$dataUpdate['nom']:''; ?>" placeholder="Name" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control input-lg" required="riquired" name="address" placeholder="Address" type="text">
+                                    <input class="form-control input-lg" required="riquired" name="adress" value="<?php echo $dataUpdate!=''?$dataUpdate['adress']:''; ?>" placeholder="Address" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control input-lg" name="contact" placeholder="Contact" type="text">
+                                    <input class="form-control input-lg" name="contact" value="<?php echo $dataUpdate!=''?$dataUpdate['contact']:''; ?>" placeholder="Contact" type="text">
                                 </div>
-                                <button type="submit" class="btn btn-success pull-right" name="register" >Register</button>
+                                <button type="submit" class="btn btn-success pull-right" name="register" ><?php echo $update==1?"Update":"Register"; ?></button>
                             </fieldset>
                         </form>
                     </div>

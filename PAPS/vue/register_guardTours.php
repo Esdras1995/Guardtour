@@ -1,3 +1,7 @@
+<?php 
+    if(!$controllerCalled)
+        header("Location: ../controler/index.php");
+ ?>
 <!DOCTYPE html>
 <html>
     <?php include("head.php"); ?>
@@ -29,120 +33,155 @@
                         <form role="form" method="post">
                             <fieldset>
                                 <legend>
-                                    Register <?php echo $_SESSION['page']; ?>
+                                    Register Guard tours
                                 </legend>
                                 <div class="row" style="margin-bottom: 10px;">
+                                	<div class="col-lg-12">
+		                                <p>
+		                                    <?php if($message) echo $message; ?>
+                                		</p>
+                                	</div>
+                                </div>
+                                
+                                <div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
-	                                	<label clas>Post:</label>
+	                                	<label><a href="post.php?page=post" target="_blank">Post:</a></label>
 	                                </div>
 	                               
 	                                <div class="col-lg-7">
-	                                	<select class="form-control" required="required">
+	                                	<select class="form-control" name="post" required="required">
 	                                		<option></option>
+	                                		<?php 
+	                                			for ($i=0; $i < sizeof($postAdress); $i++) { 
+	                                				# code...
+
+	                                				foreach ($postAdress[$i] as $value) {
+	                                					# code...
+	                                					echo "<option>".$value."</option>";
+	                                				}
+	                                			}
+	                                		 ?>
 	                                	</select>
 	                                </div>
 
 	                                <div class="col-lg-3">
 	                                	<div style="margin-top: 2px;">
-		                                	<a href="#" class="btn btn-info">Edit</a>
-		                                	<a href="#" class="btn btn-success">Add</a>
+		                                	<a href="post.php?page=post" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
+		                                	<a href="forms.php?page=Post" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
 								</div>
 
 								<div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
-	                                	<label clas>Guard 1: </label>
+	                                	<label clas><a href="post.php?page=guard" target="_blank">Guard 1:</a> </label>
 	                                </div>
 	                               
 	                                <div class="col-lg-7">
-	                                	<select class="form-control" required="required">
+	                                	<select class="form-control" name="guard1" required="required">
 	                                		<option></option>
+	                                		<?php 
+	                                			for ($i=0; $i < sizeof($guardId); $i++) { 
+	                                				# code...
+
+	                                				foreach ($guardId[$i] as $value) {
+	                                					# code...
+	                                					echo "<option>".$value."</option>";
+	                                				}
+	                                			}
+	                                		 ?>
 	                                	</select>
 	                                </div>
 
 	                                <div class="col-lg-3">
 	                                	<div style="margin-top: 2px;">
-		                                	<a href="#" class="btn btn-info">Edit</a>
-		                                	<a href="#" class="btn btn-success">Add</a>
+		                                	<a href="post.php?page=guard" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
+		                                	<a href="forms.php?page=Guard" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
 								</div>
 
 								<div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
-	                                	<label clas>Guard 2: </label>
+	                                	<label clas><a href="post.php?page=guard" target="_blank">Guard 2:</a> </label>
 	                                </div>
 	                               
 	                                <div class="col-lg-7">
-	                                	<select class="form-control" required="required">
+	                                	<select class="form-control" name="guard2" required="required">
 	                                		<option></option>
+	                                		<?php 
+	                                			for ($i=0; $i < sizeof($guardId); $i++) { 
+	                                				# code...
+
+	                                				foreach ($guardId[$i] as $value) {
+	                                					# code...
+	                                					echo "<option>".$value."</option>";
+	                                				}
+	                                			}
+	                                		 ?>
 	                                	</select>
 	                                </div>
 
 	                                <div class="col-lg-3">
 	                                	<div style="margin-top: 2px;">
-		                                	<a href="#" class="btn btn-info">Edit</a>
-		                                	<a href="#" class="btn btn-success">Add</a>
+		                                	<a href="post.php?page=guard" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
+		                                	<a href="forms.php?page=Guard" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
 								</div>
 
-
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input  name="firstname" class="form-control input-lg" size="16" type="text" placeholder="firstname">
+								<div class="row" style="margin-bottom: 10px;">
+	                                <div class="col-lg-2">
+	                                	<label>Begin at: </label>
+	                                </div>
+	                               
+	                                <div class="col-lg-10">
+	                                	<div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                            <input  name="begin" class="form-control" size="16" value="18:00:00" type="time" placeholder="intervale">
                                         </div>
-                                    <!-- </div> -->
-                                </div>
-
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input name="lastname" class="form-control input-lg" size="16" type="text" placeholder="lastname">
+	                                </div>
+								</div>
+								
+								<div class="row" style="margin-bottom: 10px;">
+	                                <div class="col-lg-2">
+	                                	<label clas>Ends at: </label>
+	                                </div>
+	                               
+	                                <div class="col-lg-10">
+	                                	<div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                            <input  name="end" class="form-control" size="16" type="time"  required="required" placeholder="intervale">
                                         </div>
-                                    <!-- </div> -->
-                                </div>
+	                                </div>
+								</div>
 
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="email" class="form-control input-lg" size="16" type="email" placeholder="email">
+								<div class="row" style="margin-bottom: 10px;">
+	                                <div class="col-lg-2">
+	                                	<label clas>Interval tower: </label>
+	                                </div>
+	                               
+	                                <div class="col-lg-10">
+	                                	<div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                            <input  name="intervale" class="form-control" size="16" type="time" required="required" placeholder="intervale">
                                         </div>
-                                    <!-- </div> -->
-                                </div>
+	                                </div>
+								</div>
 
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="uid" required="required" class="form-control input-lg" size="16" type="text" placeholder="uid">
+
+                                <div class="row" style="margin-bottom: 10px;">
+	                                <div class="col-lg-2">
+	                                	<label clas>Limit: </label>
+	                                </div>
+	                               
+	                                <div class="col-lg-10">
+	                                	<div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                            <input  name="limit" class="form-control" size="16" type="time" required="required" placeholder="intervale">
                                         </div>
-                                    <!-- </div> -->
-                                </div>
-
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                            <input name="phone" class="form-control input-lg" size="16" type="text" placeholder="phone">
-                                        </div>
-                                    <!-- </div> -->
-                                </div>
-
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="nif" class="form-control input-lg" size="16" type="text" placeholder="nif/cin">
-                                        </div>
-                                    <!-- </div> -->
-                                </div>
-
+	                                </div>
+								</div>
                                 <button type="submit" class="btn btn-success pull-right" name="register" >Register</button>
                             </fieldset>
                         </form>

@@ -64,21 +64,21 @@
         <ul class="sidebar-labels">
             <li>
                 <a href="#">
-                    <!-- yep, .circle again -->
-                    <i class="fa fa-circle text-warning mr-xs"></i>
-                    <span class="label-name">My Recent</span>
+                    <i class="fa fa-circle text-gray mr-xs"></i>
+                    <span class="label-name">Good</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa fa-circle text-gray mr-xs"></i>
-                    <span class="label-name">Starred</span>
+                    <!-- yep, .circle again -->
+                    <i class="fa fa-circle text-warning mr-xs"></i>
+                    <span class="label-name">Warning</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class="fa fa-circle text-danger mr-xs"></i>
-                    <span class="label-name">Background</span>
+                    <span class="label-name">Bad</span>
                 </a>
             </li>
         </ul>

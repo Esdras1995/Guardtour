@@ -28,7 +28,7 @@ class User extends Model
 			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
 			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 
-			echo $stmt->rowCount();
+			// echo $stmt->rowCount();
 			
 			if($stmt->rowCount() >= 1)
 				return true;
@@ -111,6 +111,40 @@ class Post extends Model
 		# code...
 		parent::__construct();
 	}
+
+	// public function dynamicSelect($where, $value, $element){
+	// 	try
+	// 	{
+	// 		$stmt = $this->conn->prepare("SELECT $element FROM poste WHERE $where");
+	// 		$stmt->execute($value);
+
+	// 		$selected=$stmt->fetch(PDO::FETCH_ASSOC);
+
+	// 		return $selected;
+	// 	}
+	// 	catch(PDOException $e)
+	// 	{
+	// 		echo $e->getMessage();
+	// 	}
+	// }
+
+	public function exist($adress){
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT id FROM poste WHERE adress=:adress ");
+			$stmt->execute(array(':adress'=>$adress));
+			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+			
+			if($stmt->rowCount() >= 1)
+				return true;
+
+			return false;
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
 }
 
 
@@ -122,6 +156,22 @@ class Guard extends Model
 		# code...
 		parent::__construct();
 	}
+
+	// public function dynamicSelect($where, $value, $element){
+	// 	try
+	// 	{
+	// 		$stmt = $this->conn->prepare("SELECT $element FROM guard WHERE $where");
+	// 		$stmt->execute($value);
+
+	// 		$selected=$stmt->fetch(PDO::FETCH_ASSOC);
+
+	// 		return $selected;
+	// 	}
+	// 	catch(PDOException $e)
+	// 	{
+	// 		echo $e->getMessage();
+	// 	}
+	// }
 
 	public function getId($where, $value){
 		
@@ -152,12 +202,34 @@ class Tours extends Model
 	}
 
 	public function getMention($heure, $guard_tours_id){
+
+		$guard_tours = new Model();
+
+		$array = $guard_tours->dynamicSelect("guardtours", "id = ?", array($guard_tours_id), "intervale, intervale_limit, commence_a, termine_a");
+
+		$intervale = $array['intervale'];
+		$intervale_limit = $array['intervale_limit'];
+		$commence_a = $array['commence_a'];
+		$termine_a = $array['termine_a'];
+
+		$diff_heure = intval(strtotime($heure)) - intval(strtotime($commence_a));
+		$intervale = intval(strtotime($intervale) - strtotime("00:00:00"));
+
+		$result = $diff_heure % $intervale;
+		$intervale_limit = intval(strtotime($intervale_limit) - strtotime("00:00:00"));
 		
-		$guard_tours = new GuardTours();
+		$a = $intervale_limit/3;
+		$b = 2*$intervale_limit/3;
 
-		$guard_tours->dynamicSelect("id = ?", array($guard_tours_id), "intervale, intervale_limit, commence_a, termine_a");
+		echo $a." ".$b." ".$intervale_limit." <br>";
 
-		return $guard_tours;
+		if($a < $result && $result <= $b)
+			return "#f0b518";
+
+		elseif (2*$intervale_limit/3 < $result && $result <= $intervale_limit)
+			return "#555";
+		
+		return "#dd5826";
 	}
 
 }
@@ -189,21 +261,21 @@ class GuardTours extends Model
 		}
 	}
 
-	public function dynamicSelect($where, $value, $element){
-		try
-		{
-			$stmt = $this->conn->prepare("SELECT $element FROM guardtours WHERE $where");
-			$stmt->execute($value);
+	// public function dynamicSelect($where, $value, $element){
+	// 	try
+	// 	{
+	// 		$stmt = $this->conn->prepare("SELECT $element FROM guardtours WHERE $where");
+	// 		$stmt->execute($value);
 
-			$selected=$stmt->fetch(PDO::FETCH_ASSOC);
+	// 		$selected=$stmt->fetch(PDO::FETCH_ASSOC);
 
-			return $selected;
-		}
-		catch(PDOException $e)
-		{
-			echo $e->getMessage();
-		}
-	}
+	// 		return $selected;
+	// 	}
+	// 	catch(PDOException $e)
+	// 	{
+	// 		echo $e->getMessage();
+	// 	}
+	// }
 }
 
 

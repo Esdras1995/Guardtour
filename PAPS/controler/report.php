@@ -5,7 +5,7 @@
   
   $_SESSION['page'] = "report";
   
-  $report = new Report();
+  $report = new Model();
   $tours = new Tours();
   
   $list = $report->_list("tours", "*");

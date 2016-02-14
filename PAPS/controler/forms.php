@@ -1,134 +1,201 @@
 <?php 
 	require_once("../model/session.php");
 	require_once('../model/models.php');
+  require_once("form.php");
 
   	// $post = new Post();
-  	$guard = new Guard();
-  	$guardTours = new GuardTours();
+  	// $guard = new Guard();
+  	// $guardTours = new GuardTours();
   	$tours = new Tours();
     $user = new User();
     $model = new Model();
+    $form = new Form();
+
+    $controllerCalled = 1;
     $error = "";
+    $success = "";
+    $dataUpdate = "";
+    $update = 0;
+    $message = "";
 
+  $h = fopen("debug.txt", "a");
+  
+  if(isset($_POST['edit'])){
 
-/* Not set up */
-  if(isset($_GET['tours'])){
-
-    if(strip_tags(htmlspecialchars($_GET["tours"])) === "add"){
-
-      $date_tour = securite_bdd(strip_tags($_POST['date_tour']));
-      $qrcode = securite_bdd(strip_tags($_POST['qrcode']));
-      $description = securite_bdd(strip_tags($_POST['description']));
-
-      $heure = securite_bdd(strip_tags($_POST['heure']));
-      $uid = securite_bdd(strip_tags($_POST['uid']));
-
-      $guard_id = $guard->getId("uid = ?", array($uid));
-
-      $guard_tours_id = $guardTours->getId("guard_id = ?", array($guard_id));
-      
-      $mention = $tours->getMention($heure, $guard_tours_id);
-    }
-
+    $_SESSION['data'] = json_decode($_POST['edit'], true);
+    
+    return;
   }
+  
+  if(isset($_SESSION['data'])){
+    $dataUpdate = $_SESSION['data'];
+    $update = 1;
+    // unset($_SESSION['data']);
+  }
+
+  if(isset($_GET['action'])){
+    if($_GET['action'] == 'add'){
+      
+      if(isset($_SESSION['data'])){
+          $dataUpdate = "";
+          $update = 0;
+          unset($_SESSION['data']);
+      }
+    }else{
+      header("Location: error.php");
+    }
+  }
+  // echo "---------------------------------------------";
+  // print_r($dataUpdate);
+
+  fclose($h);
+  
+/* Not set up */
+  // if(isset($_GET['tours'])){
+
+  //   if(strip_tags(htmlspecialchars($_GET["tours"])) === "add"){
+
+  //     if(isset($_POST['date_tour']) && isset($_POST['qrcode']) && isset($_POST['description']) && isset($_POST['heure']) && isset($_POST['uid'])){
+        
+  //       $date_tour = securite_bdd(strip_tags($_POST['date_tour']));
+  //       $qrcode = securite_bdd(strip_tags($_POST['qrcode']));
+  //       $description = securite_bdd(strip_tags($_POST['description']));
+
+  //       $heure = securite_bdd(strip_tags($_POST['heure']));
+  //       $uid = securite_bdd(strip_tags($_POST['uid']));
+
+  //       // $guard_id = $guard->getId("uid = ?", array($uid));
+  //       $guard_id = $model->dynamicSelect("guard", "uid = ?", array($uid), "id")['id'];
+  //       $guard_tours_id = $model->dynamicSelect("guardtours", "guard_id = ?", array($guard_id), "id")['id'];
+  //       // $guard_tours_id = $guardTours->getId("guard_id = ?", array($guard_id));
+        
+  //       $mention = $tours->getMention($heure, $guard_tours_id);
+  //     }
+  //   }
+
+  // }
 /* EndComment */
+
+
 
 	if(isset($_GET["page"])){
 
     $page = strip_tags(htmlspecialchars($_GET["page"]));
 
-    if($page === "Post"){
-      # code...
+    switch ($page) {
 
-      if(isset($_POST['register'])){
+      case 'Post':
+        # code...      
+
+        if(isset($_POST['register'])){
+          
+          if($update){
+            $message = $form->update("poste", $_POST, $dataUpdate['id']);
+            if($message === 1){
+              if(isset($_SESSION['data'])) unset($_SESSION['data']);
+              header("Location: post.php?page=post");
+            }
+          }
+
+          else
+            $message = $form->register("poste", $_POST);
+        }
+
+        include("../vue/register_post.php");
+
+        break;
+
+
+      case 'Guard':
+        # code...
         
-        $contact = null;
+        if(isset($_POST['register'])){
+          
+          if($update){
+            $message = $form->update("guard", $_POST, $dataUpdate['id']);
+            if($message === 1){
+              if(isset($_SESSION['data'])) unset($_SESSION['data']);
+              header("Location: post.php?page=guard");
+            }
+          }
 
-      	$name = securite_bdd(strip_tags($_POST['name']));
-      	$adress = securite_bdd(strip_tags($_POST['address']));
-      	$contact = securite_bdd(strip_tags($_POST['contact']));
+          else
+              $message = $form->register("guard", $_POST);
+        }
 
-      	$arrayPost = array('nom'=>$name, 'adress'=>$adress, 'contact'=>$contact);
-      	$model->add("poste", $arrayPost);
-      }
+        include("../vue/register_guard.php");
 
-      include("../vue/register_post.php");
-      
-    }elseif ($page === "Guard") {
-      # code...
+        break;
 
-      if(isset($_POST['register'])){
 
-        $firstname = securite_bdd(strip_tags($_POST['firstname']));
-        $lastname = securite_bdd(strip_tags($_POST['lastname']));
-        $email = securite_bdd(strip_tags($_POST['email']));
-        $uid = securite_bdd(strip_tags($_POST['uid']));
-        $phone = securite_bdd(strip_tags($_POST['phone']));
-        $nif = securite_bdd(strip_tags($_POST['nif']));
-
-        $arrayPost = array('nom'=>$lastname, 'prenom'=>$firstname, 'email'=>$email, 'uid'=>$uid, 'phone'=>$phone, 'nif'=>$nif);
-        $model->add("guard", $arrayPost);
-      }
-
-      include("../vue/register_guard.php");
-    
-    }elseif ($page === "Guard tours") {
-      # code...
-
-      include("../vue/register_guardTours.php");
-
-    }elseif ($page === "Tours") {
-      # code...
-      
-	    include("../vue/register_tours.php");      
-
-    }elseif ($page === "Users") {
-      # code...
-
-      if(isset($_POST['register'])){
-
-        $firstname = securite_bdd(strip_tags($_POST['firstname']));
-        $lastname = securite_bdd(strip_tags($_POST['lastname']));
-        $email = securite_bdd(strip_tags($_POST['email']));
-        $username = securite_bdd(strip_tags($_POST['username']));
-        $password = securite_bdd(strip_tags($_POST['password']));
-
-        $password = md5($password);
-
-        $arrayPost = array('nom'=>$lastname, 'prenom'=>$firstname, 'email'=>$email, 'username'=>$username, 'password'=>$password);
+      case 'Guard tours':
+        # code...
         
-        if(!$user->exist($username, $email))
-            $user->add("admin", $arrayPost);
+        if(isset($_POST['register'])){
+          
+          if($update)
+              $message = $form->updateGuardtours($dataUpdate['id']);
+          else
+              $message = $form->registerGuardtours();
+        }
+
+        $postAdress = $model->_list("poste", "adress");
+        $guardId = $model->_list("guard", "uid");
+
+        include("../vue/register_guardTours.php");
+
+        break;
         
-        else
-          $error = "Username or email already exist. please check  the list users";
+        
+      case 'Tours':
+        # code...
+        
+        include("../vue/register_tours.php"); 
 
-      }
+        break;
+        
 
-      include("../vue/register_users.php"); 
-    }else{
+      case 'Users':
+        # code...
+        
+        if($update) $dataUpdate['password'] = '';
+
+        if(isset($_POST['register'])){
+          
+          $_POST['password'] = md5($_POST['password']);
+          
+          if($update){
+            
+            $message = $form->update("admin", $_POST, $dataUpdate['id']);
+            
+            if($message === 1){
+              if(isset($_SESSION['data'])) unset($_SESSION['data']);
+              header("Location: post.php?page=users");
+            }
+          }
+          
+          else
+              $message = $form->register("admin", $_POST);
+
+        }
+
+        include("../vue/register_users.php");
+
+        break;
+
+
+      default:
+        # code...
         header("Location: error.php");
+        break;
+  
+
     }
-  
-  }else{
+
+
+  }else
     header("Location: error.php");
-  }
-  
 
-	function securite_bdd($string)
-	{
-	    // On regarde si le type de string est un nombre entier (int)
-	    if(ctype_digit($string))
-	    {
-	        $string = intval($string);
-	    }
-	    // Pour tous les autres types
-	    else
-	    {
-	        $string = htmlspecialchars($string);
-	        $string = addcslashes($string, '%_');
-	    }
 
-	    return $string;
-	}
- ?>
+
+?>

@@ -407,6 +407,8 @@ $(function(){
         column.visible( ! column.visible() );
     });
 
+    
+
 // $('.delete').on('click', function(){
 //         // var allId = {"id":[]};
 //         if(selected != 0){

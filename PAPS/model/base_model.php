@@ -100,6 +100,45 @@ class Model implements iDatabase
 		}
 
 	}
+
+	public function dynamicSelect($table, $where, $value, $element){
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT $element FROM $table WHERE $where");
+			$stmt->execute($value);
+
+			$selected=$stmt->fetch(PDO::FETCH_ASSOC);
+
+			return $selected;
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+
+	public function listKey($table, $data){
+		$listkey = array();
+		try
+		{	
+			
+			$stmt = $this->conn->prepare("SELECT " . $data . " FROM $table");
+			$stmt->execute();
+			$listpost = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			foreach ($listpost[0] as $key => $value) {
+				# code...
+				$listkey[] = $key;
+			}
+
+		}catch(PDOException $e){
+
+			echo $e->getMessage();
+		}
+
+		return $listkey;
+
+	}
 }
 
 

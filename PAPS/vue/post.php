@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-title">List - <span class="fw-semi-bold"><?php echo $_SESSION['page']; ?></span></h1>
-                <a href="forms.php?page=<?php echo $_SESSION['page']; ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="forms.php?action=add&page=<?php echo $_SESSION['page']; ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a>
             </div>
         </div>
         
@@ -60,7 +60,7 @@
                                foreach ($list[$i] as $key => $value){ 
                                 # code...
                                 if(++$compt == 0)
-                                    echo '<td class="item"><a href="#" class="edit">'.$value."</a></td>";
+                                    echo '<td class="item"><a href="javascript:;" class="edit">'.$value."</a></td>";
 
                                 else
                                     echo '<td class="item">'.$value."</td>";
@@ -139,6 +139,33 @@
 <!-- page specific js -->
 <script src="js/tables-dynamic.js"></script>
 
+<script type="text/javascript">
+    $('.edit').on('click', function(){
 
+        var key = [];
+        var objTmpl = {};
+
+        $('tr .key').each(function(i){
+            objTmpl[$(this).text()] = '';
+            key[i] = $(this).text();
+        });
+
+        var arrayTemp = JSON.parse(JSON.stringify(objTmpl));
+
+        $(this).closest("tr").find('td').each(function(i){
+            if($(this).text()){
+                arrayTemp[key[i-1]] = $(this).text();
+                // console.log($(this).text()+"---");
+            }
+        });
+
+
+        $.post('../controler/forms.php', {edit: JSON.stringify(arrayTemp)});
+        console.log(JSON.stringify(arrayTemp));
+        
+        var page = decodeURIComponent("<?php echo $_SESSION['page']; ?>");
+        window.location = "forms.php?page="+page;
+    });
+</script>
 </body>
 </html>

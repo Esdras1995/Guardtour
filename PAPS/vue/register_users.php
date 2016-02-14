@@ -1,3 +1,7 @@
+<?php 
+    if(!$controllerCalled)
+        header("Location: ../controler/index.php");
+ ?>
 <!DOCTYPE html>
 <html>
     <?php include("head.php"); ?>
@@ -11,7 +15,7 @@
             <li>YOU ARE HERE</li>
             <li class="active">Form Validation</li>
         </ol> -->
-        <h1 class="page-title">Form - <span class="fw-semi-bold">register</span></h1>
+        <h1 class="page-title">Form - <span class="fw-semi-bold"><?php echo $update==1?"Update":"Register"; ?></span></h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-1">
                 <section class="widget">
@@ -30,14 +34,20 @@
                         <form role="form" method="post">
                             <fieldset>
                                 <legend>
-                                    Register <?php echo $_SESSION['page']; ?>
+                                    Register User
                                 </legend>
-                                <?php if($error) echo '<span class="alert alert-danger">'.$error.'</span><br>'; ?>
+                                <div class="row" style="margin-bottom: 10px;">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            <?php if($message) echo $message; ?>
+                                        </p>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input  name="firstname" class="form-control input-lg" size="16" type="text" placeholder="firstname" required="required">
+                                            <input  name="prenom" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['prenom']:''; ?>" size="16" type="text" placeholder="firstname" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -46,7 +56,7 @@
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input name="lastname" class="form-control input-lg" size="16" type="text" placeholder="lastname" required="required">
+                                            <input name="nom" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['nom']:''; ?>" size="16" type="text" placeholder="lastname" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -55,7 +65,7 @@
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input name="username" class="form-control input-lg" size="16" type="text" placeholder="username" required="required">
+                                            <input name="username" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['username']:''; ?>" size="16" type="text" placeholder="username" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -64,7 +74,7 @@
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="email" class="form-control input-lg" size="16" type="email" placeholder="email" required="required">
+                                            <input name="email" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['email']:''; ?>" size="16" type="email" placeholder="email" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -73,7 +83,7 @@
                                     <!-- <div class="col-sm-7"> -->
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                            <input name="password" class="form-control input-lg" size="16" type="password" placeholder="password" required="required">
+                                            <input name="password" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['password']:''; ?>" size="16" type="password" placeholder="password" required="required">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -86,7 +96,7 @@
                                         </div> -->
                                     <!-- </div> -->
                                 <!-- </div> -->
-                                <button type="submit" class="btn btn-success pull-right" name="register" >Register</button>
+                                <button type="submit" class="btn btn-success pull-right" name="register" ><?php echo $update==1?"Update":"Register"; ?></button>
                             </fieldset>
                         </form>
                     </div>
