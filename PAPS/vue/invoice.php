@@ -31,31 +31,31 @@
                             <section class="col-sm-6 col-print-6">
                                 <h4 class="text-muted no-margin">Company Information</h4>
                                 <h3 class="company-name">
-                                    Wrapbootstrap LLC
+                                    <?php echo $_GET['company']; ?>
                                 </h3>
                                 <address>
-                                    <strong>2 Infinite Loop</strong><br>
-                                    Minsk, Belarus 220004<br>
-                                    088.253.5345<br>
-                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#">email@example.com</a><br>
-                                    <abbr title="Work Phone">phone:</abbr> (012) 345-678-901<br>
-                                    <abbr title="Work Fax">fax:</abbr> (012) 678-132-901
+                                    <strong><?php echo $_GET['poste']; ?></strong><br>
+                                    <?php echo $_GET['name']; ?><br>
+                                    <?php echo $_GET['adress']; ?><br>
+                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#"><?php echo $_GET['co-mail']; ?></a><br>
+                                    <abbr title="Work Phone">phone:</abbr> <?php echo $_GET['contact']; ?><br>
+                                    <!-- <abbr title="Work Fax">fax:</abbr> (012) 678-132-901 -->
                                 </address>
                             </section>
                             <section class="col-sm-6 col-print-6 text-align-right">
                                 <h4 class="text-muted no-margin">Client Information</h4>
                                 <h3 class="client-name">
-                                    Veronica Niasvizhskaja
+                                    <?php echo $_GET['client']; ?>
                                 </h3>
                                 <address>
-                                    <strong>Consultant</strong> at
-                                    <a href="#">Allspana</a><br>
-                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#">maryna@allspana.by</a><br>
-                                    <abbr title="Work Phone">phone:</abbr> (012) 345-678-901<br>
-                                    <abbr title="Work Fax">fax:</abbr> (012) 678-132-901
+                                    <strong><?php echo $_GET['cl-poste']; ?></strong><br>
+                                    <a href="#"><?php echo $_GET['cl-name']; ?></a><br>
+                                    <abbr title="Work adress"></abbr> <?php echo $_GET['cl-adress']; ?><br>
+                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#"><?php echo $_GET['cl-mail']; ?></a><br>
+                                    <abbr title="Work Phone">phone:</abbr><?php echo $_GET['cl-contact']; ?><br>
+                                    <!-- <abbr title="Work Fax">fax:</abbr> (012) 678-132-901 -->
                                     <p class="no-margin"><strong>Note:</strong></p>
-                                    <p class="text-muted fs-mini">Some nights I stay up cashing in my bad luck.
-                                        Some nights I call it a draw</p>
+                                    <p class="text-muted fs-mini"><?php echo $_GET['cl-note']; ?></p>
                                 </address>
                             </section>
                         </div>
@@ -98,26 +98,11 @@
                             </tbody>
                         </table>
                         <div class="row">
-                            <div class="col-sm-8 col-print-6">
+                            <div class="col-sm-9 col-print-7">
                                 <p>
                                     <strong>Note:</strong>
-                                    Thank you for your business. Keep in mind, sometimes bad things happen. But it's just sometimes.
+                                    <?php echo $_GET['note']; ?>
                                 </p>
-                            </div>
-                            <div class="col-sm-4 col-print-6">
-                                <div class="row text-align-right">
-                                    <div class="col-xs-6"></div> <!-- instead of offset -->
-                                    <div class="col-xs-3">
-                                        <p>Subtotal</p>
-                                        <p>Tax(10%)</p>
-                                        <p class="no-margin"><strong>Total</strong></p>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <p>1,598.88</p>
-                                        <p>159.89</p>
-                                        <p class="no-margin"><strong>1,758.77</strong></p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <p class="text-align-right mt-lg mb-xs">

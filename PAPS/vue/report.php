@@ -32,6 +32,7 @@
                 </div>
             </header>
             <hr>
+            <p>
             <strong>Show/Hide: &nbsp;&nbsp;&nbsp;</strong>
             <strong><a href="javascript:;" class="hide-show" data-column="0">Checkbox</a></strong>
             &nbsp;&nbsp;&nbsp;
@@ -43,12 +44,14 @@
                         if($key != "id")
                             echo '<strong><a href="javascript:;" class="hide-show" data-column="'.$compt.'">'.$key.'</a></strong>';
                             echo "&nbsp;&nbsp;&nbsp;";
+                            echo "\n";
                             $compt++;
                     }
               ?>
+              </p>
               <hr>
             <div class="widget-body">
-                <div class="mt">
+                <div class="mt"  style="overflow-x: scroll;">
                     <table id="datatable-table" class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -59,6 +62,7 @@
                                     # code...
                                     // if($key != "tours_id")
                                         echo '<th class="key">'.$key."</th>";
+                                        echo "\n";
                                     // else
                                     //     echo '<th class="key"><a href="post.php?page=tours" target="_blank">'.$key."</a></th>";
                                 }
@@ -94,11 +98,17 @@
                 </div>
             </div>
         </section>
-        <button type="button" class="btn btn-warning del-selected" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $_SESSION['page']; ?></button>
-        <a href="filter.php" class="btn btn-danger pull-right" style="margin-left: 10px;">More filter</a>
-        <button type="button" class="btn btn-inverse pull-right" data-toggle="modal" data-target="#myModal1">Export selected</button>
-
-        <span class="selected-item"></span>
+        <div class="row">
+            
+            <div class="col-lg-4" style="margin-bottom: 10px;">
+                <button type="button" class="btn btn-warning del-selected" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $_SESSION['page']; ?></button>
+                <span class="selected-item"></span>
+            </div>
+            <div class="col-lg-8">
+                <a href="filter.php" class="btn btn-danger pull-right" style="margin-left: 10px; margin-bottom: 10px;">More filter</a>
+                <button type="button" class="btn btn-inverse pull-right" data-toggle="modal" data-target="#myModal1">Export selected</button>
+            </div>
+        </div>
         
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -130,22 +140,64 @@
               <div class="modal-body">
                 
                     <fieldset>
+                        <legend>
+                            Company info
+                        </legend>
                         <!-- <p>
                             Different colors & sizes for any elements including input groups. Elements may be
                             easily styled with classes like <code>.bg-primary</code> or <code>.bg-transparent</code>
                         </p> -->
                         <br/>
                         <div class="form-group">
-                            <input class="form-control input-lg" name="company" placeholder="Company name" type="text">
+                            <input class="form-control input-sm" name="company" placeholder="Company name" type="text">
                         </div>
                         <div class="form-group">
-                            <input class="form-control input-lg" name="co-mail" placeholder="Company mail" type="mail">
+                            <input class="form-control input-sm" name="name" placeholder="Your name" type="text">
                         </div>
                         <div class="form-group">
-                            <input class="form-control input-lg" name="contact" placeholder="Contact" type="text">
+                            <input class="form-control input-sm" name="poste" placeholder="Your post" type="text">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control input-lg" name="note" placeholder="Note...." type="text"></textarea>
+                            <input class="form-control input-sm" name="adress" placeholder="Company adress" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="co-mail" placeholder="Company mail" type="mail">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="contact" placeholder="Contact" type="text">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control input-sm" name="note" placeholder="Note...." type="text"></textarea>
+                        </div>
+
+                        <legend>
+                            Client info
+                        </legend>
+                        <!-- <p>
+                            Different colors & sizes for any elements including input groups. Elements may be
+                            easily styled with classes like <code>.bg-primary</code> or <code>.bg-transparent</code>
+                        </p> -->
+                        <br/>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="client" placeholder="Client company" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="cl-name" placeholder="Client name" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="cl-poste" placeholder="Client post" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="cl-adress" placeholder="Client adress" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="cl-mail" placeholder="Client mail" type="mail">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" name="cl-contact" placeholder="Contact" type="text">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control input-sm" name="cl-note" placeholder="Note...." type="text"></textarea>
                         </div>
                     </fieldset>
                 
