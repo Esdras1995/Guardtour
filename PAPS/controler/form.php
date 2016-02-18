@@ -47,10 +47,7 @@
 			
 			$message = "";
 
-			if(!empty($this->model->listKey($table, "*")))
-				$listkey = $this->model->listKey($table, "*");
-			else
-				return '<span class="alert alert-danger"> Something is bad 1111</span>';
+			$listkey = Constants::getListKey()[$table];
 
 			if(!empty($this->listToAdd($listkey, $value)))
 				$listToAdd = $this->listToAdd($listkey, $value);
@@ -66,11 +63,7 @@
 
 		public function update($table, $value, $id){
 			
-			if(!empty($this->model->listKey($table, "*")))
-				$listkey = $this->model->listKey($table, "*");
-			else
-				return '<span class="alert alert-danger"> Something is bad </span>';
-
+			$listkey = Constants::getListKey()[$table];
 			
 			if(!empty($this->listToAdd($listkey, $value)))
 				$listToAdd = $this->listToAdd($listkey, $value);

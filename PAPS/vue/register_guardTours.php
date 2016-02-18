@@ -66,8 +66,8 @@
 
 	                                <div class="col-lg-3">
 	                                	<div style="margin-top: 2px;">
-		                                	<a href="post.php?page=post" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
-		                                	<a href="forms.php?page=Post" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
+		                                	<a href="post.php?page=post" class="btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
+		                                	<a href="forms.php?page=Post" class="btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
 								</div>
@@ -99,8 +99,8 @@
 
 	                                <div class="col-lg-3">
 	                                	<div style="margin-top: 2px;">
-		                                	<a href="post.php?page=guard" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
-		                                	<a href="forms.php?page=Guard" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
+		                                	<a href="post.php?page=guard" class="btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
+		                                	<a href="forms.php?page=Guard" class="btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
 								</div>
@@ -156,8 +156,8 @@
 
 	                                <div class="col-lg-3">
 	                                	<div style="margin-top: 2px;">
-		                                	<a href="post.php?page=guard" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
-		                                	<a href="forms.php?page=Guard" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
+		                                	<a href="post.php?page=guard" class="btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
+		                                	<a href="forms.php?page=Guard" class="btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
 								</div>

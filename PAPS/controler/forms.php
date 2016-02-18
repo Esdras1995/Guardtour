@@ -138,7 +138,6 @@
             $poste_id = $model->dynamicSelect("poste", "adress = ?", array($_POST['poste_id']), "id")['id'];
             $guard_id1 = $model->dynamicSelect("guard", "uid = ?", array($_POST['guard1']), "id")['id'];
             $guard_id2 = $model->dynamicSelect("guard", "uid = ?", array($_POST['guard2']), "id")['id'];
-
             $exist = (empty($model->dynamicSelect("guardtours", "poste_id = ? OR guard_id = ? OR guard_id = ?", array($poste_id, $guard_id1, $guard_id2), "id")))?0:1;
             
             if(!$exist){

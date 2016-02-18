@@ -40,9 +40,10 @@
                 if(!empty($list))
                     foreach ($list[0] as $key => $value) {
                         # code...
-                        // if($key != "id")
-                            echo '<strong><a href="javascript:;" class="hide-show" data-column="'.$compt++.'">'.$key.'</a></strong>';
+                        if($key != "id")
+                            echo '<strong><a href="javascript:;" class="hide-show" data-column="'.$compt.'">'.$key.'</a></strong>';
                             echo "&nbsp;&nbsp;&nbsp;";
+                            $compt++;
                     }
               ?>
               <hr>
@@ -56,10 +57,10 @@
                                 if(!empty($list))
                                 foreach ($list[0] as $key => $value) {
                                     # code...
-                                    if($key != "tours_id")
+                                    // if($key != "tours_id")
                                         echo '<th class="key">'.$key."</th>";
-                                    else
-                                        echo '<th class="key"><a href="post.php?page=tours" target="_blank">'.$key."</a></th>";
+                                    // else
+                                    //     echo '<th class="key"><a href="post.php?page=tours" target="_blank">'.$key."</a></th>";
                                 }
                               ?>
                             <!-- <th class="hidden-xs">Date</th> -->

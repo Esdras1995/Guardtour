@@ -82,12 +82,14 @@ class Model implements iDatabase
 		return $stmt;
 	}
 	
+	// public function selectAllByListId(){
 
+	// }
 
 	public function _list($table, $data){
 		try
 		{	
-			
+			// if($data == "*")
 			$stmt = $this->conn->prepare("SELECT " . $data . " FROM $table");
 			$stmt->execute();
 			$listpost = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -117,10 +119,55 @@ class Model implements iDatabase
 		}
 	}
 
-	public function listKey($table, $data){
+	public function dynamicSelectAll($table, $where, $element){
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT $element FROM $table WHERE $where");
+			$stmt->execute();
 
-		return (!empty($this->_list($table, $data))) ? array_keys($this->_list($table, $data)[0]) : array();
+			$selected=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
+			return $selected;
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+
+	// public function listKey($table, $data){
+
+	// 	define('KEYS_MODEL', array(
+	// 		'poste' => array('id', 'nom', 'adress', 'contact'),
+	// 		'guard' => array('id', 'nom', 'prenom', 'uid', 'photo', 'email', 'phone', 'nif'),
+	// 		'tours' => array('id', 'date_tour', 'heure', 'qrcode', 'mention', 'description', 'guardtours_id'),
+	// 		'guardtours' => array('id', 'intervale', 'intervale_limit', 'commence_a', 'termine_a', 'poste_id', 'guard_id'),
+	// 		'admin' => array('id', 'nom', 'prenom', 'username', 'email', 'password', 'date_created') 
+	// 	));
+
+	// 	return ($table in_array($table, array_keys()()))
+
+	// }
+}
+
+
+/**
+* 
+*/
+class Constants
+{
+	/* Les colonnes des tableaux de la base sont stockes ici */
+	private static $KEYS_MODEL = array(
+		'poste' => array('id', 'nom', 'adress', 'contact'),
+		'guard' => array('id', 'nom', 'prenom', 'uid', 'photo', 'email', 'phone', 'nif'),
+		'tours' => array('id', 'date_tour', 'heure', 'qrcode', 'mention', 'description', 'guardtours_id'),
+		'guardtours' => array('id', 'intervale', 'intervale_limit', 'commence_a', 'termine_a', 'poste_id', 'guard_id'),
+		'admin' => array('id', 'nom', 'prenom', 'username', 'email', 'password', 'date_created') 
+	);
+
+	public static function getListKey(){
+
+		return self::$KEYS_MODEL;
 	}
 }
 

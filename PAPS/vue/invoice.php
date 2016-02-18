@@ -81,12 +81,11 @@
                                      {
                                       $compt = -1;
                                       echo '<tr>';
-                                      echo '<td><input type="checkbox" class="check-item"></td>'; 
+                                      // echo '<td><input type="checkbox" class="check-item"></td>'; 
                                        foreach ($listReport[$i] as $key => $value){ 
                                         # code...
                                         if(++$compt == 0)
                                             echo '<td class="item"><a href="#" class="edit">'.$value."</a></td>";
-
                                         else
                                             echo '<td class="item">'.$value."</td>";
                                       }

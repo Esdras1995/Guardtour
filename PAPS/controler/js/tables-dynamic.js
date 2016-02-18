@@ -394,8 +394,15 @@ $(function(){
     $('.save').on('click', function(){
         if(selected != 0){
             var allId = getAllSelected();
-            $.post("invoice.php", {id: JSON.stringify(allId)});
+            var allth = [];
+            $('tr th').each(function(i){
+                if(i >= 2)
+                    allth.push($(this).text());
+            });
+            $.post("invoice.php", {id: JSON.stringify(allId), key:JSON.stringify(allth)});
+            console.log(JSON.stringify(allth));
         }
+        alert("pause");
     });
 
     $('.hide-show').on('click', function(){
@@ -406,8 +413,6 @@ $(function(){
         // Toggle the visibility
         column.visible( ! column.visible() );
     });
-
-    
 
 // $('.delete').on('click', function(){
 //         // var allId = {"id":[]};

@@ -63,8 +63,8 @@
 
 	                                <div class="col-lg-3">
 	                                	<div style="margin-top: 2px;">
-		                                	<a href="post.php?page=guardtours" class="btn btn-info"><i class="fa fa-edit"></i> Edit</a>
-		                                	<a href="forms.php?page=Guard tours" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
+		                                	<a href="post.php?page=guardtours" class="btn-sm btn-info"><i class="fa fa-edit"></i> Edit</a>
+		                                	<a href="forms.php?page=Guard tours" class="btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
 								</div>
