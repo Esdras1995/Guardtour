@@ -1,7 +1,7 @@
 <?php 
   require_once("../model/session.php");
   require_once('../model/models.php');
-
+  $controllerCalled = 1;
   $tours = new Tours();
   $model = new Model();
 

@@ -1,6 +1,7 @@
 <?php
 	require_once('../model/session.php');
 	require_once('../model/models.php');
+	$controllerCalled = 1;
 	$user_logout = new User();
 	
 	if($user_logout->is_loggedin()!="")

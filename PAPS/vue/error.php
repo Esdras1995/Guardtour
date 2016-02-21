@@ -1,3 +1,7 @@
+<?php 
+    if(!$controllerCalled)
+        header("Location: ../controler/index.php");
+ ?>
 <!DOCTYPE html>
 <html>
 

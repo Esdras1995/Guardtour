@@ -1,7 +1,7 @@
 <?php 
   
   require_once("../model/models.php");
-
+  $controllerCalled = 1;
   $auth_user = new User();
   
   

@@ -1,7 +1,7 @@
 <?php
 require_once("../model/session.php"); 
 require_once("../model/base_model.php");
-
+$controllerCalled = 1;
 $model = new Model();
 
 // $h = fopen("debug.txt", "a");

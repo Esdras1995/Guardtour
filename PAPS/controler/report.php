@@ -2,7 +2,7 @@
   
   require_once("../model/session.php");
   require_once('../model/models.php');
-  
+  $controllerCalled = 1;
   $_SESSION['page'] = "report";
   
   $report = new Model();

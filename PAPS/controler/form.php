@@ -2,7 +2,7 @@
 	
 	require_once("../model/session.php");
 	require_once('../model/models.php');
-
+	$controllerCalled = 1;
   	// $post = new Post();
   	// $guard = new Guard();
   	// $guardTours = new GuardTours();

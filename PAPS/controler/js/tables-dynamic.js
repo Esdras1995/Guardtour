@@ -400,9 +400,7 @@ $(function(){
                     allth.push($(this).text());
             });
             $.post("invoice.php", {id: JSON.stringify(allId), key:JSON.stringify(allth)});
-            console.log(JSON.stringify(allth));
         }
-        alert("pause");
     });
 
     $('.hide-show').on('click', function(){

@@ -3,7 +3,7 @@
 session_start();
 
 require_once("../model/models.php");
-
+$controllerCalled = 1;
 $login = new User();
 
 if($login->is_loggedin()!="")

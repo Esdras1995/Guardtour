@@ -1,7 +1,7 @@
 <?php 
   require_once("../model/session.php");
   require_once('../model/models.php');
-  
+  $controllerCalled = 1;
 
   $report = new Model();
   $listReport = "";
@@ -12,7 +12,8 @@
     $_SESSION["report-list"]['key'] = json_decode($_POST['key'], true);
   }
 
-  $listReport = $report->dynamicSelectAll("tours", "id IN(".implode(',', $_SESSION["report-list"]['id']).")", implode(',', $_SESSION["report-list"]['key']));
+  if(!empty($_SESSION["report-list"]['id']) && !empty($_SESSION["report-list"]['key']))
+    $listReport = $report->dynamicSelectAll("tours", "id IN(".implode(',', $_SESSION["report-list"]['id']).")", implode(',', $_SESSION["report-list"]['key']));
   
   include("../vue/invoice.php");
  ?>
