@@ -113,7 +113,7 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="commence_a1" class="form-control" size="16" type="time" placeholder="begin at">
+                                            <input  name="commence_a1" class="form-control" size="16" type="time" placeholder="Begin at (h:m:s)">
                                         </div>
 	                                </div>
 								</div>
@@ -126,7 +126,7 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="termine_a1" class="form-control" size="16" type="time"  required="required" placeholder="Ends at">
+                                            <input  name="termine_a1" class="form-control" size="16" type="time"  required="required" placeholder="Ends at (h:m:s)">
                                         </div>
 	                                </div>
 								</div>
@@ -170,7 +170,7 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="commence_a2" class="form-control" size="16" type="time" placeholder="begin at">
+                                            <input  name="commence_a2" class="form-control" size="16" type="time" placeholder="Begin at (h:m:s)">
                                         </div>
 	                                </div>
 								</div>
@@ -183,7 +183,7 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="termine_a2" class="form-control" size="16" type="time"  required="required" placeholder="Ends at">
+                                            <input  name="termine_a2" class="form-control" size="16" type="time"  required="required" placeholder="Ends at (h:m:s)">
                                         </div>
 	                                </div>
 								</div>
@@ -198,7 +198,7 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="intervale" class="form-control" size="16" type="time" required="required" placeholder="intervale">
+                                            <input  name="intervale" class="form-control" size="16" type="time" required="required" placeholder="Intervale">
                                         </div>
 	                                </div>
 								</div>
@@ -212,7 +212,7 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="intervale_limit" class="form-control" size="16" min="1" max="59" type="number" required="required" placeholder="interval limit">
+                                            <input  name="intervale_limit" class="form-control" size="16" min="1" max="59" type="number" required="required" placeholder="Interval limit">
                                         </div>
 	                                </div>
 								</div>

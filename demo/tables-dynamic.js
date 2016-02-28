@@ -379,17 +379,15 @@ $(function(){
             $('.to-remove td:nth-child(2)').each(function(){
                  allId.push($(this).text());
             });
-            var confirm_delete = confirm("Are you sure you wan't to delete selected data?");
-            // console.log(JSON.stringify(allId));
-           //  var confirm = confirm("Are you sure you wan't to delete selected data?");
-            if(confirm_delete){
-               $.post('delete.php', {id: JSON.stringify(allId)});
-               // console.log(JSON.stringify(allId));
-               location.reload();
-           }
 
-        }else{
-            alert("nothing selected!");
+            // console.log(JSON.stringify(allId));
+            
+           $.post('delete.php', {id: JSON.stringify(allId)});
+           $('.modal-body').html('<i class="glyphicon glyphicon-ok" style="font-size: 2em; color: green;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Successfully deleted!');
+           $('.no').prop('disabled', true);
+           $('.delete').prop('disabled', true);
+           // console.log(JSON.stringify(allId));
+           location.reload();
         }
     });
     

@@ -56,7 +56,6 @@ class User extends Model
 				//if(password_verify($upass, $userRow['password']))
 				if(md5($upass) == $userRow['password'])
 				{
-					echo "tout va bien!!!";
 					$_SESSION['user_session'] = $userRow['id'];
 					return true;
 				}
@@ -120,28 +119,39 @@ class Tours extends Model
 		$array = $guard_tours->dynamicSelect("guardtours", "id = ?", array($guard_tours_id), "intervale, intervale_limit, commence_a, termine_a");
 
 		$intervale = $array['intervale'];
-		$intervale_limit = $array['intervale_limit'];
-		$commence_a = $array['commence_a'];
-		$termine_a = $array['termine_a'];
+		$limit = $array['intervale_limit'];
+		$hc = $array['commence_a'];
+		$ht = $array['termine_a'];
 
-		$diff_heure = intval(strtotime($heure)) - intval(strtotime($commence_a));
-		$intervale = intval(strtotime($intervale) - strtotime("00:00:00"));
+		$intervale = doubleval(strtotime($intervale)-strtotime("00:00:00"))/3600;
+		$diff = $this->intervaleHeure($hc, $heure);
+		$nbInt = $diff/$intervale;
+		$result = $intervale*($nbInt - intval($nbInt));
 
-		$result = $diff_heure % $intervale;
-		$intervale_limit = intval(strtotime($intervale_limit) - strtotime("00:00:00"));
+		$limit = doubleval(strtotime($limit) - strtotime("00:00:00"))/3600;
 		
-		$a = $intervale_limit/3;
-		$b = 2*$intervale_limit/3;
+		$a = $limit/3;
+		$b = 2*$limit/3;
 
-		// echo $a." ".$b." ".$intervale_limit." <br>";
-
-		if($a < $result && $result <= $b)
-			return "#f0b518";
-
-		elseif (2*$intervale_limit/3 < $result && $result <= $intervale_limit)
+		if(0 <= $result && $result <= $a)
 			return "#555";
+
+		elseif ($a < $result && $result <= $b)
+			return "#f0b518";
 		
 		return "#dd5826";
+	}
+
+	public function intervaleHeure($h1, $h2){
+
+		if(!strtotime($h1) || !strtotime($h2))
+			return null;
+
+		else if(strtotime($h1) < strtotime($h2))
+			return doubleval(strtotime($h2)-strtotime($h1))/3600;
+
+		else
+			return doubleval(strtotime("23:00:00")-strtotime($h1) + strtotime($h2)-2*strtotime("00:00:00") + strtotime("01:00:00"))/3600;
 	}
 
 }

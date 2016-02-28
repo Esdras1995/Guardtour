@@ -81,10 +81,6 @@ class Model implements iDatabase
 		
 		return $stmt;
 	}
-	
-	// public function selectAllByListId(){
-
-	// }
 
 	public function _list($table, $data){
 		try
@@ -134,20 +130,6 @@ class Model implements iDatabase
 			echo $e->getMessage();
 		}
 	}
-
-	// public function listKey($table, $data){
-
-	// 	define('KEYS_MODEL', array(
-	// 		'poste' => array('id', 'nom', 'adress', 'contact'),
-	// 		'guard' => array('id', 'nom', 'prenom', 'uid', 'photo', 'email', 'phone', 'nif'),
-	// 		'tours' => array('id', 'date_tour', 'heure', 'qrcode', 'mention', 'description', 'guardtours_id'),
-	// 		'guardtours' => array('id', 'intervale', 'intervale_limit', 'commence_a', 'termine_a', 'poste_id', 'guard_id'),
-	// 		'admin' => array('id', 'nom', 'prenom', 'username', 'email', 'password', 'date_created') 
-	// 	));
-
-	// 	return ($table in_array($table, array_keys()()))
-
-	// }
 }
 
 

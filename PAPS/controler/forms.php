@@ -17,8 +17,6 @@
     $dataUpdate = "";
     $update = 0;
     $message = "";
-
-  $h = fopen("debug.txt", "a");
   
   if(isset($_POST['edit'])){
 
@@ -30,7 +28,6 @@
   if(isset($_SESSION['data'])){
     $dataUpdate = $_SESSION['data'];
     $update = 1;
-    // unset($_SESSION['data']);
   }
 
   if(isset($_GET['action'])){
@@ -45,39 +42,7 @@
       header("Location: error.php");
     }
   }
-  // echo "---------------------------------------------";
-  // print_r($dataUpdate);
-
-  fclose($h);
   
-/* Not set up */
-  // if(isset($_GET['tours'])){
-
-  //   if(strip_tags(htmlspecialchars($_GET["tours"])) === "add"){
-
-  //     if(isset($_POST['date_tour']) && isset($_POST['qrcode']) && isset($_POST['description']) && isset($_POST['heure']) && isset($_POST['uid'])){
-        
-  //       $date_tour = securite_bdd(strip_tags($_POST['date_tour']));
-  //       $qrcode = securite_bdd(strip_tags($_POST['qrcode']));
-  //       $description = securite_bdd(strip_tags($_POST['description']));
-
-  //       $heure = securite_bdd(strip_tags($_POST['heure']));
-  //       $uid = securite_bdd(strip_tags($_POST['uid']));
-
-  //       // $guard_id = $guard->getId("uid = ?", array($uid));
-  //       $guard_id = $model->dynamicSelect("guard", "uid = ?", array($uid), "id")['id'];
-  //       $guard_tours_id = $model->dynamicSelect("guardtours", "guard_id = ?", array($guard_id), "id")['id'];
-  //       // $guard_tours_id = $guardTours->getId("guard_id = ?", array($guard_id));
-        
-  //       $mention = $tours->getMention($heure, $guard_tours_id);
-  //     }
-  //   }
-
-  // }
-/* EndComment */
-
-
-
 	if(isset($_GET["page"])){
 
     $page = strip_tags(htmlspecialchars($_GET["page"]));
@@ -97,8 +62,11 @@
             }
           }
 
-          else
-            $message = $form->register("poste", $_POST);
+          else{
+            $message = post_verify($_POST);
+            if($message == "")
+              $message = $form->register("poste", $_POST);
+          }
         }
 
         include("../vue/register_post.php");
@@ -115,12 +83,15 @@
             $message = $form->update("guard", $_POST, $dataUpdate['id']);
             if($message === 1){
               if(isset($_SESSION['data'])) unset($_SESSION['data']);
-              header("Location: post.php?page=guard");
+                header("Location: post.php?page=guard");
             }
           }
 
-          else
+          else{
+            $message = guard_verify($_POST);
+            if($message == "")
               $message = $form->register("guard", $_POST);
+          }
         }
 
         include("../vue/register_guard.php");
@@ -133,31 +104,32 @@
         
         if(isset($_POST['register'])){
           
-          if($_POST['guard1'] != $_POST['guard2']){
+          $new_POST = getGuardtoursPostMethod($_POST);
 
-            $poste_id = $model->dynamicSelect("poste", "adress = ?", array($_POST['poste_id']), "id")['id'];
-            $guard_id1 = $model->dynamicSelect("guard", "uid = ?", array($_POST['guard1']), "id")['id'];
-            $guard_id2 = $model->dynamicSelect("guard", "uid = ?", array($_POST['guard2']), "id")['id'];
-            $exist = (empty($model->dynamicSelect("guardtours", "poste_id = ? OR guard_id = ? OR guard_id = ?", array($poste_id, $guard_id1, $guard_id2), "id")))?0:1;
-            
-            if(!$exist){
-              $limit = ($_POST['intervale_limit']<10)?"0".$_POST['intervale_limit']:$_POST['intervale_limit'];
-              $new_POST = array(
-                0 => array('intervale' =>$_POST['intervale'], 'intervale_limit' =>"00:".$limit."00", 'commence_a' =>$_POST['commence_a1'], 'termine_a' =>$_POST['termine_a1'], 'poste_id' =>$poste_id, 'guard_id' =>$guard_id1), 
-                1 => array('intervale' =>$_POST['intervale'], 'intervale_limit' =>"00".$limit."00", 'commence_a' =>$_POST['commence_a2'], 'termine_a' =>$_POST['termine_a2'], 'poste_id' =>$poste_id, 'guard_id' =>$guard_id2)
-              );
+          $message = (guardtours_verify($new_POST[0]) != "")?guardtours_verify($new_POST[0]):guardtours_verify($new_POST[1]);
 
-              for ($i=0; $i < sizeof($new_POST); $i++)
+          if($message ==""){
+
+            if($new_POST[0]['guard_id'] != $new_POST[1]['guard_id']){
+              for ($i=0; $i < sizeof($new_POST); $i++){
                 $message = $form->register("guardtours", $new_POST[$i]);
-            }else
-              $message = '<span class="alert alert-danger">Post id or guard1 uid or guard2 uid already exist please check the list guard tours.</span>';
-
-          }else
-            $message = '<span class="alert alert-danger">Please check guard uid. In your choice guard1 uid = guard2 uid.</span>';
+              }
+            
+            }else{
+               $message = '<span class="alert alert-danger">Please check guard uid. In your choice guard1 uid = guard2 uid.</span>';
+            }
+          }
         }
-
-        $postAdress = $model->_list("poste", "adress");
-        $guardId = $model->_list("guard", "uid");
+        
+        $guardpost = $model->_list("guardtours", "poste_id, guard_id");
+        $arraId = array("poste_id"=>array(), "guard_id"=>array());
+        
+        for ($i=0; $i < sizeof($guardpost); $i++)
+          foreach ($guardpost[$i] as $key => $value)
+              $arraId[$key][] = $value;
+        
+        $postAdress = $model->dynamicSelectAll("poste", "id NOT IN(".implode(',', $arraId['poste_id']).")", "adress");
+        $guardId = $model->dynamicSelectAll("guard", "id NOT IN(".implode(',', $arraId['guard_id']).")", "uid");
 
         include("../vue/register_guardTours.php");
 
@@ -217,12 +189,14 @@
             
             if($message === 1){
               if(isset($_SESSION['data'])) unset($_SESSION['data']);
-              header("Location: post.php?page=users");
+                header("Location: post.php?page=users");
             }
           }
           
-          else
+          else{
+            if(!$user->exist($_POST['username'], $_POST['email']))
               $message = $form->register("admin", $_POST);
+          }
 
         }
 
@@ -239,10 +213,74 @@
 
     }
 
-
   }else
     header("Location: error.php");
 
 
+function getGuardtoursPostMethod($post){
 
+  $limit = ($post['intervale_limit']<10)?"0".$post['intervale_limit']:$post['intervale_limit'];
+  $limit = "00:".$limit.":00";
+  
+  $guard_id1 = $model->dynamicSelect("guard", "uid = ?", array($post['guard1']), "id")['id'];
+  $guard_id2 = $model->dynamicSelect("guard", "uid = ?", array($post['guard2']), "id")['id'];
+  $poste_id = $model->dynamicSelect("poste", "adress = ?", array($post['poste_id']), "id")['id'];
+
+  $newpost = array(
+    0 => array('intervale' =>$post['intervale'], 'intervale_limit' =>$limit, 'commence_a' =>$post['commence_a1'], 'termine_a' =>$post['termine_a1'], 'poste_id' =>$poste_id, 'guard_id' =>$guard_id1), 
+    1 => array('intervale' =>$post['intervale'], 'intervale_limit' =>$limit, 'commence_a' =>$post['commence_a2'], 'termine_a' =>$post['termine_a2'], 'poste_id' =>$poste_id, 'guard_id' =>$guard_id2)
+  );
+
+  return $newpost;
+}
+
+
+function guardtours_verify($new_POST){
+      
+  $message = "";
+  
+  if(!strtotime($new_POST['intervale_limit']) || !strtotime($new_POST['intervale']) || !strtotime($new_POST['commence_a']) || !strtotime($new_POST['termine_a']))
+        $message = '<span class="alert alert-danger">Time format error!</span>';
+
+
+  elseif(strtotime($new_POST['intervale'])==strtotime("00:00:00"))
+    $message = '<span class="alert alert-danger">Intervale error!</span>';
+
+  elseif(strtotime($new_POST['intervale'])<strtotime($new_POST['intervale_limit']))
+    $message = '<span class="alert alert-danger">Intervale limit most than the specified intervale!</span>';
+
+  return $message;
+}
+
+function guard_verify($post){
+  $message = "";
+
+  $model = new Model();
+  $uid = $model->dynamicSelect("guard", "uid = ?", array($post['uid']), "id");
+  $nif = $model->dynamicSelect("guard", "nif = ?", array($post['nif']), "id");
+  $phone = $model->dynamicSelect("guard", "phone = ?", array($post['phone']), "id");
+  
+  if(!empty($uid))
+    $message = '<span class="alert alert-danger">Guard uid already exist!</span>';
+  
+  elseif(!empty($phone))
+    $message = '<span class="alert alert-danger">Guard phone number already exist!</span>';
+  
+  elseif(!empty($nif))
+    $message = '<span class="alert alert-danger">Guard nif already exist!</span>';
+
+  return $message;
+}
+
+function post_verify($post){
+  $message = "";
+
+  $model = new Model();
+  $adress = $model->dynamicSelect("poste", "adress = ?", array($post['adress']), "id");
+  
+  if(!empty($adress))
+    $message = '<span class="alert alert-danger">A post with this adress already exist!</span>';
+
+  return $message;
+}
 ?>

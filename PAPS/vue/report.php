@@ -55,7 +55,7 @@
               </p>
               <hr>
             <div class="widget-body">
-                <div class="mt"  style="overflow-x: scroll;">
+                <div class="mt"  style="overflow-x: scroll; overflow: auto;">
                     <table id="datatable-table" class="table table-striped table-hover">
                         <thead>
                         <tr>
@@ -88,6 +88,8 @@
                                 if(++$compt == 0)
                                     echo '<td class="item"><a href="#" class="edit">'.$value."</a></td>";
 
+                                elseif($key == "mention")
+                                    echo '<td class="item">'.$value.'<div style="background: '.$value.'; width: 100%; height: 10px; border-radius: 3px;"></div></td>';
                                 else
                                     echo '<td class="item">'.$value."</td>";
                               }
@@ -105,17 +107,16 @@
         <div class="row">
             
             <div class="col-lg-4" style="margin-bottom: 10px;">
-                <button type="button" class="btn btn-warning del-selected" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $_SESSION['page']; ?></button>
+                <button type="button" class="btn btn-inverse export" data-toggle="modal" data-target="#myModal">Export selected</button>
                 <span class="selected-item"></span>
             </div>
-            <div class="col-lg-8">
-                <a href="filter.php" class="btn btn-danger pull-right" style="margin-left: 10px; margin-bottom: 10px;">More filter</a>
-                <button type="button" class="btn btn-inverse pull-right" data-toggle="modal" data-target="#myModal1">Export selected</button>
+            <div class="col-lg-offset-6 col-sm-2">
+                <a href="filter.php" class="btn btn-danger" style="margin-left: 10px; margin-bottom: 10px;">More filter</a>
             </div>
         </div>
         
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -131,10 +132,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">

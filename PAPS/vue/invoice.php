@@ -18,11 +18,11 @@
                     <header>
                         <div class="row">
                             <div class="col-sm-6 col-print-6">
-                                <img src="demo/img/logo/invoice-logo.png" alt="Logo" class="invoice-logo"/>
+                                <img src="img/logo_invoice.png" alt="Logo" class="invoice-logo"/>
                             </div>
                             <div class="col-sm-6 col-print-6">
                                 <h3 class="text-align-right">
-                                    #<span class="fw-semi-bold">9.45613</span> / <small>17 May 2014</small>
+                                    #<span class="fw-semi-bold">9.45613</span> / <small><?php echo date("F j, Y, g:i a");  ?></small>
                                 </h3>
                                 <div class="text-muted fs-larger text-align-right">
                                     Some Invoice number description or whatever
@@ -41,8 +41,8 @@
                                     <strong><?php echo $_GET['poste']; ?></strong><br>
                                     <?php echo $_GET['name']; ?><br>
                                     <?php echo $_GET['adress']; ?><br>
-                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#"><?php echo $_GET['co-mail']; ?></a><br>
-                                    <abbr title="Work Phone">phone:</abbr> <?php echo $_GET['contact']; ?><br>
+                                    e-mail: <?php echo $_GET['co-mail']; ?><br>
+                                    phone: <?php echo $_GET['contact']; ?><br>
                                     <!-- <abbr title="Work Fax">fax:</abbr> (012) 678-132-901 -->
                                 </address>
                             </section>
@@ -54,9 +54,9 @@
                                 <address>
                                     <strong><?php echo $_GET['cl-poste']; ?></strong><br>
                                     <a href="#"><?php echo $_GET['cl-name']; ?></a><br>
-                                    <abbr title="Work adress"></abbr> <?php echo $_GET['cl-adress']; ?><br>
-                                    <abbr title="Work email">e-mail:</abbr> <a href="mailto:#"><?php echo $_GET['cl-mail']; ?></a><br>
-                                    <abbr title="Work Phone">phone:</abbr><?php echo $_GET['cl-contact']; ?><br>
+                                    <?php echo $_GET['cl-adress']; ?><br>
+                                    e-mail: <?php echo $_GET['cl-mail']; ?><br>
+                                    phone: <?php echo $_GET['cl-contact']; ?><br>
                                     <!-- <abbr title="Work Fax">fax:</abbr> (012) 678-132-901 -->
                                     <p class="no-margin"><strong>Note:</strong></p>
                                     <p class="text-muted fs-mini"><?php echo $_GET['cl-note']; ?></p>

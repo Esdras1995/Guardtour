@@ -85,11 +85,11 @@
                 </div>
             </div>
         </section>
-        <button type="button" class="btn btn-warning del-selected" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $_SESSION['page']; ?></button>
+        <button type="button" class="btn btn-warning delete" data-toggle="modal" data-target="#myModal">Delete selected <?php echo $_SESSION['page']; ?></button>
         <span class="selected-item"></span>
         
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -105,7 +105,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
     </main>
 </div>
 

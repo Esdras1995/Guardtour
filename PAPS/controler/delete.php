@@ -30,7 +30,7 @@ if(isset($_POST['id'])){
 		case 'Guard tours':
 			# code...
 			$model->remove("tours", $data, "guardtours_id");
-			$model->remove("guardTours", $data, "id");
+			$model->remove("guardtours", $data, "id");
 			break;
 		
 		case 'Tours':

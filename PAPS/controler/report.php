@@ -17,6 +17,8 @@ if(!empty($listTours))
   foreach ($listTours[0] as $key => $value) {
   	$toursKeys[] = $key;  
   }
+
+  $mention = $tours->getMention("09:00:00", 1);
   
   include("../vue/report.php");
 
