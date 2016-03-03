@@ -142,7 +142,7 @@ class Constants
 	private static $KEYS_MODEL = array(
 		'poste' => array('id', 'nom', 'adress', 'contact'),
 		'guard' => array('id', 'nom', 'prenom', 'uid', 'photo', 'email', 'phone', 'nif'),
-		'tours' => array('id', 'date_tour', 'heure', 'qrcode', 'mention', 'description', 'guardtours_id'),
+		'tours' => array('id', 'date_tour', 'heure', 'qrcode', 'mention', 'photo', 'matricule','description', 'guardtours_id'),
 		'guardtours' => array('id', 'intervale', 'intervale_limit', 'commence_a', 'termine_a', 'poste_id', 'guard_id'),
 		'admin' => array('id', 'nom', 'prenom', 'username', 'email', 'password', 'date_created') 
 	);

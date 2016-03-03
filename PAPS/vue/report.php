@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <?php include("head.php"); ?>
-
+    <!-- <meta http-equiv="refresh" content="10" /> -->
 <body>
 
 <?php include("menu_and_header.php"); ?>
@@ -219,7 +219,9 @@
 </div>
 
 <script type="text/javascript">
-    
+    // setTimeout(function() {
+    //     Location.reload();
+    // }, 1000);
 </script>
 <!-- The Loader. Is shown when pjax happens -->
 <div class="loader-wrap hiding hide">

@@ -161,7 +161,7 @@
                         <!-- <i class="fa fa-cog fa-lg"></i> -->
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
+                        <li><a href="forms.php?action=add&page=Users"><i class="glyphicon glyphicon-user"></i> &nbsp; New Account</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Help <!-- &nbsp;&nbsp;<span class="badge bg-danger animated bounceIn">9</span> --></a></li>
                         <li class="divider"></li>

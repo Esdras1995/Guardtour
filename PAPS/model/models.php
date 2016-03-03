@@ -118,28 +118,34 @@ class Tours extends Model
 
 		$array = $guard_tours->dynamicSelect("guardtours", "id = ?", array($guard_tours_id), "intervale, intervale_limit, commence_a, termine_a");
 
-		$intervale = $array['intervale'];
-		$limit = $array['intervale_limit'];
-		$hc = $array['commence_a'];
-		$ht = $array['termine_a'];
+		if(!empty($array)){
 
-		$intervale = doubleval(strtotime($intervale)-strtotime("00:00:00"))/3600;
-		$diff = $this->intervaleHeure($hc, $heure);
-		$nbInt = $diff/$intervale;
-		$result = $intervale*($nbInt - intval($nbInt));
+			$intervale = $array['intervale'];
+			$limit = $array['intervale_limit'];
+			$hc = $array['commence_a'];
+			$ht = $array['termine_a'];
 
-		$limit = doubleval(strtotime($limit) - strtotime("00:00:00"))/3600;
-		
-		$a = $limit/3;
-		$b = 2*$limit/3;
+			$intervale = doubleval(strtotime($intervale)-strtotime("00:00:00"))/3600;
+			$diff = $this->intervaleHeure($hc, $heure);
+			$nbInt = $diff/$intervale;
+			$result = $intervale*($nbInt - intval($nbInt));
 
-		if(0 <= $result && $result <= $a)
-			return "#555";
+			$limit = doubleval(strtotime($limit) - strtotime("00:00:00"))/3600;
+			
+			$a = $limit/3;
+			$b = 2*$limit/3;
 
-		elseif ($a < $result && $result <= $b)
-			return "#f0b518";
-		
-		return "#dd5826";
+			if(0 <= $result && $result <= $a)
+				return "#555";
+
+			elseif ($a < $result && $result <= $b)
+				return "#f0b518";
+			
+			else
+				return "#dd5826";
+		}
+
+		return null;
 	}
 
 	public function intervaleHeure($h1, $h2){
@@ -153,7 +159,6 @@ class Tours extends Model
 		else
 			return doubleval(strtotime("23:00:00")-strtotime($h1) + strtotime($h2)-2*strtotime("00:00:00") + strtotime("01:00:00"))/3600;
 	}
-
 }
 
 ?>

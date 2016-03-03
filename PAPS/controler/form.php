@@ -1,8 +1,8 @@
 <?php 
 	
-	require_once("../model/session.php");
+	// require_once("../model/session.php");
 	require_once('../model/models.php');
-	$controllerCalled = 1;
+	// $controllerCalled = 1;
   	// $post = new Post();
   	// $guard = new Guard();
   	// $guardTours = new GuardTours();
@@ -76,21 +76,33 @@
 			}
 		}
 
-		private function securite_bdd($string){
+		public function securite_bdd($string){
 
 			// On regarde si le type de string est un nombre entier (int)
 			if(ctype_digit($string)){
 				$string = intval($string);
 			}
-			
 			// Pour tous les autres types
 			else{
 				$string = htmlspecialchars($string);
-				$string = addcslashes($string, '%_');
+				// $string = addcslashes($string, '%_');
 			}
 
 			return $string;
 		}
+
+		public function saveImage($base64img, $extension, $path){
+		    $base64img = str_replace('data:image/'.$extension.';base64,', '', $base64img);
+		    $data = base64_decode($base64img);
+		    file_put_contents($path, $data);
+		}
+
+		// public function base64_encode_image ($filename=string,$filetype=string) {
+		//     if ($filename) {
+		//         $imgbinary = fread(fopen($filename, "r"), filesize($filename));
+		//         return 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
+		//     }
+		// }
 
 
 	}

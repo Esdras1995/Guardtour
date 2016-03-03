@@ -36,7 +36,7 @@
                 </div>
             </header>
             <div class="widget-body">
-                <div class="mt">
+                <div class="mt" style="overflow-x: scroll; overflow: auto;">
                     <table id="datatable-table" class="table table-striped table-hover">
                         <thead>
                         <tr>
