@@ -181,7 +181,7 @@
                                 if(++$compt == 0)
                                     echo '<td class="item"><a href="javascript:;" class="edit">'.$value."</a></td>";
                                 elseif($key == "photo")
-                                    echo '<td class="item"><img class="img-rounded" src="'.$value.'" alt="" height="50" width="70">';
+                                    echo '<td class="item"><a href="'.$value.'"><img class="img-rounded" src="'.$value.'" alt="" height="50" width="70"></a></td>';
                                 elseif ($key == "mention") {
                                     # code...
                                     echo '<td class="item"><div class="progress progress-xs mt-xs mb-0">
