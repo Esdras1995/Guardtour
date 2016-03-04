@@ -10,9 +10,10 @@
   </script>
 </head>
 <body>
-  <div id="refresh"></div>
+  <div id="refresh">
   <div id="time">
     <?php echo date('H:i:s');?>
-  </div>  
+  </div>
+  </div>
 </body>
 </html>

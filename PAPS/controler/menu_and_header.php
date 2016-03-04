@@ -58,33 +58,45 @@
                     <li><a href="post.php?page=users">Users</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="collapsed" href="#signature" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    Signature
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="signature" class="collapse">
+                    <li><a href="post.php?page=signature">Signature</a></li>
+                </ul>
+            </li>
         </ul>
-        <h5 class="sidebar-nav-title">Labels <a class="action-link" href="#"><i class="glyphicon glyphicon-plus"></i></a></h5>
+        <h5 class="sidebar-nav-title">Labels <a class="action-link" href="javascript:;"><i class="glyphicon glyphicon-plus"></i></a></h5>
         <!-- some styled links in sidebar. ready to use as links to email folders, projects, groups, etc -->
         <ul class="sidebar-labels">
             <li>
                 <a href="#">
                     <i class="fa fa-circle text-gray mr-xs"></i>
-                    <span class="label-name">Good</span>
+                    <span class="label-name">Good (#555)</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <!-- yep, .circle again -->
                     <i class="fa fa-circle text-warning mr-xs"></i>
-                    <span class="label-name">Warning</span>
+                    <span class="label-name">Warning (#f0b518)</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class="fa fa-circle text-danger mr-xs"></i>
-                    <span class="label-name">Bad</span>
+                    <span class="label-name">Bad (#dd5826)</span>
                 </a>
             </li>
         </ul>
-        <h5 class="sidebar-nav-title">Projects</h5>
+        <!-- <h5 class="sidebar-nav-title">Projects</h5> -->
         <!-- A place for sidebar notifications & alerts -->
-        <div class="sidebar-alerts">
+        <!-- <div class="sidebar-alerts">
             <div class="alert fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
                 <span class="text-white fw-semi-bold">Sales Report</span> <br>
@@ -101,7 +113,7 @@
                 </div>
                 <small>Provide required notes</small>
             </div>
-        </div>
+        </div> -->
     </div>
 </nav>
 <!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
@@ -121,11 +133,11 @@
                         <i class="fa fa-bars fa-lg hidden-xs"></i>
                     </a>
                 </li>
-                <li class="ml-sm mr-n-xs hidden-xs"><a href="#"><i class="fa fa-refresh fa-lg"></i></a></li>
+                <li class="ml-sm mr-n-xs hidden-xs"><a href="javascript:;" class="refresh"><i class="fa fa-refresh fa-lg"></i></a></li>
                 <li class="ml-n-xs hidden-xs"><a href="#"><i class="fa fa-times fa-lg"></i></a></li>
             </ul>
             <!-- xs & sm screen logo -->
-            <a class="navbar-brand visible-xs" href="index.html">
+            <a class="navbar-brand visible-xs" href="dashboard.php">
                 <i class="fa fa-circle text-gray mr-n-sm"></i>
                 <i class="fa fa-circle text-warning"></i>
                 &nbsp;
@@ -169,9 +181,11 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- <a href="post.php?page=company"></a> -->
+                    <a href="post.php?page=company">
                         <i class="fa fa-cog fa-lg"></i>
                     </a>
+
                 </li>
                 <!-- <li> -->
                     <!-- <div id="chat-notification" class="chat-notification hide">

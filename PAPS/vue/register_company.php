@@ -15,7 +15,7 @@
             <li>YOU ARE HERE</li>
             <li class="active">Form Validation</li>
         </ol> -->
-        <h1 class="page-title">Form - <span class="fw-semi-bold"><?php echo $update==1?"Update":"Register"; ?></span></h1>
+        <h1 class="page-title">Form - <span class="fw-semi-bold"><?php echo $update==1?"Update":"Register"; ?> </span></h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-1">
                 <section class="widget">
@@ -30,10 +30,10 @@
                         </div>
                     </header>
                     <div class="widget-body">
-                        <form role="form" method="post">
+                        <form role="form" method="post" enctype="multipart/form-data" class="form-register">
                             <fieldset>
                                 <legend>
-                                    <strong><?php echo $update==1?"Update":"Register"; ?> Guard</strong>
+                                    <strong><?php echo $update==1?"Update":"Register"; ?> Company Info</strong>
                                 </legend>
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-lg-12">
@@ -42,60 +42,20 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input  name="prenom" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['prenom']:''; ?>" size="16" type="text" placeholder="firstname">
-                                        </div>
-                                    <!-- </div> -->
-                                </div>
 
+                                <br/>
                                 <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input name="nom" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['nom']:''; ?>" size="16" type="text" placeholder="lastname">
-                                        </div>
-                                    <!-- </div> -->
+                                    <input class="form-control input-lg" required="riquired" name="nom" value="<?php echo $dataUpdate!=''?$dataUpdate['nom']:''; ?>" placeholder="Name" type="text">
                                 </div>
-
                                 <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                            <input name="email" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['email']:''; ?>" size="16" type="email" placeholder="email">
-                                        </div>
-                                    <!-- </div> -->
+                                    <input class="form-control input-lg" name="adress" value="<?php echo $dataUpdate!=''?$dataUpdate['adress']:''; ?>" placeholder="Adress" type="text">
                                 </div>
-
+                                 <div class="form-group">
+                                    <input class="form-control input-lg" name="contact" value="<?php echo $dataUpdate!=''?$dataUpdate['contact']:''; ?>" placeholder="Contact" type="text">
+                                </div>
                                 <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon">uid</span>
-                                            <input name="uid" required="required" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['uid']:''; ?>" size="16" type="text" placeholder="uid">
-                                        </div>
-                                    <!-- </div> -->
+                                    <input class="form-control input-lg" name="email" value="<?php echo $dataUpdate!=''?$dataUpdate['email']:''; ?>" placeholder="email" type="email">
                                 </div>
-
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                            <input name="phone" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['phone']:''; ?>" size="16" type="text" placeholder="phone">
-                                        </div>
-                                    <!-- </div> -->
-                                </div>
-
-                                <div class="form-group">
-                                    <!-- <div class="col-sm-7"> -->
-                                        <div class="input-group">
-                                            <span class="input-group-addon">nif</span>
-                                            <input name="nif" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['nif']:''; ?>" size="16" type="text" placeholder="nif/cin">
-                                        </div>
-                                    <!-- </div> -->
-                                </div>
-
                                 <button type="submit" class="btn btn-success pull-right" name="register" ><?php echo $update==1?"Update":"Register"; ?></button>
                             </fieldset>
                         </form>

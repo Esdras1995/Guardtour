@@ -45,6 +45,24 @@
         $_SESSION['page'] = "Users";
         break;
 
+      case 'signature':
+        # code...
+        $list = $model->_list("signature", "*");
+        $_SESSION['page'] = "Signature";
+        break;
+
+      case 'docs':
+        # code...
+        $list = $model->_list("report", "*");
+        $_SESSION['page'] = "Docs";
+        break;
+
+      case 'company':
+        # code...
+        $list = $model->_list("company", "*");
+        $_SESSION['page'] = "Company Info";
+        break;
+
       default:
         # code...
         header("Location: error.php");

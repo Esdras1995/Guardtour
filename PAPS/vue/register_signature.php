@@ -15,7 +15,7 @@
             <li>YOU ARE HERE</li>
             <li class="active">Form Validation</li>
         </ol> -->
-
+        <?php echo date("Y-m-d h:i:sa"); ?>
         <h1 class="page-title">Form - <span class="fw-semi-bold"><?php echo $update==1?"Update":"Register"; ?> </span></h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-1">
@@ -31,10 +31,10 @@
                         </div>
                     </header>
                     <div class="widget-body">
-                        <form role="form" method="post" class="form-register">
+                        <form role="form" method="post" action="forms.php?action=add&page=Signature" enctype="multipart/form-data" class="form-register">
                             <fieldset>
                                 <legend>
-                                    <strong><?php echo $update==1?"Update":"Register"; ?> Post</strong>
+                                    <strong><?php echo $update==1?"Update":"Register"; ?> Signature</strong>
                                 </legend>
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-lg-12">
@@ -49,11 +49,10 @@
                                     <input class="form-control input-lg" required="riquired" name="nom" value="<?php echo $dataUpdate!=''?$dataUpdate['nom']:''; ?>" placeholder="Name" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control input-lg" required="riquired" name="adress" value="<?php echo $dataUpdate!=''?$dataUpdate['adress']:''; ?>" placeholder="Address" type="text">
+                                    <input class="form-control input-lg" name="role" value="<?php echo $dataUpdate!=''?$dataUpdate['role']:''; ?>" placeholder="Your role" type="text">
                                 </div>
-                                <div class="form-group">
-                                    <input class="form-control input-lg" name="contact" value="<?php echo $dataUpdate!=''?$dataUpdate['contact']:''; ?>" placeholder="Contact" type="text">
-                                </div>
+                                <!-- <div class="form-group"> -->
+                                    <input type="file" name="signature"  id="signature">
                                 <button type="submit" class="btn btn-success pull-right" name="register" ><?php echo $update==1?"Update":"Register"; ?></button>
                             </fieldset>
                         </form>

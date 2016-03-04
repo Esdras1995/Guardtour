@@ -97,12 +97,12 @@
 		    file_put_contents($path, $data);
 		}
 
-		// public function base64_encode_image ($filename=string,$filetype=string) {
-		//     if ($filename) {
-		//         $imgbinary = fread(fopen($filename, "r"), filesize($filename));
-		//         return 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
-		//     }
-		// }
+		public function base64_encode_image ($filename=string,$filetype=string) {
+		    if ($filename) {
+		        $imgbinary = fread(fopen($filename, "r"), filesize($filename));
+		        return 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
+		    }
+		}
 
 
 	}

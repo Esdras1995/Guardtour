@@ -59,5 +59,10 @@
 
 <!-- page specific libs -->
 <!-- page specific js -->
+<script type="text/javascript">
+    $('.refresh').on('click', function(){
+        window.location.reload();
+    });
+</script>
 </body>
 </html>

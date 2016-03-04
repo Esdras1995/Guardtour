@@ -421,6 +421,12 @@ $(function(){
             $('.save').prop('disabled', false);
     });
 
+    // var table = $('#datatable-table').DataTable({
+    //     ajax: "data.json"
+    // };
+    // setInterval( function () {
+    //     table.ajax.reload();
+    // }, 1000);
 // $('.delete').on('click', function(){
 //         // var allId = {"id":[]};
 //         if(selected != 0){

@@ -173,5 +173,10 @@
 <script src="vendor/parsleyjs/dist/parsley.min.js"></script>
 <!-- page specific js -->
 <script src="js/form-validation.js"></script>
+<script type="text/javascript">
+	$('.refresh').on('click', function(){
+        window.location.reload();
+    });
+</script>
 </body>
 </html>

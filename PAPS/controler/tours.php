@@ -23,7 +23,7 @@ $uid	 = $form->securite_bdd(strip_tags($_POST['uid']));
 // echo htmlspecialchars("363663_3737373.jpeg");
 // echo $form->securite_bdd(strip_tags("363663_3737373.jpeg"));
 // $date = "2016-03-02";
-// $heure = "08:15:00";
+// $heure = "08:09:01";
 // $photo = base64_encode_image("img/hqdefault.jpg", "jpeg");
 // $qrcode = "5364564538837830";
 // $matricule = "1234";

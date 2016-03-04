@@ -175,6 +175,9 @@
         var page = decodeURIComponent("<?php echo $_SESSION['page']; ?>");
         window.location = "forms.php?page="+page;
     });
+    $('.refresh').on('click', function(){
+        window.location.reload();
+    });
 </script>
 </body>
 </html>

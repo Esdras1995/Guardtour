@@ -24,9 +24,9 @@
                                 <h3 class="text-align-right">
                                     #<span class="fw-semi-bold">9.45613</span> / <small><?php echo date("F j, Y, g:i a");  ?></small>
                                 </h3>
-                                <div class="text-muted fs-larger text-align-right">
+                                <!-- <div class="text-muted fs-larger text-align-right">
                                     Some Invoice number description or whatever
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </header>
@@ -90,6 +90,8 @@
                                         # code...
                                         if(++$compt == 0)
                                             echo '<td class="item"><a href="#" class="edit">'.$value."</a></td>";
+                                        elseif($key == "photo")
+                                            echo '<td class="item"><img class="img-rounded" src="'.$value.'" alt="" height="50" width="70">';
                                         else
                                             echo '<td class="item">'.$value."</td>";
                                       }
@@ -161,5 +163,10 @@
 <!-- page specific libs -->
 <!-- page specific js -->
 <script src="js/invoice.js"></script>
+<script type="text/javascript">
+    $('.refresh').on('click', function(){
+        window.location.reload();
+    });
+</script>
 </body>
 </html>

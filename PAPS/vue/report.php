@@ -75,7 +75,7 @@
                             <!-- <th class="no-sort">Status</th> -->
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="overflow-x: scroll;">
                         <?php
                             if(!empty($list))
                             for ($i=0; $i < sizeof($list); $i++) {
@@ -90,8 +90,11 @@
 
                                 elseif($key == "mention")
                                     echo '<td class="item">'.$value.'<div style="background: '.$value.'; width: 100%; height: 10px; border-radius: 3px;"></div></td>';
+                                elseif($key == "photo")
+                                    echo '<td class="item"><img class="img-rounded" src="'.$value.'" alt="" height="50" width="70">';
                                 else
-                                    echo '<td class="item">'.$value."</td>";
+                                    echo '<td class="item">'.$value.date('H:i:s')."</td>";
+
                               }
 
                               echo "</tr>";
@@ -99,6 +102,7 @@
                             }
                         }
                         ?>
+
                         </tbody>
                     </table>
                 </div>
@@ -218,11 +222,14 @@
     </main>
 </div>
 
-<script type="text/javascript">
-    // setTimeout(function() {
-    //     Location.reload();
-    // }, 1000);
-</script>
+<!--<script src="http://code.jquery.com/jquery-latest.js">
+  </script>-->
+  <script type="text/javascript">
+    setInterval("refresh();",1000); 
+    function refresh(){
+      $('#refresh').load(location.href + ' #datatable-table');
+    }
+  </script>
 <!-- The Loader. Is shown when pjax happens -->
 <div class="loader-wrap hiding hide">
     <i class="fa fa-circle-o-notch fa-spin-fast"></i>
@@ -258,5 +265,10 @@
 
 <!-- page specific js -->
 <script src="js/tables-dynamic.js"></script>
+<script type="text/javascript">
+    $('.refresh').on('click', function(){
+        window.location.reload();
+    });
+</script>
 </body>
 </html>

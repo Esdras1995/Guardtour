@@ -11,7 +11,7 @@
     <!--[if IE 9]>
         <link href="css/application-ie9-part2.css" rel="stylesheet">
     <![endif]-->
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="img/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -32,7 +32,8 @@
             <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
                 <h4 class="widget-login-logo animated fadeInUp">
                     <i class="fa fa-circle text-gray"></i>
-                    PAP Security
+                    <img src="img/logo.png"/>
+                    <!-- <small>PAP Security</small> -->
                     <i class="fa fa-circle text-warning"></i>
                 </h4>
                 <section class="widget widget-login animated fadeInUp">

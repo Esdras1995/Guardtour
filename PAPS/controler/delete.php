@@ -13,6 +13,8 @@ if(isset($_POST['id'])){
 	$data = json_decode($_POST['id'], true);
 	// var_dump(json_decode($data, true));
 	// fprintf($h, $data[0]." ".$page);
+    // $path="uploads/20160304050432pmJRyUi7E.jpg";
+    // if(unlink($path)) echo "Deleted file ";
 
 	switch ($page) {
 		case 'Post':

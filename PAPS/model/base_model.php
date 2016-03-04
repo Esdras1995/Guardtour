@@ -9,7 +9,6 @@ require_once 'dbconfig.php';
 class Model implements iDatabase
 {
 	protected $conn;
-	protected $form;
 
 	function __construct()
 	{
@@ -130,6 +129,38 @@ class Model implements iDatabase
 			echo $e->getMessage();
 		}
 	}
+
+	public function count($table, $where){
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT * FROM $table WHERE $where");
+			$stmt->execute();
+			// $userRow=$stmt->fetchAll(PDO::FETCH_ASSOC);
+			// echo "------------------------------------------";
+			// echo $stmt->rowCount();
+			return $stmt->rowCount();
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+
+	public function _count($table){
+		try
+		{
+			$stmt = $this->conn->prepare("SELECT * FROM $table");
+			$stmt->execute();
+			// $userRow=$stmt->fetchAll(PDO::FETCH_ASSOC);
+			// echo "------------------------------------------";
+			// echo $stmt->rowCount();
+			return $stmt->rowCount();
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}
 }
 
 
@@ -144,7 +175,10 @@ class Constants
 		'guard' => array('id', 'nom', 'prenom', 'uid', 'photo', 'email', 'phone', 'nif'),
 		'tours' => array('id', 'date_tour', 'heure', 'qrcode', 'mention', 'photo', 'matricule','description', 'guardtours_id'),
 		'guardtours' => array('id', 'intervale', 'intervale_limit', 'commence_a', 'termine_a', 'poste_id', 'guard_id'),
-		'admin' => array('id', 'nom', 'prenom', 'username', 'email', 'password', 'date_created') 
+		'admin' => array('id', 'nom', 'prenom', 'username', 'email', 'password', 'date_created'),
+		'signature' => array('id', 'nom', 'signature', 'role'),
+		'report' => array('id', 'numdossier', 'liste_reporte', 'date', 'client', 'signature_id'),
+		'company' => array('id', 'nom', 'adress', 'contact', 'email')
 	);
 
 	public static function getListKey(){

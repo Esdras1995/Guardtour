@@ -173,7 +173,6 @@
 
         break;
         
-
       case 'Users':
         # code...
         
@@ -202,6 +201,41 @@
 
         include("../vue/register_users.php");
 
+        break;
+
+      case 'Company Info':
+        # code...
+        if(isset($_POST['register'])){  
+          $message = $form->register("company", $_POST);
+        }
+        include("../vue/register_company.php");
+        break;
+
+      // case 'Docs':
+      //   # code...
+      //   if(isset($_POST['register'])){  
+
+      //   }
+      //   include("../vue/register_company.php");
+      //   break;
+
+      case 'Signature':
+        # code...
+        if(isset($_POST['register'])){ 
+          $chars = $chars = array(":", "/", "-", " ");
+          $date = date("Y-m-d h:i:sa");
+          $img = str_replace($chars, '', $date).str_replace($chars, '', basename($_FILES["signature"]["name"]));
+
+          $target_dir = "signature/";
+          $target_file = $target_dir . $img;//basename($_FILES["signature"]["name"]);
+          $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+          move_uploaded_file($_FILES["signature"]["tmp_name"], $target_file);
+          $name = $_POST['nom'];
+          $role = $_POST['role'];
+          $new_POST = array('nom' => $name, 'role'=>$role, 'signature'=>$img);
+          $message = $form->register("signature", $new_POST);
+        }
+        include("../vue/register_signature.php");
         break;
 
 
