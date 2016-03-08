@@ -46,9 +46,9 @@ if(!is_null($mention)){
 
 	$new_POST = array('date_tour' => $date, 'qrcode' =>$qrcode, 'description' => $description, 'heure' => $heure, 'mention' => $mention, 'matricule' => $matricule, 'photo' => $path, 'guardtours_id' =>$guard_tours_id);
 
-	echo $form->register("tours", $new_POST);
+	$form->register("tours", $new_POST);
 	$form->saveImage($photo, 'jpeg', $path);
-
+	echo $tours->getIntervale($guard_id);
 }else
 	echo "You are not registered!";
 

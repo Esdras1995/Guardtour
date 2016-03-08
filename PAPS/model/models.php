@@ -159,6 +159,13 @@ class Tours extends Model
 		else
 			return doubleval(strtotime("23:00:00")-strtotime($h1) + strtotime($h2)-2*strtotime("00:00:00") + strtotime("01:00:00"))/3600;
 	}
+
+	public function getIntervale($id){
+		$model = new Model();
+		$intervale = $model->dynamicSelect("guardtours", "guard_id = ?", array($id), "intervale")['intervale'];
+		// $intervale = "00:03:00";
+		return intval(strtotime($intervale)-strtotime("00:00:00"))*1000;
+	}
 }
 
 ?>

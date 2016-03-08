@@ -116,12 +116,12 @@
                                             </p>
                                         </div>
                                         <div class="stat-item">
-                                            <h6 class="name">Takeoff Angle</h6>
-                                            <p class="value">14.29°</p>
+                                            <h6 class="name">Montly</h6>
+                                            <p class="value">55 120</p>
                                         </div>
                                         <div class="stat-item">
-                                            <h6 class="name">World Pop.</h6>
-                                            <p class="value">7,211M</p>
+                                            <h6 class="name">24h</h6>
+                                            <p class="value">9 695</p>
                                         </div>
                                     </div>
                                     <div class="progress progress-xs">
@@ -171,7 +171,7 @@
                         <tbody>
                         <?php
                             if(!empty($list))
-                            for ($i=0; $i < sizeof($list); $i++) {
+                            for ($i=sizeof($list)-1; $i >=0 ; $i--) {
                              {
                               $compt = -1;
                               echo '<tr>';

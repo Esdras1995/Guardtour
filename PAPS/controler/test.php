@@ -12,7 +12,8 @@
 <body>
   <div id="refresh">
   <div id="time">
-    <?php echo date('H:i:s');?>
+
+    <?php echo intval(strtotime("00:03:00")-strtotime("00:00:00"));?>
   </div>
   </div>
 </body>

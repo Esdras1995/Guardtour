@@ -71,6 +71,8 @@
                                             <div class="progress-bar progress-bar-gray-light" style="width: 100%; background: '.$value.'"></div>
                                         </div>'.$value."</td>";;
                                 }
+                                elseif($key == "photo")
+                                    echo '<td class="item"><img class="img-rounded" src="'.$value.'" alt="" height="50" width="70">';
                                 else
                                     echo '<td class="item">'.$value."</td>";
                               }
@@ -96,7 +98,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
               <div class="modal-body">
-                Are you sure you wan't to delete selected <?php print($_SESSION['page']); ?> ?
+                Are you sure you wan't to delete selected <?php #print($_SESSION['page']); ?> ?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
