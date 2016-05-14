@@ -170,11 +170,11 @@
             }
         });
 
-
+        var page = decodeURIComponent("<?php echo $_SESSION['page']; ?>");
+        arrayTemp['page'] = page;
         $.post('../controler/forms.php', {edit: JSON.stringify(arrayTemp)});
         console.log(JSON.stringify(arrayTemp));
         
-        var page = decodeURIComponent("<?php echo $_SESSION['page']; ?>");
         window.location = "forms.php?page="+page;
     });
     $('.refresh').on('click', function(){

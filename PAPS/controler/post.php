@@ -30,6 +30,12 @@
       case 'guardTours':
         # code...
         $list = $model->_list("guardtours", "*");
+        for ($i=0; $i <sizeof($list); $i++)
+          foreach ($list[$i] as $key => $value){
+            if($key == "poste_id") $list[$i][$key] = $model->getBy("poste", "nom", "id", $value);
+            if($key == "guard_id") 
+              $list[$i][$key] = $model->getBy("guard", "nom", "id", $value)." ".$model->getBy("guard", "prenom", "id", $value);
+          }
         $_SESSION['page'] = "Guard tours";
         break;
       

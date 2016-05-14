@@ -15,7 +15,7 @@
             <li>YOU ARE HERE</li>
             <li class="active">Form Validation</li>
         </ol> -->
-        <h1 class="page-title">Form - <span class="fw-semi-bold">register</span></h1>
+        <h1 class="page-title">Form - <span class="fw-semi-bold"><?php echo $update==1?"Update":"Register"; ?> </span></h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-1">
                 <section class="widget">
@@ -38,7 +38,7 @@
                                 <div class="row" style="margin-bottom: 10px;">
                                 	<div class="col-lg-12">
 		                                <p>
-		                                    <?php if($message) echo $message; ?>
+		                                    <?php if($message) echo $message['error']; ?>
                                 		</p>
                                 	</div>
                                 </div>
@@ -52,13 +52,9 @@
 	                                	<select class="form-control" name="poste_id" required="required">
 	                                		<option></option>
 	                                		<?php 
-	                                			for ($i=0; $i < sizeof($postAdress); $i++) { 
+	                                			for ($i=0; $i < sizeof($postId); $i++) { 
 	                                				# code...
-
-	                                				foreach ($postAdress[$i] as $value) {
-	                                					# code...
-	                                					echo "<option>".$value."</option>";
-	                                				}
+                                					echo "<option>".$postId[$i]['adress']."|".$postId[$i]['nom']."</option>";
 	                                			}
 	                                		 ?>
 	                                	</select>
@@ -70,7 +66,7 @@
 		                                	<a href="forms.php?page=Post" class="btn-sm btn-primary"><i class="fa fa-plus"></i> Add</a>
 	                                	</div>
 	                                </div>
-								</div>
+								</div><br>
 
 								<legend>
                                     First guard
@@ -78,20 +74,20 @@
 
 								<div class="row" style="margin-bottom: 10px;">
 	                                <div class="col-lg-2">
-	                                	<label clas><a href="post.php?page=guard" target="_blank">Guard 1:</a> </label>
+	                                	<label clas><a href="post.php?page=guard" target="_blank">Guard:</a> </label>
 	                                </div>
 	                               
 	                                <div class="col-lg-7">
-	                                	<select class="form-control" name="guard1" required="required">
+	                                	<select class="form-control" name="guard_id" required="required">
 	                                		<option></option>
 	                                		<?php 
 	                                			for ($i=0; $i < sizeof($guardId); $i++) { 
 	                                				# code...
 
-	                                				foreach ($guardId[$i] as $value) {
+	                                				// foreach ($guardId[$i] as $value) {
 	                                					# code...
-	                                					echo "<option>".$value."</option>";
-	                                				}
+	                                					echo "<option>".$guardId[$i]['uid']."|".$guardId[$i]['nom']." ".$guardId[$i]['prenom']."</option>";
+	                                				// }
 	                                			}
 	                                		 ?>
 	                                	</select>
@@ -113,8 +109,9 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="commence_a1" class="form-control" size="16" type="time" placeholder="Begin at (h:m:s)">
+                                            <input  name="commence_a" class="form-control" size="16" type="time" placeholder="Begin at (h:m:s)" value="<?php echo $dataUpdate!=''?$dataUpdate['commence_a']:''; ?>">
                                         </div>
+                                        <span class="alert-danger"><?php if($message) echo $message['commence_a']; ?></span>
 	                                </div>
 								</div>
 								
@@ -126,11 +123,12 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="termine_a1" class="form-control" size="16" type="time"  required="required" placeholder="Ends at (h:m:s)">
+                                            <input  name="termine_a" class="form-control" size="16" type="time"  required="required" placeholder="Ends at (h:m:s)" value="<?php echo $dataUpdate!=''?$dataUpdate['termine_a']:''; ?>">
                                         </div>
+                                        <span class="alert-danger"><?php if($message) echo $message['termine_a']; ?></span>
 	                                </div>
 								</div>
-								<legend>
+								<!-- <legend>
                                     Second guard
                                 </legend>
 								<div class="row" style="margin-bottom: 10px;">
@@ -140,18 +138,18 @@
 	                               
 	                                <div class="col-lg-7">
 	                                	<select class="form-control" name="guard2" required="required">
-	                                		<option></option>
+	                                		<option></option> -->
 	                                		<?php 
-	                                			for ($i=0; $i < sizeof($guardId); $i++) { 
-	                                				# code...
+	                                			// for ($i=0; $i < sizeof($guardId); $i++) { 
+	                                			// 	# code...
 
-	                                				foreach ($guardId[$i] as $value) {
-	                                					# code...
-	                                					echo "<option>".$value."</option>";
-	                                				}
-	                                			}
+	                                			// 	foreach ($guardId[$i] as $value) {
+	                                			// 		# code...
+	                                			// 		echo "<option>".$value."</option>";
+	                                			// 	}
+	                                			// }
 	                                		 ?>
-	                                	</select>
+	                                	<!-- </select>
 	                                </div>
 
 	                                <div class="col-lg-3">
@@ -186,7 +184,8 @@
                                             <input  name="termine_a2" class="form-control" size="16" type="time"  required="required" placeholder="Ends at (h:m:s)">
                                         </div>
 	                                </div>
-								</div>
+								</div> -->
+								<br>
 								<legend>
                                     Intervale tower and limit time
                                 </legend>
@@ -198,8 +197,9 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="intervale" class="form-control" size="16" type="time" required="required" placeholder="Intervale">
+                                            <input  name="intervale" class="form-control" size="16" type="time" required="required" placeholder="Intervale (h:m:s)" value="<?php echo $dataUpdate!=''?$dataUpdate['intervale']:''; ?>">
                                         </div>
+                                        <span class="alert-danger"><?php if($message) echo $message['intervale']; ?></span>
 	                                </div>
 								</div>
 
@@ -212,8 +212,9 @@
 	                                <div class="col-lg-10">
 	                                	<div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                            <input  name="intervale_limit" class="form-control" size="16" min="1" max="59" type="number" required="required" placeholder="Interval limit">
+                                            <input  name="intervale_limit" class="form-control" size="16" min="1" max="59" type="number" required="required" placeholder="Interval limit" value="<?php echo $dataUpdate!=''?$dataUpdate['intervale_limit']:''; ?>">
                                         </div>
+                                        <span class="alert-danger"><?php if($message) echo $message['intervale_limit']; ?></span>
 	                                </div>
 								</div>
                                 <button type="submit" class="btn btn-success pull-right" name="register" >Register</button>

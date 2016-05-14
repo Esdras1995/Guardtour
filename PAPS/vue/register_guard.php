@@ -38,7 +38,7 @@
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-lg-12">
                                         <p>
-                                            <?php if($message) echo $message; ?>
+                                            <?php if($message) echo $message['error']; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -74,7 +74,9 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">uid</span>
                                             <input name="uid" required="required" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['uid']:''; ?>" size="16" type="text" placeholder="uid">
+                                            <span class="alert-danger"><?php if($message) echo $message['uid']; ?></span>
                                         </div>
+
                                     <!-- </div> -->
                                 </div>
 
@@ -83,6 +85,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                             <input name="phone" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['phone']:''; ?>" size="16" type="text" placeholder="phone">
+                                            <span class="alert-danger"><?php if($message) echo $message['phone']; ?></span>
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -92,6 +95,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">nif</span>
                                             <input name="nif" class="form-control input-lg" value="<?php echo $dataUpdate!=''?$dataUpdate['nif']:''; ?>" size="16" type="text" placeholder="nif/cin">
+                                            <span class="alert-danger"><?php if($message) echo $message['nif']; ?></span>
                                         </div>
                                     <!-- </div> -->
                                 </div>

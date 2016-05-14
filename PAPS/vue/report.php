@@ -23,8 +23,19 @@
                 <!-- <a href="forms.php?page=<?php echo $_SESSION['page']; ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a> -->
             </div>
         </div>
-        
-        
+        <div class="row">
+            <div class="col-lg-12">
+                <form>
+                    <select class="form-control" id="exampleSelect1">
+                        <option>1</option>
+                      <?php 
+                        for ($i=0; $i <2; $i+=LIMIT)
+                             echo '<option value="'.$i.'">from '.$i.' to'.$i+LIMIT.'</option>';
+                       ?>
+                    </select>
+                </form>
+            </div>
+        </div>
 
         <section class="widget">
             <header>
@@ -93,7 +104,7 @@
                                 elseif($key == "photo")
                                     echo '<td class="item"><img class="img-rounded" src="'.$value.'" alt="" height="50" width="70">';
                                 else
-                                    echo '<td class="item">'.$value.date('H:i:s')."</td>";
+                                    echo '<td class="item">'.$value."</td>";
 
                               }
 
@@ -115,7 +126,7 @@
                 <span class="selected-item"></span>
             </div>
             <div class="col-lg-offset-6 col-sm-2">
-                <a href="filter.php" class="btn btn-danger" style="margin-left: 10px; margin-bottom: 10px;">More filter</a>
+                <!-- <a href="filter.php" class="btn btn-danger" style="margin-left: 10px; margin-bottom: 10px;">More filter</a> -->
             </div>
         </div>
         
@@ -158,24 +169,6 @@
                         </p> -->
                         <br/>
                         <div class="form-group">
-                            <input class="form-control input-sm" name="company" placeholder="Company name" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="name" placeholder="Your name" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="poste" placeholder="Your post" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="adress" placeholder="Company adress" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="co-mail" placeholder="Company mail" type="mail">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="contact" placeholder="Contact" type="text">
-                        </div>
-                        <div class="form-group">
                             <textarea class="form-control input-sm" name="note" placeholder="Note...." type="text"></textarea>
                         </div>
 
@@ -189,12 +182,6 @@
                         <br/>
                         <div class="form-group">
                             <input class="form-control input-sm" name="client" placeholder="Client company" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="cl-name" placeholder="Client name" type="text">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control input-sm" name="cl-poste" placeholder="Client post" type="text">
                         </div>
                         <div class="form-group">
                             <input class="form-control input-sm" name="cl-adress" placeholder="Client adress" type="text">

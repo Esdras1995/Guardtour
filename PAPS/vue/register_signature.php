@@ -15,7 +15,6 @@
             <li>YOU ARE HERE</li>
             <li class="active">Form Validation</li>
         </ol> -->
-        <?php echo date("Y-m-d h:i:sa"); ?>
         <h1 class="page-title">Form - <span class="fw-semi-bold"><?php echo $update==1?"Update":"Register"; ?> </span></h1>
         <div class="row">
             <div class="col-md-8 col-md-offset-1">

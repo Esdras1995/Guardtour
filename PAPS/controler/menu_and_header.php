@@ -43,7 +43,7 @@
                     <li><a href="post.php?page=post">Post</a></li>
                     <li><a href="post.php?page=guard">Guard</a></li>
                     <li><a href="post.php?page=guardTours">Guard Tours</a></li>
-                    <li><a href="post.php?page=tours">Tours</a></li>
+                    <!-- <li><a href="post.php?page=tours">Tours</a></li> -->
                 </ul>
             </li>
             <li>
@@ -59,16 +59,16 @@
                 </ul>
             </li>
             <li>
-                <a class="collapsed" href="#signature" data-toggle="collapse" data-parent="#sidebar">
+                <!-- <a class="collapsed" href="#signature" data-toggle="collapse" data-parent="#sidebar">
                     <span class="icon">
                         <i class="glyphicon glyphicon-user"></i>
                     </span>
                     Signature
                     <i class="toggle fa fa-angle-down"></i>
-                </a>
-                <ul id="signature" class="collapse">
+                </a> -->
+                <!-- <ul id="signature" class="collapse">
                     <li><a href="post.php?page=signature">Signature</a></li>
-                </ul>
+                </ul> -->
             </li>
         </ul>
         <h5 class="sidebar-nav-title">Labels <a class="action-link" href="javascript:;"><i class="glyphicon glyphicon-plus"></i></a></h5>
@@ -165,7 +165,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="thumb-sm avatar pull-left">
-                            <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                            <!-- <img class="img-circle" src="demo/img/people/a5.jpg" alt="..."> -->
                         </span>
                         &nbsp;
                         <?php print($userRow['username']); ?>&nbsp;

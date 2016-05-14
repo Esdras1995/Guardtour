@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2016 at 09:03 
+-- Generation Time: May 13, 2016 at 08:37 
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -89,7 +89,9 @@ INSERT INTO `guard` (`id`, `nom`, `prenom`, `uid`, `photo`, `email`, `phone`, `n
 (1, 'SUY', 'Esdras', '123457575675', NULL, 'esdras@mail.com', '30390939093', '111-111-111-1'),
 (2, 'klamklma', 'lkmlkm', 'mlkmlmlml', 'klmlkmlkm', 'mklmlml', 'mklmlml', 'lmklmklml'),
 (3, 'tetet', 'ti tet', '123457575675', NULL, 'tet@mail.com', '3456-0099', '123-000-888-7'),
-(4, 'Osias', 'Alhdo', '466d3f09217cdbf1', NULL, 'alhdo@mail.com', '3456-0097', '111-111-111-8');
+(4, 'Osias', 'Alhdo', '466d3f09217cdbf1', NULL, 'alhdo@mail.com', '3456-0097', '111-111-111-8'),
+(5, 'today123', 'Esdras today', '1234567890', NULL, 'suyeasdras@yahoo.fr', '3790-9122', '123-444-111-6'),
+(6, 'Derisse', 'Hollyn', 'eb414cd27279ee13', NULL, 'suyeasdras@mail.fr', '3790-9128', '300-000-000-9');
 
 -- --------------------------------------------------------
 
@@ -113,7 +115,11 @@ CREATE TABLE `guardtours` (
 
 INSERT INTO `guardtours` (`id`, `intervale`, `intervale_limit`, `commence_a`, `termine_a`, `poste_id`, `guard_id`) VALUES
 (4, '01:00:00', '00:15:00', '07:00:00', '15:00:00', 3, 4),
-(5, '01:00:00', '00:15:00', '15:00:00', '07:00:00', 3, 1);
+(5, '01:00:00', '00:15:00', '15:00:00', '07:00:00', 3, 1),
+(12, '01:00:00', '00:09:00', '01:00:00', '02:00:00', 4, 5),
+(13, '15:00:00', '00:12:00', '12:00:00', '13:00:00', 4, 2),
+(14, '08:13:18', '07:19:19', '13:14:14', '12:17:08', 6, 3),
+(15, '01:00:00', '00:12:00', '08:00:00', '16:00:00', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -134,7 +140,11 @@ CREATE TABLE `poste` (
 
 INSERT INTO `poste` (`id`, `nom`, `adress`, `contact`) VALUES
 (1, 'poste', 'kmmk', 'mklmkll'),
-(3, 'jesais pas', 'knknkn', 'knklnklnkl\r\n');
+(3, 'jesais pas', 'knknkn', 'knklnklnkl\r\n'),
+(4, 'Poste test1', '19 rue testard, christ-roi', '3444-9901'),
+(5, '&amp;amp;quot;', 'kkbbkbj', 'bjkbjkbjk'),
+(6, 'kjbkbj''nnn', 'bjkbbkb', 'bjkbjkbjk'),
+(7, '\\''', 'nkn', 'klnlnkl');
 
 -- --------------------------------------------------------
 
@@ -197,7 +207,20 @@ CREATE TABLE `tours` (
 INSERT INTO `tours` (`id`, `guardtours_id`, `date_tour`, `heure`, `qrcode`, `matricule`, `description`, `mention`, `photo`) VALUES
 (11, 4, '2016-03-02', '08:15:00', '5364564538837830', 1234, 'je sais pas', '#dd5826', 'uploads/1234_20160302081500.jpeg'),
 (12, 4, '2016-03-02', '08:10:00', 'post1', 1243, 'test', '#dd5826', 'uploads/1243_20160302081000.jpeg'),
-(13, 4, '2016-03-02', '08:09:01', '5364564538837830', 1234, 'je sais pas', '#f0b518', 'uploads/1234_20160302080901.jpeg');
+(13, 4, '2016-03-02', '08:09:01', '5364564538837830', 1234, 'je sais pas', '#f0b518', 'uploads/1234_20160302080901.jpeg'),
+(14, 13, '2016-03-02', '08:09:01', '5364564538837830', 1234, 'je sais pas', '#dd5826', 'uploads/1234_20160302080901.jpeg'),
+(15, 13, '2025-03-02', '08:09:01', '5364564538837830', 1234, 'je sais pas', '#dd5826', 'uploads/1234_20250302080901.jpeg'),
+(16, 13, '2025-03-02', '08:09:01', '5364564538837830', 1234, 'je sais pas', '#dd5826', 'uploads/1234_20250302080901.jpeg'),
+(17, 15, '2016-05-13', '11:28:08', 'PAPSECURITY35', 0, 'Consierge present, Lumieres defectueuses, ', '#dd5826', ''),
+(18, 15, '2016-05-13', '11:30:11', 'PAPSECURITY35', 0, 'Lumieres defectueuses, ', '#dd5826', ''),
+(19, 15, '2016-05-13', '11:32:18', 'PAPSECURITY35', -1, '', '#dd5826', ''),
+(20, 15, '2016-05-13', '11:37:17', 'PAPSECURITY35', -1, 'Generatrice ne marche pas, Employe present, ', '#dd5826', ''),
+(21, 15, '2016-05-13', '11:41:30', 'PAPSECURITY35', -1, 'Pas d\\''electricite, Consierge present, Employe present, ', '#dd5826', ''),
+(22, 15, '2016-05-13', '11:54:55', 'PAPSECURITY35', -1, 'Generatrice ne marche pas, Consierge present, ', '#dd5826', ''),
+(23, 15, '2016-05-13', '12:01:23', 'PAPSECURITY35', 6866, 'Generatrice ne marche pas, ', '#555', 'uploads/6866_20160513120123.jpeg'),
+(24, 15, '2016-05-13', '12:03:48', 'PAPSECURITY35', 6431, 'Generatrice ne marche pas, ', '#555', 'uploads/6431_20160513120348.jpeg'),
+(25, 15, '2016-05-13', '12:06:26', 'PAPSECURITY35', 6482, '', '#f0b518', 'uploads/6482_20160513120626.jpeg'),
+(26, 15, '2016-05-13', '12:09:09', 'PAPSECURITY35', 6321, 'Vitre casse, Fenetre Brisee, Pas d\\''electricite, Generatrice ne marche pas, Consierge present, Employe present, Lumieres defectueuses, ', '#dd5826', 'uploads/6321_20160513120909.jpeg');
 
 --
 -- Indexes for dumped tables
@@ -273,17 +296,17 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT for table `guard`
 --
 ALTER TABLE `guard`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `guardtours`
 --
 ALTER TABLE `guardtours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `poste`
 --
 ALTER TABLE `poste`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `report`
 --
@@ -298,7 +321,7 @@ ALTER TABLE `signature`
 -- AUTO_INCREMENT for table `tours`
 --
 ALTER TABLE `tours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- Constraints for dumped tables
 --

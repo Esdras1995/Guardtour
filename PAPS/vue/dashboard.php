@@ -32,15 +32,15 @@
                                 <?php echo $guardSuccess; ?>
                                 </p>
                             </div>
-                            <div class="stat-item">
+                            <!-- <div class="stat-item">
                                 <h6 class="name">Montly</h6><p class="value">1%</p>
                             </div>
                             <div class="stat-item">
                                 <h6 class="name">24h</h6><p class="value">3.38%</p>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $guardSuccess.'%'; ?>;">
                                 
                             </div>
                         </div>
@@ -74,17 +74,17 @@
                                             <?php echo $guardWarning; ?>
                                         </p>
                                     </div>
-                                    <div class="stat-item">
+                                    <!-- <div class="stat-item">
                                         <h6 class="name">Montly</h6>
                                         <p class="value">55 120</p>
                                     </div>
                                     <div class="stat-item">
                                         <h6 class="name">24h</h6>
                                         <p class="value">9 695</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $guardWarning.'%'; ?>;"></div>
                                 </div>
                                 <p>
                                     <small>
@@ -115,17 +115,17 @@
                                             <?php echo $guardBad; ?>
                                             </p>
                                         </div>
-                                        <div class="stat-item">
+                                        <!-- <div class="stat-item">
                                             <h6 class="name">Montly</h6>
                                             <p class="value">55 120</p>
                                         </div>
                                         <div class="stat-item">
                                             <h6 class="name">24h</h6>
                                             <p class="value">9 695</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="progress progress-xs">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $guardBad.'%'; ?>;"></div>
                                     </div>
                                         <p>
                                             <small>

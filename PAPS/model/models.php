@@ -105,7 +105,7 @@ class User extends Model
 
 class Tours extends Model
 {
-	
+	private $result;
 	function __construct()
 	{
 		# code...
@@ -134,7 +134,7 @@ class Tours extends Model
 			
 			$a = $limit/3;
 			$b = 2*$limit/3;
-
+			$this->result = $result;
 			if(0 <= $result && $result <= $a)
 				return "#555";
 
@@ -164,7 +164,7 @@ class Tours extends Model
 		$model = new Model();
 		$intervale = $model->dynamicSelect("guardtours", "guard_id = ?", array($id), "intervale")['intervale'];
 		// $intervale = "00:03:00";
-		return intval(strtotime($intervale)-strtotime("00:00:00"))*1000;
+		return intval((strtotime($intervale)-strtotime("00:00:00")))*1000;
 	}
 }
 

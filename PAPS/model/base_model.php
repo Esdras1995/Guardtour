@@ -19,8 +19,18 @@ class Model implements iDatabase
 		$this->conn = $db;
 	}
 
+	public function query($query){
+		try {
+			
+		    $stmt = $this->conn->prepare($query);
+		    $stmt->execute();
 
+		} catch(PDOException $e){
 
+			echo $e->getMessage();
+		}
+		return $stmt;
+	}
 	public function update($table, $data, $where){
 
 		try {
@@ -67,6 +77,7 @@ class Model implements iDatabase
 			$cols = array();
 
 		    foreach($data as $key=>$val) {
+		    	$val = str_replace("'", "\'", $val);
 		        $cols[] = "$key = '$val'";
 		    }
 
@@ -74,9 +85,8 @@ class Model implements iDatabase
 		    $stmt->execute();
 
 		} catch(PDOException $e){
-
-				echo $e->getMessage();
-			}
+			echo $e->getMessage();
+		}
 		
 		return $stmt;
 	}
@@ -129,6 +139,10 @@ class Model implements iDatabase
 			echo $e->getMessage();
 		}
 	}
+ 
+	public function getBy($table, $value, $by, $val){
+		return $this->dynamicSelect($table, $by." = ?", array($val), $value)[$value];
+	}
 
 	public function count($table, $where){
 		try
@@ -162,7 +176,6 @@ class Model implements iDatabase
 		}
 	}
 }
-
 
 /**
 * 

@@ -39,7 +39,7 @@
                                 <div class="row" style="margin-bottom: 10px;">
                                     <div class="col-lg-12">
                                         <p>
-                                            <?php if($message) echo $message; ?>
+                                            <?php if($message) echo $message['error']; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -50,6 +50,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control input-lg" required="riquired" name="adress" value="<?php echo $dataUpdate!=''?$dataUpdate['adress']:''; ?>" placeholder="Address" type="text">
+                                    <span class="alert-danger"><?php if($message) echo $message['adress']; ?></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control input-lg" name="contact" value="<?php echo $dataUpdate!=''?$dataUpdate['contact']:''; ?>" placeholder="Contact" type="text">

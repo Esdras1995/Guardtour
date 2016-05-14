@@ -2,22 +2,20 @@
 	require_once("../model/session.php");
 	require_once('../model/models.php');
   require_once("form.php");
+  require_once("controler.php");
 
-  	// $post = new Post();
-  	// $guard = new Guard();
-  	// $guardTours = new GuardTours();
-  	$tours = new Tours();
-    $user = new User();
-    $model = new Model();
-    $form = new Form();
+	$tours = new Tours();
+  $user = new User();
+  $model = new Model();
+  $form = new Form();
 
-    $controllerCalled = 1;
-    $error = "";
-    $success = "";
-    $dataUpdate = "";
-    $update = 0;
-    $message = "";
-  
+  $controllerCalled = 1;
+  // $error = "";
+  // $success = "";
+  $data = "";
+  $update = 0;
+  $message = "";
+
   if(isset($_POST['edit'])){
 
     $_SESSION['data'] = json_decode($_POST['edit'], true);
@@ -26,10 +24,16 @@
   }
   
   if(isset($_SESSION['data'])){
-    $dataUpdate = $_SESSION['data'];
+    $data = $_SESSION['data'];
     $update = 1;
   }
 
+  // if(isset($_GET['update'])){
+  //   if($_GET['update']){
+  //     $dataUpdate['page'] = $_GET['page'];
+  //     print_r($dataUpdate);
+  //   }
+  // }
   if(isset($_GET['action'])){
     if($_GET['action'] == 'add'){
       
@@ -50,162 +54,128 @@
     switch ($page) {
 
       case 'Post':
-        # code...      
-
+        # code...
+        $dataUpdate = ($update && $data['page'] == 'Post')?$data:""; 
         if(isset($_POST['register'])){
-          
-          if($update){
+          if($update && $data['page'] == 'Post'){
             $message = $form->update("poste", $_POST, $dataUpdate['id']);
-            if($message === 1){
-              if(isset($_SESSION['data'])) unset($_SESSION['data']);
-              header("Location: post.php?page=post");
-            }
+            if($message === 1) header("Location: post.php?page=post");
           }
-
           else{
-            $message = post_verify($_POST);
-            if($message == "")
               $message = $form->register("poste", $_POST);
           }
         }
-
         include("../vue/register_post.php");
-
         break;
 
 
       case 'Guard':
         # code...
-        
+        $dataUpdate = ($update && $data['page'] == 'Guard')?$data:""; 
         if(isset($_POST['register'])){
           
-          if($update){
+          if($update && $data['page'] == 'Guard'){
             $message = $form->update("guard", $_POST, $dataUpdate['id']);
-            if($message === 1){
-              if(isset($_SESSION['data'])) unset($_SESSION['data']);
-                header("Location: post.php?page=guard");
-            }
+            if($message === 1) header("Location: post.php?page=guard");
           }
-
           else{
-            $message = guard_verify($_POST);
-            if($message == "")
               $message = $form->register("guard", $_POST);
           }
         }
-
         include("../vue/register_guard.php");
-
         break;
 
 
       case 'Guard tours':
         # code...
-        
+        $dataUpdate = ($update && $data['page'] == 'Guard tours')?$data:""; 
         if(isset($_POST['register'])){
           
-          $new_POST = getGuardtoursPostMethod($_POST);
-
-          $message = (guardtours_verify($new_POST[0]) != "")?guardtours_verify($new_POST[0]):guardtours_verify($new_POST[1]);
-
-          if($message ==""){
-
-            if($new_POST[0]['guard_id'] != $new_POST[1]['guard_id']){
-              for ($i=0; $i < sizeof($new_POST); $i++){
-                $message = $form->register("guardtours", $new_POST[$i]);
-              }
-            
-            }else{
-               $message = '<span class="alert alert-danger">Please check guard uid. In your choice guard1 uid = guard2 uid.</span>';
-            }
+          $limit = ($_POST['intervale_limit']<10)?"0".$_POST['intervale_limit']:$_POST['intervale_limit'];
+          $limit = "00:".$limit.":00";
+          $uid = explode("|", $_POST['guard_id']);
+          $adress = explode("|", $_POST['poste_id']);
+          $_POST['intervale_limit'] = $limit;
+          $_POST['guard_id'] = $model->getBy('guard', 'id', 'uid', $uid[0]);
+          $_POST['poste_id'] = $model->getBy('poste', 'id', 'adress', $adress[0]);
+          
+          if($update && $data['page'] == 'Guard tours'){
+            $message = $form->update("guardtours", $_POST, $dataUpdate['id']);
+            if($message === 1) header("Location: post.php?page=guardTours");
           }
-        }
-        
-        $guardpost = $model->_list("guardtours", "poste_id, guard_id");
-        $arraId = array("poste_id"=>array(), "guard_id"=>array());
-        
-        for ($i=0; $i < sizeof($guardpost); $i++)
-          foreach ($guardpost[$i] as $key => $value)
-              $arraId[$key][] = $value;
-        
-        $postAdress = $model->dynamicSelectAll("poste", "id NOT IN(".implode(',', $arraId['poste_id']).")", "adress");
-        $guardId = $model->dynamicSelectAll("guard", "id NOT IN(".implode(',', $arraId['guard_id']).")", "uid");
-
+          else{
+            $message = $form->register("guardtours", $_POST);
+          }
+       }
+        $guardId = GuardToursForm::listDataFK()['guard_id'];
+        $postId = GuardToursForm::listDataFK()['poste_id'];
         include("../vue/register_guardTours.php");
 
         break;
         
         
-      case 'Tours':
-        # code...
-        if(isset($_POST['register'])){  
+      // case 'Tours':
+      //   # code...
+      //   if(isset($_POST['register'])){  
           
 
-          $heure = $_POST['heure'];
-          // $uid = $_POST['uid'];
+      //     $heure = $_POST['heure'];
+      //     $guard_tours_id = $_POST['guardtours_id'];
+      //     $mention = $tours->getMention($heure, $guard_tours_id);
+      //     $_POST['mention'] = $mention;
 
-          // $guard_id = $guard->getId("uid = ?", array($uid));
-          // $guard_id = $model->dynamicSelect("guard", "uid = ?", array($uid), "id")['id'];
-          $guard_tours_id = $_POST['guardtours_id'];
-          // $model->dynamicSelect("guardtours", "guard_id = ?", array($guard_id), "id")['id'];
-          // $guard_tours_id = $guardTours->getId("guard_id = ?", array($guard_id));
-          
-          $mention = $tours->getMention($heure, $guard_tours_id);
-
-          if($update){
+      //     if($update){
             
-            // $message = $form->update("tours", $_POST, $dataUpdate['id']);
+      //       // $message = $form->update("tours", $_POST, $dataUpdate['id']);
             
-            // if($message === 1){
-            //   if(isset($_SESSION['data'])) unset($_SESSION['data']);
-            //   header("Location: post.php?page=users");
-            // }
-          }
-          else{
+      //       // if($message === 1){
+      //       //   if(isset($_SESSION['data'])) unset($_SESSION['data']);
+      //       //   header("Location: post.php?page=users");
+      //       // }
+      //     }
+      //     else{
+      //       $message = $form->register("tours", $_POST);
+      //     }
+      //   }
+      //   $guardTours = $model->_list("guardtours", "id");
+      //   include("../vue/register_tours.php"); 
 
-            $new_POST = array('date_tour' => $_POST['date_tours'], 'qrcode' => $_POST['qrcode'], 'description' => $_POST['description'], 'heure' => $_POST['heure'], 'mention' => $mention, 'guardtours_id' =>$guard_tours_id);
-
-            $message = $form->register("tours", $new_POST);
-          }
-        }
-        $guardTours = $model->_list("guardtours", "id");
-        include("../vue/register_tours.php"); 
-
-        break;
+      //   break;
         
       case 'Users':
         # code...
-        
-        if($update) $dataUpdate['password'] = '';
 
-        if(isset($_POST['register'])){
-          
-          $_POST['password'] = md5($_POST['password']);
-          
-          if($update){
-            
-            $message = $form->update("admin", $_POST, $dataUpdate['id']);
-            
-            if($message === 1){
-              if(isset($_SESSION['data'])) unset($_SESSION['data']);
-                header("Location: post.php?page=users");
-            }
+        $dataUpdate = "";
+        if(!empty($data)){
+          if($update && $data['page'] == 'Users'){
+            $dataUpdate = $data;
+            $dataUpdate['password'] = '';
           }
-          
-          else{
-            if(!$user->exist($_POST['username'], $_POST['email']))
-              $message = $form->register("admin", $_POST);
-          }
-
         }
 
+        if(isset($_POST['register'])){
+          $_POST['password'] = md5($_POST['password']);
+          
+          if($update && $data['page'] == 'Users'){
+            $message = $form->update("admin", $_POST, $dataUpdate['id']);
+            if($message === 1) header("Location: post.php?page=users");
+          }
+          else
+              $message = $form->register("admin", $_POST);
+        }
         include("../vue/register_users.php");
-
         break;
+
+
 
       case 'Company Info':
         # code...
-        if(isset($_POST['register'])){  
+        $dataUpdate = ($update && $data['page'] == 'Company Info')?$data:""; 
+        if($update && $data['page'] == 'Company Info'){
+            $message = $form->update("company", $_POST, $dataUpdate['id']);
+            if($message === 1) header("Location: post.php?page=company");
+          }
+          else{  
           $message = $form->register("company", $_POST);
         }
         include("../vue/register_company.php");
@@ -221,6 +191,7 @@
 
       case 'Signature':
         # code...
+        $dataUpdate = ($update && $data['page'] == 'Signature')?$data:""; 
         if(isset($_POST['register'])){ 
           $chars = $chars = array(":", "/", "-", " ");
           $date = date("Y-m-d h:i:sa");
@@ -250,71 +221,4 @@
   }else
     header("Location: error.php");
 
-
-function getGuardtoursPostMethod($post){
-
-  $limit = ($post['intervale_limit']<10)?"0".$post['intervale_limit']:$post['intervale_limit'];
-  $limit = "00:".$limit.":00";
-  
-  $guard_id1 = $model->dynamicSelect("guard", "uid = ?", array($post['guard1']), "id")['id'];
-  $guard_id2 = $model->dynamicSelect("guard", "uid = ?", array($post['guard2']), "id")['id'];
-  $poste_id = $model->dynamicSelect("poste", "adress = ?", array($post['poste_id']), "id")['id'];
-
-  $newpost = array(
-    0 => array('intervale' =>$post['intervale'], 'intervale_limit' =>$limit, 'commence_a' =>$post['commence_a1'], 'termine_a' =>$post['termine_a1'], 'poste_id' =>$poste_id, 'guard_id' =>$guard_id1), 
-    1 => array('intervale' =>$post['intervale'], 'intervale_limit' =>$limit, 'commence_a' =>$post['commence_a2'], 'termine_a' =>$post['termine_a2'], 'poste_id' =>$poste_id, 'guard_id' =>$guard_id2)
-  );
-
-  return $newpost;
-}
-
-
-function guardtours_verify($new_POST){
-      
-  $message = "";
-  
-  if(!strtotime($new_POST['intervale_limit']) || !strtotime($new_POST['intervale']) || !strtotime($new_POST['commence_a']) || !strtotime($new_POST['termine_a']))
-        $message = '<span class="alert alert-danger">Time format error!</span>';
-
-
-  elseif(strtotime($new_POST['intervale'])==strtotime("00:00:00"))
-    $message = '<span class="alert alert-danger">Intervale error!</span>';
-
-  elseif(strtotime($new_POST['intervale'])<strtotime($new_POST['intervale_limit']))
-    $message = '<span class="alert alert-danger">Intervale limit most than the specified intervale!</span>';
-
-  return $message;
-}
-
-function guard_verify($post){
-  $message = "";
-
-  $model = new Model();
-  $uid = $model->dynamicSelect("guard", "uid = ?", array($post['uid']), "id");
-  $nif = $model->dynamicSelect("guard", "nif = ?", array($post['nif']), "id");
-  $phone = $model->dynamicSelect("guard", "phone = ?", array($post['phone']), "id");
-  
-  if(!empty($uid))
-    $message = '<span class="alert alert-danger">Guard uid already exist!</span>';
-  
-  elseif(!empty($phone))
-    $message = '<span class="alert alert-danger">Guard phone number already exist!</span>';
-  
-  elseif(!empty($nif))
-    $message = '<span class="alert alert-danger">Guard nif already exist!</span>';
-
-  return $message;
-}
-
-function post_verify($post){
-  $message = "";
-
-  $model = new Model();
-  $adress = $model->dynamicSelect("poste", "adress = ?", array($post['adress']), "id");
-  
-  if(!empty($adress))
-    $message = '<span class="alert alert-danger">A post with this adress already exist!</span>';
-
-  return $message;
-}
 ?>

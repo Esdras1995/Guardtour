@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-sm-6 col-print-6">
                                 <h3 class="text-align-right">
-                                    #<span class="fw-semi-bold">9.45613</span> / <small><?php echo date("F j, Y, g:i a");  ?></small>
+                                    <!--#<span class="fw-semi-bold">9.45613</span> / --><small><?php echo date("F j, Y, g:i a");  ?></small>
                                 </h3>
                                 <!-- <div class="text-muted fs-larger text-align-right">
                                     Some Invoice number description or whatever
@@ -35,14 +35,13 @@
                             <section class="col-sm-6 col-print-6">
                                 <h4 class="text-muted no-margin">Company Information</h4>
                                 <h3 class="company-name">
-                                    <?php echo $_GET['company']; ?>
+                                    <?php echo $company['nom']; ?>
                                 </h3>
                                 <address>
-                                    <strong><?php echo $_GET['poste']; ?></strong><br>
-                                    <?php echo $_GET['name']; ?><br>
-                                    <?php echo $_GET['adress']; ?><br>
-                                    e-mail: <?php echo $_GET['co-mail']; ?><br>
-                                    phone: <?php echo $_GET['contact']; ?><br>
+                                    <?php echo $company['nom']; ?><br>
+                                    <?php echo $company['adress']; ?><br>
+                                    e-mail: <?php echo $company['email']; ?><br>
+                                    phone: <?php echo $company['contact']; ?><br>
                                     <!-- <abbr title="Work Fax">fax:</abbr> (012) 678-132-901 -->
                                 </address>
                             </section>
@@ -52,8 +51,6 @@
                                     <?php echo $_GET['client']; ?>
                                 </h3>
                                 <address>
-                                    <strong><?php echo $_GET['cl-poste']; ?></strong><br>
-                                    <a href="#"><?php echo $_GET['cl-name']; ?></a><br>
                                     <?php echo $_GET['cl-adress']; ?><br>
                                     e-mail: <?php echo $_GET['cl-mail']; ?><br>
                                     phone: <?php echo $_GET['cl-contact']; ?><br>
@@ -111,12 +108,12 @@
                                 </p>
                             </div>
                         </div>
-                        <p class="text-align-right mt-lg mb-xs">
+                        <!-- <p class="text-align-right mt-lg mb-xs">
                             Marketing Consultant
                         </p>
                         <p class="text-align-right">
                             <span class="fw-semi-bold">Bob Smith</span>
-                        </p>
+                        </p> -->
                         <div class="btn-toolbar mt-lg text-align-right hidden-print">
                             <button id="print" class="btn btn-inverse">
                                 <i class="fa fa-print"></i>

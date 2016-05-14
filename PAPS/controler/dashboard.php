@@ -10,10 +10,12 @@
   $guardWarning = $model->count("tours", "mention='#f0b518' AND date_tour='".$date."'");
   $nbGuard = $model->count("tours",  "date_tour='".$date."'");
   $list = $model->dynamicSelectAll("tours", "date_tour='".$date."'", "*");
+  
   // echo "-------------------------------------------------------------";
   // print_r($list);
   // echo "-------------------------------------------------------------";
   // echo $nbGuard;
+  
   if($nbGuard != 0){
     $pSuccess = round(doubleval($guardSuccess*100)/$nbGuard, 2);
     $pWarning = round(doubleval($guardWarning*100)/$nbGuard, 2);
