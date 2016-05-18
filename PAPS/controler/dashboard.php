@@ -14,7 +14,7 @@
   // echo "-------------------------------------------------------------";
   // print_r($list);
   // echo "-------------------------------------------------------------";
-  // echo $nbGuard;
+  // echo $date;
   
   if($nbGuard != 0){
     $pSuccess = round(doubleval($guardSuccess*100)/$nbGuard, 2);

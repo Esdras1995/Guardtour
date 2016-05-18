@@ -49,7 +49,7 @@ class User extends Model
 			$stmt->execute(array(':uname'=>$uname, ':umail'=>$umail));
 			$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 
-			echo $stmt->rowCount();
+			//echo $stmt->rowCount();
 			
 			if($stmt->rowCount() == 1)
 			{
@@ -106,6 +106,7 @@ class User extends Model
 class Tours extends Model
 {
 	private $result;
+	private $heureReception;
 	function __construct()
 	{
 		# code...
@@ -164,7 +165,7 @@ class Tours extends Model
 		$model = new Model();
 		$intervale = $model->dynamicSelect("guardtours", "guard_id = ?", array($id), "intervale")['intervale'];
 		// $intervale = "00:03:00";
-		return intval((strtotime($intervale)-strtotime("00:00:00")))*1000;
+		return intval((strtotime($intervale)-strtotime("00:00:00")) - $this->result*3600)*1000;
 	}
 }
 
