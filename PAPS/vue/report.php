@@ -23,19 +23,21 @@
                 <!-- <a href="forms.php?page=<?php echo $_SESSION['page']; ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a> -->
             </div>
         </div>
-        <div class="row">
+       <!--  <div class="row">
             <div class="col-lg-12">
                 <form>
                     <select class="form-control" id="exampleSelect1">
                         <option>1</option>
                       <?php 
-                        for ($i=0; $i <2; $i+=LIMIT)
-                             echo '<option value="'.$i.'">from '.$i.' to'.$i+LIMIT.'</option>';
+                        /*for ($i=1; $i <=$size;$i+=LIMIT){
+                            $to = $i + LIMIT;
+                             echo '<option value="'.$i.'">from '.$i.' to'.$to.'</option>';
+                         }*/
                        ?>
                     </select>
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <section class="widget">
             <header>

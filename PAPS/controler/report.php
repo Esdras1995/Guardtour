@@ -20,9 +20,9 @@
   //la taille du tableau tours dans la base
   $size = sizeof($list);
 
-  //On divise la table par 500 pour ne pas afficher tout les donnees.
+  //On divise le table par 500 pour ne pas afficher tout les donnees.
   $div = ($size>LIMIT)?$size/LIMIT:1;
-
+  $limit = LIMIT;
   for ($i=0; $i < sizeof($list); $i++)
     foreach ($list[$i] as $key => $value)
       if($key == "guardtours_id"){
